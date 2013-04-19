@@ -1,0 +1,68 @@
+{
+"bones": [
+	{ "name": "root", "rotation": -0.53 },
+	{ "name": "bone1", "parent": "root", "x": 2.92, "y": 31.93 },
+	{ "name": "bone2", "parent": "bone1", "length": 108.73, "x": 0.14, "y": 3.5, "rotation": 89.09 }
+],
+"slots": [
+	{ "name": "tree", "bone": "root", "attachment": "tree" },
+	{ "name": "treeBottom", "bone": "root", "attachment": "treeBottom" },
+	{ "name": "bone2", "bone": "bone2", "attachment": "treeTop" }
+],
+"skins": {
+	"default": {
+		"treeBottom": {
+			"treeBottom": { "x": 3.45, "y": 20.03, "rotation": 0.53, "width": 108, "height": 38 }
+		},
+		"bone2": {
+			"treeTop": { "x": 51.46, "y": -0.11, "rotation": -89.09, "width": 108, "height": 125 }
+		}
+	}
+},
+"animations": {
+	"tree fall": {
+		"bones": {
+			"bone1": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.4666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.4666, "x": 0, "y": 0 }
+				]
+			},
+			"bone2": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 0,
+						"curve": [ 0.25, 0, 0.474, 1.08 ]
+					},
+					{ "time": 0.4666, "angle": -104.74 }
+				],
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.474, 1.08 ]
+					},
+					{ "time": 0.4666, "x": 37.2, "y": -1.69 }
+				]
+			}
+		},
+		"slots": {
+			"bone2": {
+				"attachment": [
+					{ "time": 0.8, "name": "treeTop" }
+				],
+				"color": [
+					{ "time": 0.6, "color": "ffffffff" },
+					{ "time": 0.8, "color": "ffffff00" }
+				]
+			}
+		}
+	}
+}
+}

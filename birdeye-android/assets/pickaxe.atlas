@@ -1,0 +1,19 @@
+
+pickaxe.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+pick
+  rotate: false
+  xy: 1, 1
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+arm
+  rotate: false
+  xy: 30, 20
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
