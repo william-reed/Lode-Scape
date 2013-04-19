@@ -54,7 +54,7 @@ public class Assets {
 		
 		treeAtlas = new TextureAtlas(Gdx.files.internal("tree.atlas"));
 		SkeletonJson treeJson = new SkeletonJson(treeAtlas);
-		treeSkeletonData = treeJson.readSkeletonData(Gdx.files.internal("skeleton.json"));
+		treeSkeletonData = treeJson.readSkeletonData(Gdx.files.internal("tree.json"));
 		treeAnim = treeSkeletonData.findAnimation("tree fall");
 	
 		pickAtlas = new TextureAtlas(Gdx.files.internal("pickaxe.atlas"));

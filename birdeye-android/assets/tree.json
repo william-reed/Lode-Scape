@@ -11,14 +11,11 @@
 ],
 "skins": {
 	"default": {
-		"tree": {
-			"tree": { "x": 3.36, "y": 74.14, "width": 108, "height": 148 }
-		},
 		"treeBottom": {
 			"treeBottom": { "x": 3.45, "y": 20.03, "rotation": 0.53, "width": 108, "height": 38 }
 		},
 		"bone2": {
-			"treeTop": { "x": 51.46, "y": -0.11, "rotation": -89.09, "width": 108, "height": 125 }
+			"treeTop": { "x": 50, "y": -0.11, "rotation": -89.09, "width": 108, "height": 125 }
 		}
 	}
 },
