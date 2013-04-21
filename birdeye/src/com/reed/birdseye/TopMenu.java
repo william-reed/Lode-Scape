@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class TopMenu {
 	void draw(SpriteBatch batch, BitmapFont font) {
 		
-		batch.draw(Assets.itemSelector, 230, 465);
+		batch.draw(Assets.itemSelector, Gdx.graphics.getWidth() / 2 - 250, Gdx.graphics.getHeight() - 75);
 		/*
 		batch.draw(Assets.material, 240, 470);//
 		batch.draw(Assets.tree, 330, 470, 50, 60);//

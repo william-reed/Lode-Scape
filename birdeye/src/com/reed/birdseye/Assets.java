@@ -12,7 +12,8 @@ public class Assets {
 
 	static Texture itemSelector, buttons, character, material, level, floor,
 			tree, hydration, bucket, corn, lake, farm, house, houseIn,
-			craftmenu, crop, creeper, robot, robotGUI, ironOre, inventory, copperOre, grass;
+			craftmenu, crop, creeper, robot, robotGUI, ironOre, inventory, copperOre, grass,
+			dpad, dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN;
 	static TextureRegion upChar, downChar, leftChar, rightChar, mainChar;
 	
 	//Spine stuffz
@@ -45,6 +46,11 @@ public class Assets {
 		inventory = new Texture(Gdx.files.internal("inventory.png"));
 		copperOre = new Texture(Gdx.files.internal("copper.png"));
 		grass = new Texture(Gdx.files.internal("grass.png"));
+		dpad = new Texture(Gdx.files.internal("dPad.png"));
+		dpadLEFT = new Texture(Gdx.files.internal("dpad_left.png"));
+		dpadRIGHT = new Texture(Gdx.files.internal("dpad_right.png"));
+		dpadUP = new Texture(Gdx.files.internal("dpad_up.png"));
+		dpadDOWN = new Texture(Gdx.files.internal("dpad_down.png"));
 		
 		downChar = new TextureRegion(character, 32, 0, 32, 48);
 		leftChar = new TextureRegion(character, 32, 48, 32, 48);

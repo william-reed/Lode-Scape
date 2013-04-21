@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esotericsoftware.spine.Bone;
 import com.esotericsoftware.spine.Skeleton;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Tree {
 
@@ -33,6 +34,8 @@ public class Tree {
 			font.draw(batch, "Press B to Pick up the Tree", 50, 50);
 		treeSkel.updateWorldTransform();
 		leavesSkel.updateWorldTransform();
+		
+		
 	}
 
 	boolean closeEnough() {
@@ -67,5 +70,12 @@ public class Tree {
 				treeDone = true;
 			}
 		}
+	}
+	
+	
+			
+	void collision(ShapeRenderer shapeRenderer){
+		CollisionDetection collision = new CollisionDetection(x, y, 20, 20);
+		collision.draw(shapeRenderer);
 	}
 }

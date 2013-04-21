@@ -2,6 +2,7 @@ package com.reed.birdseye;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 
 public class ArrayListsz {
@@ -52,6 +53,12 @@ public class ArrayListsz {
 		}
 	}
 
+	void treeArrayShapes(ShapeRenderer shapeRenderer){
+		for (int i = 0; i < amountOfTrees; i++) {
+			treeArray.get(i).collision(shapeRenderer);
+		}
+	}
+	
 	static Array<House> houseArray = new Array<House>();
 	static int amountOfHouse = 1;
 

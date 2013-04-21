@@ -1,5 +1,6 @@
 package com.reed.birdseye;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -30,6 +31,7 @@ public class GameScreen implements Screen {
 	Copper copper;
 	Tree tree, tre;
 	CollisionDetection collision;
+	Android android;
 
 	public GameScreen(Game game) {
 		this.game = game;
@@ -53,14 +55,16 @@ public class GameScreen implements Screen {
 		tre = new Tree();
 		collision = new CollisionDetection(400, 700, 20, 20);
 		fps = new FPSLogger();
+		android = new Android();
 	}
 
 	FPSLogger fps;
 
 	public void update(float deltaTime) {
- 		// farm.closeEnoughToFarm();
+		// farm.closeEnoughToFarm();
 		player.setSprites();
 		player.move();
+		player.input();
 		player.update();
 		craft.menuInput();
 		craft.clicked();
@@ -77,10 +81,11 @@ public class GameScreen implements Screen {
 		copper.closeEnough();
 		copper.collect();
 		collision.collisionDetector();
+		
 	}
 
 	public void draw(float deltaTime) {
-		
+
 		// float delta = Gdx.graphics.getDeltaTime() / 3;
 		// time += delta;
 
@@ -89,8 +94,8 @@ public class GameScreen implements Screen {
 		batch.begin();
 
 		level.draw(batch);
-		
-		batch.draw(Assets.grass, 0 ,0);
+
+		batch.draw(Assets.grass, 0, 0);
 		arrays.resourceArrayEstablisher(batch, font);
 		arrays.treeArrayEstablisher(batch, font);
 		arrays.houseArrayEstablisher(batch, font);
@@ -103,14 +108,17 @@ public class GameScreen implements Screen {
 		player.draw(batch, font);
 		// draws gui
 		mob.robotDraw(batch, font);
+		//if (Gdx.app.getType() == ApplicationType.Android) {
+			android.input();
+			android.draw(batch);
+		//}
 
 		// animation.apply(skeleton, time, false);
 		// skeleton.updateWorldTransform();
 		// skeleton.draw(batch);
 		batch.end();
-		
-		collision.draw(shapeRenderer);
 
+		arrays.treeArrayShapes(shapeRenderer);
 	}
 
 	@Override

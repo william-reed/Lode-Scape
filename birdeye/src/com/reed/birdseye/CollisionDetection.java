@@ -30,7 +30,6 @@ public class CollisionDetection {
 		if(collisionDetector()){
 			System.out.println("Collision!");
 		}
-		System.out.println(Level.levelX + shape2X);
 		// draw the rectangles
 		shapeRenderer.begin(ShapeType.Line);
 		shapeRenderer.setColor(0, 0, 0, 1);

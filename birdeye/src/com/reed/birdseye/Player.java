@@ -9,7 +9,7 @@ import com.esotericsoftware.spine.Skeleton;
 
 public class Player {
 	static boolean move = true;
-	boolean up = false, down = false, left = false, right = false;
+	static boolean up = false, down = false, left = false, right = false;
 	int currentDirection = 0; //0 is down, 1 is up, 2 is left, 3 is right
 	int playerSpeed = 2;
 	static float x = Level.middleX;
@@ -21,30 +21,26 @@ public class Player {
 	Skeleton pickSkel = new Skeleton(Assets.pickRightSkeletonData);
 	Bone root = pickSkel.getRootBone();
 
-	void move() {
+	void input() {
 		if (move) {
 			if (!House.inHouse) {
 
 				if ((Gdx.input.isKeyPressed(Keys.W))) {
-					Level.levelY -= playerSpeed;
 					up = true;
 					currentDirection = 1;
 				} else
 					up = false;
 				if ((Gdx.input.isKeyPressed(Keys.A))) {
-					Level.levelX += playerSpeed;
 					left = true;
 					currentDirection = 2;
 				} else
 					left = false;
 				if ((Gdx.input.isKeyPressed(Keys.S))) {
-					Level.levelY += playerSpeed;
 					currentDirection = 0;
 					down = true;
 				} else
 					down = false;
 				if ((Gdx.input.isKeyPressed(Keys.D))) {
-					Level.levelX -= playerSpeed;
 					right = true;
 					currentDirection = 3;
 				} else
@@ -72,6 +68,17 @@ public class Player {
 					right = false;
 			}
 		}
+	}
+	
+	void move(){
+		if(up)
+			Level.levelY -= playerSpeed;
+		if(down)
+			Level.levelY += playerSpeed;
+		if(left)
+			Level.levelX += playerSpeed;
+		if(right)
+			Level.levelX -= playerSpeed;
 	}
 
 	void setSprites() {
