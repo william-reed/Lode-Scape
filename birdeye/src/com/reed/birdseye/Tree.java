@@ -58,6 +58,7 @@ public class Tree {
 		amountOfWoodString = Integer.toString(amountOfWood);// update string
 		if (closeEnough() && !treeFall) {
 			if (Gdx.input.isKeyPressed(Keys.B)) {
+				Points.xp += 1;
 				amountOfWood += 4;
 				treeFall = true;
 			}

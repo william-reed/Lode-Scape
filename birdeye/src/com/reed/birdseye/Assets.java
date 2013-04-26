@@ -2,6 +2,7 @@ package com.reed.birdseye;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.esotericsoftware.spine.Animation;
@@ -13,7 +14,7 @@ public class Assets {
 	static Texture itemSelector, buttons, character, material, level, floor,
 			tree, hydration, bucket, corn, lake, farm, house, houseIn,
 			craftmenu, crop, creeper, robot, robotGUI, ironOre, inventory, copperOre, grass,
-			dpad, dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN;
+			dpad, dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN, pointsBar;
 	static TextureRegion upChar, downChar, leftChar, rightChar, mainChar;
 	
 	//Spine stuffz
@@ -21,13 +22,15 @@ public class Assets {
 	static Animation treeAnim, pickRightAnim, leaveAnim;
 	static SkeletonData treeSkeletonData, pickRightSkeletonData, leaveSkeletonData;
 	
+	static BitmapFont cgfFont;
+	
 	public static void load(){
 		level = new Texture(Gdx.files.internal("map1test.png"));
 		itemSelector = new Texture(Gdx.files.internal("itemselector.png"));
 		crop = new Texture(Gdx.files.internal("crop.png"));
 		// floor = new Texture(Gdx.files.internal("floor.png"));
 		lake = new Texture(Gdx.files.internal("lake.png"));
-		buttons = new Texture(Gdx.files.internal("buttons.png"));
+		//buttons = new Texture(Gdx.files.internal("buttons.png"));
 		bucket = new Texture(Gdx.files.internal("bucket.png"));
 		hydration = new Texture(Gdx.files.internal("hydration.png"));
 		corn = new Texture(Gdx.files.internal("corn.png"));
@@ -51,6 +54,8 @@ public class Assets {
 		dpadRIGHT = new Texture(Gdx.files.internal("dpad_right.png"));
 		dpadUP = new Texture(Gdx.files.internal("dpad_up.png"));
 		dpadDOWN = new Texture(Gdx.files.internal("dpad_down.png"));
+		buttons = new Texture(Gdx.files.internal("buttonsGray.png"));
+		pointsBar = new Texture(Gdx.files.internal("pointBar.png"));
 		
 		downChar = new TextureRegion(character, 32, 0, 32, 48);
 		leftChar = new TextureRegion(character, 32, 48, 32, 48);
@@ -72,5 +77,7 @@ public class Assets {
 		SkeletonJson leavesJson = new SkeletonJson(leavesAtlas);
 		leaveSkeletonData = leavesJson.readSkeletonData(Gdx.files.internal("leavesSkel.json"));
 		leaveAnim = leaveSkeletonData.findAnimation("animation");
+		
+		cgfFont = new BitmapFont(Gdx.files.internal("cgf.fnt"), Gdx.files.internal("cgf_0.png"), false);
 	}
 }

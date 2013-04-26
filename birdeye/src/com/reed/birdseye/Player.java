@@ -10,7 +10,7 @@ import com.esotericsoftware.spine.Skeleton;
 public class Player {
 	static boolean move = true;
 	static boolean up = false, down = false, left = false, right = false;
-	int currentDirection = 0; //0 is down, 1 is up, 2 is left, 3 is right
+	int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is right
 	int playerSpeed = 2;
 	static float x = Level.middleX;
 	static float y = Level.middleY;
@@ -25,22 +25,22 @@ public class Player {
 		if (move) {
 			if (!House.inHouse) {
 
-				if ((Gdx.input.isKeyPressed(Keys.W))) {
+				if ((Gdx.input.isKeyPressed(Keys.W)) || Android.up) {
 					up = true;
 					currentDirection = 1;
 				} else
 					up = false;
-				if ((Gdx.input.isKeyPressed(Keys.A))) {
+				if ((Gdx.input.isKeyPressed(Keys.A)) || Android.left) {
 					left = true;
 					currentDirection = 2;
 				} else
 					left = false;
-				if ((Gdx.input.isKeyPressed(Keys.S))) {
+				if ((Gdx.input.isKeyPressed(Keys.S)) || Android.down) {
 					currentDirection = 0;
 					down = true;
 				} else
 					down = false;
-				if ((Gdx.input.isKeyPressed(Keys.D))) {
+				if ((Gdx.input.isKeyPressed(Keys.D)) || Android.right) {
 					right = true;
 					currentDirection = 3;
 				} else
@@ -69,16 +69,18 @@ public class Player {
 			}
 		}
 	}
-	
-	void move(){
-		if(up)
-			Level.levelY -= playerSpeed;
-		if(down)
-			Level.levelY += playerSpeed;
-		if(left)
-			Level.levelX += playerSpeed;
-		if(right)
-			Level.levelX -= playerSpeed;
+
+	void move() {
+		if (move) {
+			if (up)
+				Level.levelY -= playerSpeed;
+			if (down)
+				Level.levelY += playerSpeed;
+			if (left)
+				Level.levelX += playerSpeed;
+			if (right)
+				Level.levelX -= playerSpeed;
+		}
 	}
 
 	void setSprites() {
@@ -93,8 +95,8 @@ public class Player {
 	}
 
 	void draw(SpriteBatch batch, BitmapFont font) {
-		font.draw(batch, "X:  " + Level.levelX, 850, 520);
-		font.draw(batch, "Y:  " + Level.levelY, 850, 500);
+		// font.draw(batch, "X:  " + Level.levelX, 850, 1030);
+		// font.draw(batch, "Y:  " + Level.levelY, 850, 1000);
 		if (currentDirection == 3 && Resource.mining)
 			pickSkel.draw(batch);
 		if (move)
@@ -104,8 +106,8 @@ public class Player {
 	float time;
 
 	void update() {
-		root.setX(475);
-		root.setY(235);
+		root.setX(Level.middleX + 11);
+		root.setY(Level.middleY - 11);
 
 		time += Gdx.graphics.getDeltaTime() * 1.2;
 		Assets.pickRightAnim.apply(pickSkel, time, true);

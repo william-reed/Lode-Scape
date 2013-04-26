@@ -20,16 +20,22 @@ public class CollisionDetection {
 	}
 
 	boolean collisionDetector() {
-		return (shape1X <= shape2X + shape2Width
-				&& shape2X <= shape1X + shape1Width
-				&& shape1Y + shape1Height <= shape2Y 
-				&& shape2Y + shape2Height <= shape1Y);
+		
+		if(((shape1Y + shape1Height) > (Level.levelY + shape2Y)) && 
+			((Level.levelX + shape2X) < (shape1X + shape1Width) &&
+			(shape1X + shape1Width) < ((Level.levelX + shape2X) + shape2Width + shape1Width))){
+			
+			System.out.println("Collision!");
+			Player.move = false;
+			return true;
+	}else{
+		
+		return false;
+		
+		}
 	}
 	
 	void draw(ShapeRenderer shapeRenderer) {
-		if(collisionDetector()){
-			System.out.println("Collision!");
-		}
 		// draw the rectangles
 		shapeRenderer.begin(ShapeType.Line);
 		shapeRenderer.setColor(0, 0, 0, 1);
@@ -37,6 +43,5 @@ public class CollisionDetection {
 		shapeRenderer.rect(shape1X, shape1Y, shape1Width, shape1Height);
 		shapeRenderer.rect(Level.levelX + shape2X, Level.levelY + shape2Y, shape2Width, shape2Height);
 		shapeRenderer.end();
-
 	}
 }

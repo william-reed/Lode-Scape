@@ -16,7 +16,7 @@ public class GameScreen implements Screen {
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
-	BitmapFont font = new BitmapFont();
+	BitmapFont currentFont;
 	Farm farm;
 	Level level;
 	Player player;
@@ -32,6 +32,7 @@ public class GameScreen implements Screen {
 	Tree tree, tre;
 	CollisionDetection collision;
 	Android android;
+	Points points;
 
 	public GameScreen(Game game) {
 		this.game = game;
@@ -56,6 +57,11 @@ public class GameScreen implements Screen {
 		collision = new CollisionDetection(400, 700, 20, 20);
 		fps = new FPSLogger();
 		android = new Android();
+		points = new Points();
+		if(Gdx.app.getType() == ApplicationType.Android){
+			currentFont = Assets.cgfFont;
+		}else
+			currentFont = new BitmapFont();
 	}
 
 	FPSLogger fps;
@@ -74,13 +80,14 @@ public class GameScreen implements Screen {
 		mob.boundingArea(300, 300, 500, 400);
 		mob.closeEnough();
 		mob.gui();
-		iron.closeEnough();
-		iron.collect();
+		//iron.closeEnough();
+		//iron.collect();
 		topMenu.input();
 		inv.input();
-		copper.closeEnough();
-		copper.collect();
-		collision.collisionDetector();
+		//copper.closeEnough();
+		//copper.collect();
+		//collision.collisionDetector();
+		points.updateLevel();
 		
 	}
 
@@ -96,29 +103,29 @@ public class GameScreen implements Screen {
 		level.draw(batch);
 
 		batch.draw(Assets.grass, 0, 0);
-		arrays.resourceArrayEstablisher(batch, font);
-		arrays.treeArrayEstablisher(batch, font);
-		arrays.houseArrayEstablisher(batch, font);
-		iron.draw(batch, font);
-		copper.draw(batch, font);
-		mob.draw(batch, font);
-		topMenu.draw(batch, font);
-		craft.draw(batch, font);
-		inv.draw(batch, font);
-		player.draw(batch, font);
+		arrays.resourceArrayEstablisher(batch, currentFont);
+		arrays.treeArrayEstablisher(batch, currentFont);
+		arrays.houseArrayEstablisher(batch, currentFont);
+		//iron.draw(batch, currentFont);
+		//copper.draw(batch, currentFont);
+		mob.draw(batch, currentFont);
+		topMenu.draw(batch, currentFont);
+		craft.draw(batch, currentFont);
+		inv.draw(batch, currentFont);
+		player.draw(batch, currentFont);
 		// draws gui
-		mob.robotDraw(batch, font);
-		//if (Gdx.app.getType() == ApplicationType.Android) {
+		mob.robotDraw(batch, currentFont);
+		points.draw(batch);
+		
+		if (Gdx.app.getType() == ApplicationType.Android) {
 			android.input();
 			android.draw(batch);
-		//}
-
-		// animation.apply(skeleton, time, false);
-		// skeleton.updateWorldTransform();
-		// skeleton.draw(batch);
+		}
+		
 		batch.end();
-
-		arrays.treeArrayShapes(shapeRenderer);
+		
+		points.drawBars(shapeRenderer);
+		//arrays.treeArrayShapes(shapeRenderer);
 	}
 
 	@Override
