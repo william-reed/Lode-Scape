@@ -71,15 +71,47 @@ public class Player {
 	}
 
 	void move() {
-		if (move) {
-			if (up)
-				Level.levelY -= playerSpeed;
-			if (down)
-				Level.levelY += playerSpeed;
-			if (left)
-				Level.levelX += playerSpeed;
-			if (right)
-				Level.levelX -= playerSpeed;
+		if (CollisionDetection.collisionAtPlayerTop == true
+				&& Gdx.input.isKeyPressed(Keys.W)) {
+
+			playerSpeed = 0;
+
+		} else {
+			if (CollisionDetection.collisionAtPlayerBottom == true
+					&& Gdx.input.isKeyPressed(Keys.S)) {
+
+				playerSpeed = 0;
+
+			} else {
+				if (CollisionDetection.collisionAtPlayerLeft == true
+						&& Gdx.input.isKeyPressed(Keys.A)) {
+
+					playerSpeed = 0;
+
+				} else {
+					if (CollisionDetection.collisionAtPlayerRight == true
+							&& Gdx.input.isKeyPressed(Keys.D)) {
+
+						playerSpeed = 0;
+
+					} else {
+
+						playerSpeed = 2;
+
+					}
+				}
+			}
+
+			if (move) {
+				if (up)
+					Level.levelY -= playerSpeed;
+				if (down)
+					Level.levelY += playerSpeed;
+				if (left)
+					Level.levelX += playerSpeed;
+				if (right)
+					Level.levelX -= playerSpeed;
+			}
 		}
 	}
 
