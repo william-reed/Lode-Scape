@@ -103,14 +103,22 @@ public class Player {
 			}
 
 			if (move) {
-				if (up)
+				if (up) {
 					Level.levelY -= playerSpeed;
-				if (down)
+					Level.grassY -= playerSpeed;
+				}
+				if (down) {
 					Level.levelY += playerSpeed;
-				if (left)
+					Level.grassY += playerSpeed;
+				}
+				if (left) {
 					Level.levelX += playerSpeed;
-				if (right)
+					Level.grassX += playerSpeed;
+				}
+				if (right) {
 					Level.levelX -= playerSpeed;
+					Level.grassX -= playerSpeed;
+				}
 			}
 		}
 	}
