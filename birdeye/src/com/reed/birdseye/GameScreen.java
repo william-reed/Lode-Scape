@@ -56,6 +56,7 @@ public class GameScreen implements Screen {
 		copper = new Copper();
 		tree = new Tree();
 		tre = new Tree();
+		//collision detection problem?
 		collision = new CollisionDetection(400, 700, 20, 20);
 		fps = new FPSLogger();
 		android = new Android();
@@ -95,8 +96,9 @@ public class GameScreen implements Screen {
 		inv.input();
 		// copper.closeEnough();
 		// copper.collect();
-		collision.collisionDetector();
+		// collision.collisionDetector();
 		points.updateLevel();
+		level.update();
 
 	}
 
@@ -111,7 +113,6 @@ public class GameScreen implements Screen {
 
 		level.draw(batch);
 
-		batch.draw(Assets.grass, 0, 0);
 		arrays.resourceArrayEstablisher(batch, currentFont);
 		arrays.treeArrayEstablisher(batch, currentFont);
 		arrays.houseArrayEstablisher(batch, currentFont);
@@ -126,12 +127,14 @@ public class GameScreen implements Screen {
 		mob.robotDraw(batch, currentFont);
 		points.draw(batch);
 		
-		test0.draw(batch);
-		test1.draw(batch);
-		test2.draw(batch);
-		test3.draw(batch);
-		test4.draw(batch);
+		//test0.draw(batch);
+		//test1.draw(batch);
+		//test2.draw(batch);
+		//test3.draw(batch);
+		//test4.draw(batch);
 		
+		currentFont.draw(batch,"FPS : +" + Gdx.graphics.getFramesPerSecond(), 800, 50);
+	 	
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			android.input();
 			android.draw(batch);
@@ -140,7 +143,7 @@ public class GameScreen implements Screen {
 		batch.end();
 
 		points.drawBars(shapeRenderer);
-		arrays.treeArrayShapes(shapeRenderer);
+		//arrays.treeArrayShapes(shapeRenderer);
 	}
 
 	@Override
