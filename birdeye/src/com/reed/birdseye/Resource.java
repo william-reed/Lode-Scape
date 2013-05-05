@@ -15,7 +15,6 @@ public class Resource {
 	int distanceFromMaterial = 100;
 	static int amountOfStone = 0;
 	static String amountOfStoneString;
-	static boolean mining = false;
 	boolean drawResource = true;
 	float miningRate = 1f;
 
@@ -44,8 +43,8 @@ public class Resource {
 		// starts making the image of the "resource" smaller as b is
 		// held down
 		if (closeEnough() && drawResource) {
-			if (Gdx.input.isKeyPressed(Keys.B) || Android.b) {
-				mining = true;
+			if ((Gdx.input.isKeyPressed(Keys.B) || Android.b)
+					&& TopMenu.currentTool == 1) {
 				resourceTimer += Gdx.graphics.getDeltaTime() * miningRate;
 				if (resourceTimer > 1 && resourceTimer < 2) {
 					width = (int) (64 * .8);
@@ -66,7 +65,6 @@ public class Resource {
 				if (resourceTimer > 5) {
 					amountOfStone += 1;
 					resourceTimer = 0;
-					mining = false;
 					Points.xp += 1;
 					drawResource = false;
 				}
@@ -75,7 +73,6 @@ public class Resource {
 				resourceTimer = 0;
 				width = 64;
 				height = 58;
-				mining = false;
 			}
 		}
 	}

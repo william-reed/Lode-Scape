@@ -34,8 +34,6 @@ public class GameScreen implements Screen {
 	Android android;
 	Points points;
 
-	Tools test0, test1, test2, test3, test4;
-
 	public GameScreen(Game game) {
 		this.game = game;
 
@@ -56,18 +54,12 @@ public class GameScreen implements Screen {
 		copper = new Copper();
 		tree = new Tree();
 		tre = new Tree();
-		//collision detection problem?
+		// collision detection problem?
 		collision = new CollisionDetection(400, 700, 20, 20);
 		fps = new FPSLogger();
 		android = new Android();
 		points = new Points();
-		
-		test0 = new Tools(Assets.bucket, 0);
-		test1 = new Tools(Assets.bucket, 1);
-		test2 = new Tools(Assets.bucket, 2);
-		test3 = new Tools(Assets.bucket, 3);
-		test4 = new Tools(Assets.bucket, 4);
-		
+
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			currentFont = Assets.cgfFont;
 		} else
@@ -126,15 +118,10 @@ public class GameScreen implements Screen {
 		// draws gui
 		mob.robotDraw(batch, currentFont);
 		points.draw(batch);
-		
-		//test0.draw(batch);
-		//test1.draw(batch);
-		//test2.draw(batch);
-		//test3.draw(batch);
-		//test4.draw(batch);
-		
-		currentFont.draw(batch,"FPS : +" + Gdx.graphics.getFramesPerSecond(), 800, 50);
-	 	
+
+		currentFont.draw(batch, "FPS : +" + Gdx.graphics.getFramesPerSecond(),
+				800, 50);
+
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			android.input();
 			android.draw(batch);
@@ -143,7 +130,7 @@ public class GameScreen implements Screen {
 		batch.end();
 
 		points.drawBars(shapeRenderer);
-		//arrays.treeArrayShapes(shapeRenderer);
+		// arrays.treeArrayShapes(shapeRenderer);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import com.esotericsoftware.spine.Skeleton;
 public class Player {
 	static boolean move = true;
 	static boolean up = false, down = false, left = false, right = false;
-	int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is right
+	static int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is right
 	int playerSpeed = 2;
 	static float x = Level.middleX;
 	static float y = Level.middleY;
@@ -18,8 +18,8 @@ public class Player {
 	static final int playerHeight = 48;
 
 	// pick stuff
-	Skeleton pickSkel = new Skeleton(Assets.pickRightSkeletonData);
-	Bone root = pickSkel.getRootBone();
+	//Skeleton pickSkel = new Skeleton(Assets.pickRightSkeletonData);
+	//Bone root = pickSkel.getRootBone();
 
 	void input() {
 		if (move) {
@@ -133,12 +133,18 @@ public class Player {
 		if (down)
 			Assets.mainChar = Assets.downChar;
 	}
-
+	
+	Tools tools = new Tools();
+	
 	void draw(SpriteBatch batch, BitmapFont font) {
 		// font.draw(batch, "X:  " + Level.levelX, 850, 1030);
 		// font.draw(batch, "Y:  " + Level.levelY, 850, 1000);
-		if (currentDirection == 3 && Resource.mining)
-			pickSkel.draw(batch);
+		//if (currentDirection == 3 && Resource.mining)
+			//pickSkel.draw(batch);
+		tools.draw(batch);
+		tools.update();
+		tools.changeTool();
+		tools.direction();
 		if (move)
 			batch.draw(Assets.mainChar, x, y);
 	}
@@ -146,11 +152,11 @@ public class Player {
 	float time;
 
 	void update() {
-		root.setX(Level.middleX + 11);
-		root.setY(Level.middleY - 11);
+		//root.setX(Level.middleX + 11);
+		//root.setY(Level.middleY - 11);
 
-		time += Gdx.graphics.getDeltaTime() * 1.2;
-		Assets.pickRightAnim.apply(pickSkel, time, true);
-		pickSkel.updateWorldTransform();
+		//time += Gdx.graphics.getDeltaTime() * 1.2;
+		//Assets.pickRightAnim.apply(pickSkel, time, true);
+		//pickSkel.updateWorldTransform();
 	}
 }

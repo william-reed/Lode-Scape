@@ -14,13 +14,13 @@ public class Assets {
 	static Texture itemSelector, buttons, character, material, level, floor,
 			tree, hydration, bucket, corn, lake, farm, house, houseIn,
 			craftmenu, crop, creeper, robot, robotGUI, ironOre, inventory, copperOre, grass,
-			dpad, dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN, pointsBar;
+			dpad, dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN, pointsBar, currentItem;
 	static TextureRegion upChar, downChar, leftChar, rightChar, mainChar;
 	
 	//Spine stuffz
-	static TextureAtlas treeAtlas, pickAtlas, leavesAtlas;
-	static Animation treeAnim, pickRightAnim, leaveAnim;
-	static SkeletonData treeSkeletonData, pickRightSkeletonData, leaveSkeletonData;
+	static TextureAtlas treeAtlas, leavesAtlas, toolsMasterAtlas;
+	static Animation treeAnim, leaveAnim, toolsMasterAnim;
+	static SkeletonData treeSkeletonData, leaveSkeletonData, toolsMasterData;
 	
 	static BitmapFont cgfFont;
 	
@@ -56,6 +56,7 @@ public class Assets {
 		dpadDOWN = new Texture(Gdx.files.internal("dpad_down.png"));
 		buttons = new Texture(Gdx.files.internal("buttonsGray.png"));
 		pointsBar = new Texture(Gdx.files.internal("pointBar.png"));
+		currentItem = new Texture(Gdx.files.internal("currentItem.png"));
 		
 		downChar = new TextureRegion(character, 32, 0, 32, 48);
 		leftChar = new TextureRegion(character, 32, 48, 32, 48);
@@ -68,15 +69,15 @@ public class Assets {
 		treeSkeletonData = treeJson.readSkeletonData(Gdx.files.internal("tree.json"));
 		treeAnim = treeSkeletonData.findAnimation("tree fall");
 	
-		pickAtlas = new TextureAtlas(Gdx.files.internal("pickaxe.atlas"));
-		SkeletonJson pickRightJson = new SkeletonJson(pickAtlas);
-		pickRightSkeletonData = pickRightJson.readSkeletonData(Gdx.files.internal("pick.json"));
-		pickRightAnim = pickRightSkeletonData.findAnimation("animation");
-		
 		leavesAtlas = new TextureAtlas(Gdx.files.internal("leaves.atlas"));
 		SkeletonJson leavesJson = new SkeletonJson(leavesAtlas);
 		leaveSkeletonData = leavesJson.readSkeletonData(Gdx.files.internal("leavesSkel.json"));
 		leaveAnim = leaveSkeletonData.findAnimation("animation");
+		
+		toolsMasterAtlas = new TextureAtlas(Gdx.files.internal("toolAtlas.atlas"));
+		SkeletonJson toolsMasterJson = new SkeletonJson(toolsMasterAtlas);
+		toolsMasterData = toolsMasterJson.readSkeletonData(Gdx.files.internal("toolsMaster.json"));
+		toolsMasterAnim = toolsMasterData.findAnimation("animation");
 		
 		cgfFont = new BitmapFont(Gdx.files.internal("cgf.fnt"), Gdx.files.internal("cgf_0.png"), false);
 	}
