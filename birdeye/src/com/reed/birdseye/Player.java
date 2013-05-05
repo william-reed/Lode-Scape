@@ -10,7 +10,10 @@ import com.esotericsoftware.spine.Skeleton;
 public class Player {
 	static boolean move = true;
 	static boolean up = false, down = false, left = false, right = false;
-	static int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is right
+	static int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is
+										// right
+	boolean moving = false;
+	
 	int playerSpeed = 2;
 	static float x = Level.middleX;
 	static float y = Level.middleY;
@@ -18,8 +21,8 @@ public class Player {
 	static final int playerHeight = 48;
 
 	// pick stuff
-	//Skeleton pickSkel = new Skeleton(Assets.pickRightSkeletonData);
-	//Bone root = pickSkel.getRootBone();
+	// Skeleton pickSkel = new Skeleton(Assets.pickRightSkeletonData);
+	// Bone root = pickSkel.getRootBone();
 
 	void input() {
 		if (move) {
@@ -123,24 +126,74 @@ public class Player {
 		}
 	}
 
+	float timer = 0;
+	
 	void setSprites() {
-		if (right)
-			Assets.mainChar = Assets.rightChar;
-		if (left)
-			Assets.mainChar = Assets.leftChar;
-		if (up)
-			Assets.mainChar = Assets.upChar;
-		if (down)
-			Assets.mainChar = Assets.downChar;
+		if(timer < 4)
+			timer += .1f;
+		else
+			timer = 0;
+		
+		//walking right animation
+		if (right) {
+			if (timer < 1) {
+				Assets.mainChar = Assets.rightChar_STILL;
+			} else if (timer > 1 && timer < 2) {
+				Assets.mainChar = Assets.rightChar_LEFT;
+			} else if (timer > 2 && timer < 3) {
+				Assets.mainChar = Assets.rightChar_STILL;
+			} else if (timer > 3) {
+				Assets.mainChar = Assets.rightChar_RIGHT;
+			}
+		}
+		
+		//walking left animation
+		if (left) {
+			if (timer < 1) {
+				Assets.mainChar = Assets.leftChar_STILL;
+			} else if (timer > 1 && timer < 2) {
+				Assets.mainChar = Assets.leftChar_LEFT;
+			} else if (timer > 2 && timer < 3) {
+				Assets.mainChar = Assets.leftChar_STILL;
+			} else if (timer > 3) {
+				Assets.mainChar = Assets.leftChar_RIGHT;
+			}
+		}
+		
+		//walking up animation
+		if (up) {
+			if (timer < 1) {
+				Assets.mainChar = Assets.upChar_STILL;
+			} else if (timer > 1 && timer < 2) {
+				Assets.mainChar = Assets.upChar_LEFT;
+			} else if (timer > 2 && timer < 3) {
+				Assets.mainChar = Assets.upChar_STILL;
+			} else if (timer > 3) {
+				Assets.mainChar = Assets.upChar_RIGHT;
+			}
+		}
+		
+		//walking down animation
+		if (down) {
+			if (timer < 1) {
+				Assets.mainChar = Assets.downChar_STILL;
+			} else if (timer > 1 && timer < 2) {
+				Assets.mainChar = Assets.downChar_LEFT;
+			} else if (timer > 2 && timer < 3) {
+				Assets.mainChar = Assets.downChar_STILL;
+			} else if (timer > 3) {
+				Assets.mainChar = Assets.downChar_RIGHT;
+			}
+		}
 	}
-	
+
 	Tools tools = new Tools();
-	
+
 	void draw(SpriteBatch batch, BitmapFont font) {
 		// font.draw(batch, "X:  " + Level.levelX, 850, 1030);
 		// font.draw(batch, "Y:  " + Level.levelY, 850, 1000);
-		//if (currentDirection == 3 && Resource.mining)
-			//pickSkel.draw(batch);
+		// if (currentDirection == 3 && Resource.mining)
+		// pickSkel.draw(batch);
 		tools.draw(batch);
 		tools.update();
 		tools.changeTool();
@@ -152,11 +205,11 @@ public class Player {
 	float time;
 
 	void update() {
-		//root.setX(Level.middleX + 11);
-		//root.setY(Level.middleY - 11);
+		// root.setX(Level.middleX + 11);
+		// root.setY(Level.middleY - 11);
 
-		//time += Gdx.graphics.getDeltaTime() * 1.2;
-		//Assets.pickRightAnim.apply(pickSkel, time, true);
-		//pickSkel.updateWorldTransform();
+		// time += Gdx.graphics.getDeltaTime() * 1.2;
+		// Assets.pickRightAnim.apply(pickSkel, time, true);
+		// pickSkel.updateWorldTransform();
 	}
 }
