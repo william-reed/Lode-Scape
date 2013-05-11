@@ -55,7 +55,7 @@ public class Assets {
 		ironOre = new Texture(Gdx.files.internal("ironOre.png"));
 		inventory = new Texture(Gdx.files.internal("inventory.png"));
 		copperOre = new Texture(Gdx.files.internal("copper.png"));
-		grass = new Texture(Gdx.files.internal("testTILE.png"));
+		grass = new Texture(Gdx.files.internal("grass.png"));
 		dpad = new Texture(Gdx.files.internal("dPad.png"));
 		dpadLEFT = new Texture(Gdx.files.internal("dpad_left.png"));
 		dpadRIGHT = new Texture(Gdx.files.internal("dpad_right.png"));
