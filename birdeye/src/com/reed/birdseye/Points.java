@@ -49,21 +49,21 @@ public class Points {
 		shapeRenderer.end();
 	}
 
-	void gainHealth(int amount) {
+	static void gainHealth(int amount) {
 		if (hp <= 100)
 			hp += amount;
 	}
 
-	void looseHealth(int amount) {
+	static void looseHealth(int amount) {
 		if (hp >= 0)
 			hp -= amount;
 	}
 
-	void gainExperience(int amount) {
+	static void gainExperience(int amount) {
 		xp += amount;
 	}
 
-	void looseExperience(int amount) {
+	static void looseExperience(int amount) {
 		xp -= amount;
 	}
 

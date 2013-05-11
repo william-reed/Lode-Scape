@@ -12,7 +12,7 @@ public class Player {
 	static boolean up = false, down = false, left = false, right = false;
 	static int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is
 										// right
-	boolean moving = false;
+	
 	
 	int playerSpeed = 2;
 	static float x = Level.middleX;
@@ -200,16 +200,5 @@ public class Player {
 		tools.direction();
 		if (move)
 			batch.draw(Assets.mainChar, x, y);
-	}
-
-	float time;
-
-	void update() {
-		// root.setX(Level.middleX + 11);
-		// root.setY(Level.middleY - 11);
-
-		// time += Gdx.graphics.getDeltaTime() * 1.2;
-		// Assets.pickRightAnim.apply(pickSkel, time, true);
-		// pickSkel.updateWorldTransform();
 	}
 }

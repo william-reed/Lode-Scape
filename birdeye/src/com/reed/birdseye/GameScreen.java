@@ -25,7 +25,6 @@ public class GameScreen implements Screen {
 	ArrayListsz arrays;
 	Crafting craft = new Crafting();
 	TopMenu topMenu;
-	Mob mob;
 	Iron iron;
 	Inventory inv;
 	Copper copper;
@@ -33,6 +32,8 @@ public class GameScreen implements Screen {
 	CollisionDetection collision;
 	Android android;
 	Points points;
+
+	Mob creeper;
 
 	public GameScreen(Game game) {
 		this.game = game;
@@ -48,7 +49,6 @@ public class GameScreen implements Screen {
 		resource = new Resource();
 		arrays = new ArrayListsz();
 		topMenu = new TopMenu();
-		mob = new Mob();
 		iron = new Iron();
 		inv = new Inventory();
 		copper = new Copper();
@@ -59,6 +59,13 @@ public class GameScreen implements Screen {
 		fps = new FPSLogger();
 		android = new Android();
 		points = new Points();
+
+		creeper = new Mob(Assets.mainCreeper, Assets.upCreeper_STILL, Assets.upCreeper_LEFT,
+				Assets.upCreeper_RIGHT, Assets.downCreeper_STILL,
+				Assets.downCreeper_LEFT, Assets.downCreeper_RIGHT,
+				Assets.leftCreeper_STILL, Assets.leftCreeper_LEFT,
+				Assets.leftCreeper_RIGHT, Assets.rightCreeper_STILL,
+				Assets.rightCreeper_LEFT, Assets.rightCreeper_RIGHT);
 
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			currentFont = Assets.cgfFont;
@@ -73,15 +80,10 @@ public class GameScreen implements Screen {
 		player.setSprites();
 		player.move();
 		player.input();
-		player.update();
 		craft.menuInput();
 		craft.clicked();
 		craft.placeResource();
 		craft.placeTree();
-		mob.movement();
-		mob.boundingArea(300, 300, 500, 400);
-		mob.closeEnough();
-		mob.gui();
 		// iron.closeEnough();
 		// iron.collect();
 		topMenu.input();
@@ -91,6 +93,11 @@ public class GameScreen implements Screen {
 		// collision.collisionDetector();
 		points.updateLevel();
 		level.update();
+		creeper.boundingArea(0, 0, 300, 300);
+		creeper.movement();
+		creeper.attack();
+		creeper.looseHealth();
+		creeper.setSprites();
 
 	}
 
@@ -110,13 +117,13 @@ public class GameScreen implements Screen {
 		arrays.houseArrayEstablisher(batch, currentFont);
 		// iron.draw(batch, currentFont);
 		// copper.draw(batch, currentFont);
-		mob.draw(batch, currentFont);
 		topMenu.draw(batch, currentFont);
 		craft.draw(batch, currentFont);
 		inv.draw(batch, currentFont);
+		creeper.draw(batch, currentFont);
+
 		player.draw(batch, currentFont);
 		// draws gui
-		mob.robotDraw(batch, currentFont);
 		points.draw(batch);
 
 		currentFont.draw(batch, "FPS : +" + Gdx.graphics.getFramesPerSecond(),
@@ -130,6 +137,7 @@ public class GameScreen implements Screen {
 		batch.end();
 
 		points.drawBars(shapeRenderer);
+		creeper.healthBar(shapeRenderer);
 		// arrays.treeArrayShapes(shapeRenderer);
 	}
 

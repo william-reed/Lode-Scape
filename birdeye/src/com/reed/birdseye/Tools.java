@@ -20,6 +20,7 @@ public class Tools {
 	final int width = 50, height = 50;
 	final int boxWidth = 80;
 	SkeletonRenderer renderer = new SkeletonRenderer();
+	static boolean isTooling = false; // great name :)
 
 	void draw(SpriteBatch batch) {
 		// draw sword
@@ -34,9 +35,14 @@ public class Tools {
 		batch.draw(Assets.toolsMasterAtlas.findRegion("gear_swords"),
 				(startOfTopBar + (2 * boxWidth)) + toolX,
 				Gdx.graphics.getHeight() - toolY, 50, 50);
-		if ((Player.currentDirection == 2 || Player.currentDirection == 3) && !(TopMenu.currentTool == 5) && !(TopMenu.currentTool == 4) && !(TopMenu.currentTool == 3)) {
+		if ((Player.currentDirection == 2 || Player.currentDirection == 3)
+				&& !(TopMenu.currentTool == 5) && !(TopMenu.currentTool == 4)
+				&& !(TopMenu.currentTool == 3)) {
 			if (Gdx.input.isKeyPressed(Keys.B)) {
+				isTooling = true;
 				renderer.draw(batch, toolSkel);
+			} else {
+				isTooling = false;
 			}
 		}
 	}

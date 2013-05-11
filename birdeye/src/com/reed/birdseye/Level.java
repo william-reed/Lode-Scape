@@ -1,6 +1,8 @@
 package com.reed.birdseye;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Level {
@@ -11,12 +13,18 @@ public class Level {
 
 	static int grassX = -64; // position for bottom left grass
 	static int grassY = -64; // ^
-
+	
+	Sprite grassSprite = new Sprite(Assets.grass);
+	
 	void draw(SpriteBatch batch) {
 		//draws grass image (64 , 64) everywhere
 		for (int i = 0; i < Gdx.graphics.getWidth() + 128; i += 64) {
 			for (int j = 0; j < Gdx.graphics.getHeight() + 128; j += 64) {
-				batch.draw(Assets.grass, grassX + i, grassY + j);
+				if(i == 256 && j == 256){
+					//grassSprite.flip(true, false);
+				}
+				
+				batch.draw(grassSprite, grassX + i, grassY + j);
 			}
 		}
 	}
