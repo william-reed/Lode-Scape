@@ -23,22 +23,22 @@ public class Farm {
 		// batch.draw(Assets.hydration, mainGame.levelX + x - 52,
 		// mainGame.levelY + y - 8);
 		// standard crop field
-		batch.draw(Assets.farm, Level.levelX + x, Level.levelY + y);
+		batch.draw(Assets.farm, x, y);
 
 		sizeAlpha = ((float) growing / 100);
 		sizeBeta = sizeAlpha * 14;
 		// actual crops
 		for (int i = 510; i <= 570; i += 20)
-			batch.draw(Assets.crop, Level.levelX + i, Level.levelY + 410,
+			batch.draw(Assets.crop, i, 410,
 					sizeBeta, sizeBeta);
 		for (int i = 510; i <= 570; i += 20)
-			batch.draw(Assets.crop, Level.levelX + i, Level.levelY + 428,
+			batch.draw(Assets.crop, i, 428,
 					sizeBeta, sizeBeta);
 		for (int i = 510; i <= 570; i += 20)
-			batch.draw(Assets.crop, Level.levelX + i, Level.levelY + 446,
+			batch.draw(Assets.crop, i, 446,
 					sizeBeta, sizeBeta);
 		for (int i = 510; i <= 570; i += 20)
-			batch.draw(Assets.crop, Level.levelX + i, Level.levelY + 464,
+			batch.draw(Assets.crop, i, 464,
 					sizeBeta, sizeBeta);
 		// draw text
 		if (closeEnough)
@@ -50,10 +50,10 @@ public class Farm {
 
 	public void closeEnoughToFarm() {
 
-		if ((Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial)) {
+		if ((Math.sqrt((x - Level.middleX)
+				* (x - Level.middleX)
+				+ (y - Level.middleY)
+				* (y - Level.middleY)) < distanceFromMaterial)) {
 			closeEnough = true;
 			if (growing == 100) {
 				if (Gdx.input.isKeyPressed(Keys.B)) {

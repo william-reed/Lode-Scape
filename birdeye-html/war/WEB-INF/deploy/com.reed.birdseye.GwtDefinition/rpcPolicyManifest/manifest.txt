@@ -1,2 +1,0 @@
-# Module com.reed.birdseye.GwtDefinition
-# RPC service class, partial path of RPC policy file

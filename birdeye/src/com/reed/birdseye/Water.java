@@ -14,16 +14,16 @@ public class Water {
 	int distanceFromMaterial = 100;
 	
 	public void draw(SpriteBatch batch, BitmapFont font) {
-		batch.draw(Assets.lake, Level.levelX + x, Level.levelY + y);
+		batch.draw(Assets.lake, x, y);
 		if (closeEnough)
 			font.draw(batch, "Hold B to get some water", 50, 50);
 	}
 
 	public void closeEnough() {
-		if ((Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial)) {
+		if ((Math.sqrt((x - Level.middleX)
+				* (x - Level.middleX)
+				+ (y - Level.middleY)
+				* (y - Level.middleY)) < distanceFromMaterial)) {
 			closeEnough = true;
 		}
 	}

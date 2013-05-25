@@ -11,14 +11,14 @@ public class House {
 	int x, y;
 
 	boolean closeEnough() {
-		return (Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial);
+		return (Math.sqrt((x - Level.middleX)
+				* (x - Level.middleX)
+				+ (y - Level.middleY)
+				* (y - Level.middleY)) < distanceFromMaterial);
 	}
 	
 	void draw(SpriteBatch batch, BitmapFont font){
-		batch.draw(Assets.house, Level.levelX + x, Level.levelY + y);
+		batch.draw(Assets.house, x, y);
 		if(closeEnough())
 			font.draw(batch, "Press B to Enter...", 50, 50);
 		if(inHouse){

@@ -14,6 +14,16 @@
 			"arm": { "x": 5.22, "y": 0.01, "rotation": 61.61, "width": 10, "height": 10 }
 		}
 	},
+	"fishingRod": {
+		"pickaxe": {
+			"tool": { "name": "fishingrod", "x": 39.2, "y": -9.17, "rotation": -62.69, "width": 64, "height": 64 }
+		}
+	},
+	"hatchet": {
+		"pickaxe": {
+			"tool": { "name": "gear_swords", "x": 16.14, "y": 0.17, "scaleX": -0.5, "scaleY": 0.5, "rotation": -56.42, "width": 47, "height": 63 }
+		}
+	},
 	"pick": {
 		"pickaxe": {
 			"tool": { "name": "pick", "x": 17.8, "y": 1.6, "rotation": 128.51, "width": 27, "height": 29 }
@@ -31,11 +41,6 @@
 				"width": 64,
 				"height": 64
 			}
-		}
-	},
-	"hatchet": {
-		"pickaxe": {
-			"tool": { "name": "gear_swords", "x": 16.14, "y": 0.17, "scaleX": -0.5, "scaleY": 0.5, "rotation": -56.42, "width": 47, "height": 63 }
 		}
 	}
 },

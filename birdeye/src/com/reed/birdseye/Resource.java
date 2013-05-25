@@ -19,15 +19,15 @@ public class Resource {
 	float miningRate = 1f;
 
 	boolean closeEnough() {
-		return (Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial);
+		return (Math.sqrt((x - Level.middleX)
+				* (x - Level.middleX)
+				+ (y - Level.middleY)
+				* (y - Level.middleY)) < distanceFromMaterial);
 	}
 
 	void draw(SpriteBatch batch, BitmapFont font) {
 		if (drawResource) {
-			batch.draw(Assets.material, Level.levelX + x, Level.levelY + y,
+			batch.draw(Assets.material, x, y,
 					width, height);
 			if (closeEnough() && Player.move) {
 				if (Gdx.app.getType() == ApplicationType.Android) {

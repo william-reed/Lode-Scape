@@ -3,6 +3,7 @@ package com.reed.birdseye;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,26 +24,30 @@ public class GameScreen implements Screen {
 	// TEMP use arrayList for random or static assigned rocks
 	Resource resource;
 	ArrayListsz arrays;
-	Crafting craft = new Crafting();
+	// Crafting craft = new Crafting();
 	TopMenu topMenu;
 	Iron iron;
 	Inventory inv;
 	Copper copper;
-	Tree tree, tre;
 	CollisionDetection collision;
 	Android android;
 	Points points;
-
-	Mob creeper;
-
+	Messages message;
+	SwordShop swordShop;
+	Fishing fishing;
+	
 	public GameScreen(Game game) {
 		this.game = game;
 
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
-		camera.setToOrtho(false, Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getHeight();
+
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, w, h);
+		camera.update();
+
 		batch = new SpriteBatch();
+
 		shapeRenderer = new ShapeRenderer();
 		level = new Level();
 		player = new Player();
@@ -51,22 +56,16 @@ public class GameScreen implements Screen {
 		topMenu = new TopMenu();
 		iron = new Iron();
 		inv = new Inventory();
-		copper = new Copper();
-		tree = new Tree();
-		tre = new Tree();
 		// collision detection problem?
-		collision = new CollisionDetection(400, 700, 20, 20);
 		fps = new FPSLogger();
 		android = new Android();
 		points = new Points();
-
-		creeper = new Mob(Assets.mainCreeper, Assets.upCreeper_STILL, Assets.upCreeper_LEFT,
-				Assets.upCreeper_RIGHT, Assets.downCreeper_STILL,
-				Assets.downCreeper_LEFT, Assets.downCreeper_RIGHT,
-				Assets.leftCreeper_STILL, Assets.leftCreeper_LEFT,
-				Assets.leftCreeper_RIGHT, Assets.rightCreeper_STILL,
-				Assets.rightCreeper_LEFT, Assets.rightCreeper_RIGHT);
-
+		collision = new CollisionDetection();
+		
+		message = new Messages();
+		swordShop = new SwordShop();
+		fishing = new Fishing();
+		
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			currentFont = Assets.cgfFont;
 		} else
@@ -76,75 +75,80 @@ public class GameScreen implements Screen {
 	FPSLogger fps;
 
 	public void update(float deltaTime) {
-		// farm.closeEnoughToFarm();
+		
 		player.setSprites();
 		player.move();
 		player.input();
-		craft.menuInput();
-		craft.clicked();
-		craft.placeResource();
-		craft.placeTree();
-		// iron.closeEnough();
-		// iron.collect();
 		topMenu.input();
 		inv.input();
-		// copper.closeEnough();
-		// copper.collect();
-		// collision.collisionDetector();
 		points.updateLevel();
 		level.update();
-		creeper.boundingArea(0, 0, 300, 300);
-		creeper.movement();
-		creeper.attack();
-		creeper.looseHealth();
-		creeper.setSprites();
-
+		
+		Messages.update();
+		message.removeOldMessages();
+		swordShop.textSetter();
+		swordShop.update();
+		collision.doCollision();
+		inv.input();
+		fishing.update();
+		fishing.fishCaught();
 	}
 
+	public static float xRate = 0;
+	public static float yRate = 0;
+
 	public void draw(float deltaTime) {
-
-		// float delta = Gdx.graphics.getDeltaTime() / 3;
-		// time += delta;
-
 		Gdx.gl.glClearColor(255f, 255f, 255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		camera.translate(xRate, yRate);
+		camera.update();
+
 		batch.begin();
+
+		// sets camera for drawing static items
+		batch.setProjectionMatrix(camera.projection.cpy().translate(
+				-(Gdx.graphics.getWidth() / 2),
+				-(Gdx.graphics.getHeight() / 2), 0));
 
 		level.draw(batch);
 
-		arrays.resourceArrayEstablisher(batch, currentFont);
-		arrays.treeArrayEstablisher(batch, currentFont);
-		arrays.houseArrayEstablisher(batch, currentFont);
-		// iron.draw(batch, currentFont);
-		// copper.draw(batch, currentFont);
-		topMenu.draw(batch, currentFont);
-		craft.draw(batch, currentFont);
-		inv.draw(batch, currentFont);
-		creeper.draw(batch, currentFont);
-
+		// set camera for drawing moving items.
+		batch.setProjectionMatrix(camera.combined);
+		batch.draw(Assets.map, -1118, -3860);
+		swordShop.draw(batch);
+		
 		player.draw(batch, currentFont);
-		// draws gui
+		//more static items
+		batch.setProjectionMatrix(camera.projection.cpy().translate(
+				-(Gdx.graphics.getWidth() / 2),
+				-(Gdx.graphics.getHeight() / 2), 0));
+
+		topMenu.draw(batch, currentFont);
+		player.drawTools(batch);
 		points.draw(batch);
-
-		currentFont.draw(batch, "FPS : +" + Gdx.graphics.getFramesPerSecond(),
-				800, 50);
-
-		if (Gdx.app.getType() == ApplicationType.Android) {
-			android.input();
-			android.draw(batch);
-		}
-
+		message.drawText(currentFont, batch);
+		inv.draw(batch, currentFont);
+		
 		batch.end();
-
+		
 		points.drawBars(shapeRenderer);
-		creeper.healthBar(shapeRenderer);
-		// arrays.treeArrayShapes(shapeRenderer);
+
 	}
 
 	@Override
 	public void render(float delta) {
 		update(delta);
 		draw(delta);
+		handleInput();
+	}
+
+	private void handleInput() {
+		if (Gdx.input.isKeyPressed(Input.Keys.O)) {
+			camera.zoom += 0.02;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+			camera.zoom -= 0.02;
+		}
 	}
 
 	@Override

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.physics.box2d.Shape.Type;
+import com.badlogic.gdx.math.Intersector;
 
 public class Mob {
 	// randomly moving "mob" (animal, monster, etc)
@@ -22,44 +22,17 @@ public class Mob {
 	float mobTime = r.nextInt(3) + 1;
 	// defines time left for movement - set to random int below 3
 	final int speed = 1;
+	static int food = 0;
 
-	TextureRegion upMob_STILL, upMob_LEFT, upMob_RIGHT, downMob_STILL,
-			downMob_LEFT, downMob_RIGHT, leftMob_STILL, leftMob_LEFT,
-			leftMob_RIGHT, rightMob_STILL, rightMob_LEFT, rightMob_RIGHT,
-			mainMob;
-
-	public Mob(TextureRegion mainMob, TextureRegion upMob_STILL,
-			TextureRegion upMob_LEFT, TextureRegion upMob_RIGHT,
-			TextureRegion downMob_STILL, TextureRegion downMob_LEFT,
-			TextureRegion downMob_RIGHT, TextureRegion rightMob_STILL,
-			TextureRegion rightMob_LEFT, TextureRegion rightMob_RIGHT,
-			TextureRegion leftMob_STILL, TextureRegion leftMob_LEFT,
-			TextureRegion leftMob_RIGHT) {
-		this.mainMob = mainMob;
-		this.upMob_STILL = upMob_STILL;
-		this.upMob_LEFT = upMob_LEFT;
-		this.upMob_RIGHT = upMob_RIGHT;
-		this.downMob_STILL = downMob_STILL;
-		this.downMob_LEFT = downMob_LEFT;
-		this.downMob_RIGHT = downMob_RIGHT;
-		this.rightMob_STILL = rightMob_STILL;
-		this.rightMob_LEFT = rightMob_LEFT;
-		this.rightMob_RIGHT = rightMob_RIGHT;
-		this.leftMob_STILL = leftMob_STILL;
-		this.leftMob_LEFT = leftMob_LEFT;
-		this.leftMob_RIGHT = leftMob_RIGHT;
-
-	}
-
-	void draw(SpriteBatch batch, BitmapFont font) {
+	void draw(SpriteBatch batch, BitmapFont font, TextureRegion mainMob) {
 		if (isAlive()) {
-			batch.draw(mainMob, Level.levelX + x, Level.levelY + y);
+			batch.draw(mainMob, x, y);
 		}
 	}
 
 	void movement() {
 		// constantly decrease the mobTime
-		if (!attackedMovement) {
+		if (!attackedMovement && isAlive()) {
 			mobTime -= Gdx.graphics.getDeltaTime();
 			if (direction == 0 && mobTime > 0) {
 				y += speed;
@@ -90,10 +63,8 @@ public class Mob {
 	}
 
 	boolean closeEnough() {
-		return (Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMob);
+		return (Math.sqrt((x - Level.middleX) * (x - Level.middleX)
+				+ (y - Level.middleY) * (y - Level.middleY)) < distanceFromMob);
 	}
 
 	// health etc
@@ -110,17 +81,16 @@ public class Mob {
 	}
 
 	// draws health bar above mob
-	void healthBar(ShapeRenderer shapeRenderer) {
+	void healthBar(ShapeRenderer shapeRenderer, TextureRegion mainMob) {
 		if (isAlive()) {
 			shapeRenderer.begin(ShapeType.Filled);
 			// set to green for full mob health
 			shapeRenderer.setColor(0, 255, 0, 1);
-			shapeRenderer.rect(Level.levelX + x,
-					Level.levelY + y + mainMob.getRegionHeight() + 15, 50, 5);
+			shapeRenderer
+					.rect(x - 8, y + mainMob.getRegionHeight() + 15, 50, 5);
 			// set to red for current mob health
 			shapeRenderer.setColor(255, 0, 0, 1);
-			shapeRenderer.rect(Level.levelX + x,
-					Level.levelY + y + mainMob.getRegionHeight() + 10,
+			shapeRenderer.rect(x - 8, y + mainMob.getRegionHeight() + 10,
 					(health / 100) * 50, 5);
 			shapeRenderer.end();
 		}
@@ -141,33 +111,35 @@ public class Mob {
 
 	// ensures that mob is alive (for drawing purposes)
 	boolean isAlive() {
-		if (health <= 0)
+		if (health <= 0) {
+			onGround = true;
 			return false;
-		else
+		} else
 			return true;
 	}
 
 	boolean attackedMovement;
 
-	void movementWhenAttacked(){
-		if(!closeEnough() && attackedMovement){
-			if (target is to the left of me):
-				move(left);
-			else
-				move(right);
-
-			if (target is above me):
-				move(up);
-			else
-				move(down);
-		}
-		//if further than 100 pixels away move back to bounding area.
-		
-	}
+	/*
+	 * //how am i going to do this??? void movementWhenAttacked(){
+	 * if(!closeEnough() && attackedMovement){ if (target is to the left of me):
+	 * move(left); else move(right);
+	 * 
+	 * if (target is above me): move(up); else move(down); } //if further than
+	 * 100 pixels away move back to bounding area.
+	 * 
+	 * }
+	 */
 
 	float timer = 0;
 
-	void setSprites() {
+	TextureRegion setSprites(TextureRegion upMob_STILL,
+			TextureRegion upMob_LEFT, TextureRegion upMob_RIGHT,
+			TextureRegion downMob_STILL, TextureRegion downMob_LEFT,
+			TextureRegion downMob_RIGHT, TextureRegion rightMob_STILL,
+			TextureRegion rightMob_LEFT, TextureRegion rightMob_RIGHT,
+			TextureRegion leftMob_STILL, TextureRegion leftMob_LEFT,
+			TextureRegion leftMob_RIGHT) {
 		if (timer < 4)
 			timer += .1f;
 		else
@@ -176,53 +148,70 @@ public class Mob {
 		// walking right animation
 		if (direction == 3) {
 			if (timer < 1) {
-				mainMob = rightMob_STILL;
+				return rightMob_STILL;
 			} else if (timer > 1 && timer < 2) {
-				mainMob = rightMob_LEFT;
+				return rightMob_LEFT;
 			} else if (timer > 2 && timer < 3) {
-				mainMob = rightMob_STILL;
+				return rightMob_STILL;
 			} else if (timer > 3) {
-				mainMob = rightMob_RIGHT;
+				return rightMob_RIGHT;
 			}
 		}
 
 		// walking left animation
 		if (direction == 2) {
 			if (timer < 1) {
-				mainMob = leftMob_STILL;
+				return leftMob_STILL;
 			} else if (timer > 1 && timer < 2) {
-				mainMob = leftMob_LEFT;
+				return leftMob_LEFT;
 			} else if (timer > 2 && timer < 3) {
-				mainMob = leftMob_STILL;
+				return leftMob_STILL;
 			} else if (timer > 3) {
-				mainMob = leftMob_RIGHT;
+				return leftMob_RIGHT;
 			}
 		}
 
 		// walking up animation
 		if (direction == 0) {
 			if (timer < 1) {
-				mainMob = upMob_STILL;
+				return upMob_STILL;
 			} else if (timer > 1 && timer < 2) {
-				mainMob = upMob_LEFT;
+				return upMob_LEFT;
 			} else if (timer > 2 && timer < 3) {
-				mainMob = upMob_STILL;
+				return upMob_STILL;
 			} else if (timer > 3) {
-				mainMob = upMob_RIGHT;
+				return upMob_RIGHT;
 			}
 		}
 
 		// walking down animation
 		if (direction == 1) {
 			if (timer < 1) {
-				mainMob = downMob_STILL;
+				return downMob_STILL;
 			} else if (timer > 1 && timer < 2) {
-				mainMob = downMob_LEFT;
+				return downMob_LEFT;
 			} else if (timer > 2 && timer < 3) {
-				mainMob = downMob_STILL;
+				return downMob_STILL;
 			} else if (timer > 3) {
-				mainMob = downMob_RIGHT;
+				return downMob_RIGHT;
 			}
+		}
+		return downMob_STILL;
+	}
+
+	// animal drops
+	boolean onGround = false;
+
+	void drawDrops(SpriteBatch batch, Texture itemDropped) {
+		if (!isAlive() && onGround) {
+			batch.draw(itemDropped, x, y);
+		}
+	}
+
+	void drops() {
+		if (!isAlive() && closeEnough() && onGround) {
+			food += 1;
+			onGround = false;
 		}
 	}
 }

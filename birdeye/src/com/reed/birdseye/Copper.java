@@ -16,18 +16,15 @@ public class Copper {
 	static String amountOfCopperString;
 	boolean drawResource = true;
 	float miningRate = 1f;
-	
+
 	boolean closeEnough() {
-		return (Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial);
+		return (Math.sqrt((Level.middleX) * (x - Level.middleX)
+				+ (y - Level.middleY) * (y - Level.middleY)) < distanceFromMaterial);
 	}
 
 	void draw(SpriteBatch batch, BitmapFont font) {
 		if (drawResource) {
-			batch.draw(Assets.copperOre, Level.levelX + x, Level.levelY + y,
-					width, height);
+			batch.draw(Assets.copperOre, x, y, width, height);
 
 			if (closeEnough() && Player.move) {
 				font.draw(batch, "Hold B to Pick up the Copper", 50, 50);
@@ -36,7 +33,7 @@ public class Copper {
 	}
 
 	void collect() {
-		amountOfCopperString = Integer.toString(amountOfCopper);//update string
+		amountOfCopperString = Integer.toString(amountOfCopper);// update string
 		// starts making the image of the "resource" smaller as b is
 		// held down
 		if (closeEnough()) {

@@ -25,13 +25,13 @@ public class Tree {
 	Bone leaveRoot = leavesSkel.getRootBone();
 
 	void draw(SpriteBatch batch, BitmapFont font) {
-		root.setX(Level.levelX + x);
-		root.setY(Level.levelY + y);
-		leaveRoot.setX(Level.levelX + x);
-		leaveRoot.setY(Level.levelY + y);
+		root.setX(x);
+		root.setY(y);
+		leaveRoot.setX(x);
+		leaveRoot.setY(y);
 		renderer.draw(batch, leavesSkel);
 		renderer.draw(batch, treeSkel);
-		// batch.draw(Assets.tree, Level.levelX + x, Level.levelY + y);
+		// batch.draw(Assets.tree, x, y);
 		if (closeEnough() && Player.move && !treeDone)
 			font.draw(batch, "Press B to Pick up the Tree", 50, 50);
 		treeSkel.updateWorldTransform();
@@ -40,10 +40,10 @@ public class Tree {
 	}
 
 	boolean closeEnough() {
-		return (Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial);
+		return (Math.sqrt((x - Level.middleX)
+				* (x - Level.middleX)
+				+ (y - Level.middleY)
+				* (y - Level.middleY)) < distanceFromMaterial);
 	}
 
 	float treeFallTime, leavesTime;
@@ -72,10 +72,5 @@ public class Tree {
 				treeDone = true;
 			}
 		}
-	}
-
-	void collision(ShapeRenderer shapeRenderer) {
-		CollisionDetection collision = new CollisionDetection(x, y, 20, 20);
-		collision.draw(shapeRenderer);
 	}
 }

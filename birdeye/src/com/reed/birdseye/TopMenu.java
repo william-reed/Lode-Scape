@@ -41,7 +41,7 @@ public class TopMenu {
 		if (Gdx.input.getX() > 649 && Gdx.input.getX() < 723
 				&& Gdx.input.getY() > 6 && Gdx.input.getY() < 68
 				&& Gdx.input.isTouched()) {
-			//Inventory.inventoryVisible = true;
+			Inventory.inventoryVisible = true;
 		}
 		
 		// sets currentTool based off of input

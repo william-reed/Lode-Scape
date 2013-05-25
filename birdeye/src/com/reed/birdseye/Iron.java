@@ -18,15 +18,15 @@ public class Iron {
 	float miningRate = 1f;
 	
 	boolean closeEnough() {
-		return (Math.sqrt((Level.levelX + x - Level.middleX)
-				* (Level.levelX + x - Level.middleX)
-				+ (Level.levelY + y - Level.middleY)
-				* (Level.levelY + y - Level.middleY)) < distanceFromMaterial);
+		return (Math.sqrt((x - Level.middleX)
+				* (x - Level.middleX)
+				+ (y - Level.middleY)
+				* (y - Level.middleY)) < distanceFromMaterial);
 	}
 
 	void draw(SpriteBatch batch, BitmapFont font) {
 		if (drawResource) {
-			batch.draw(Assets.ironOre, Level.levelX + x, Level.levelY + y,
+			batch.draw(Assets.ironOre, x, y,
 					width, height);
 
 			if (closeEnough() && Player.move) {

@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Robot {
 
-	//Mob bot = new Mob(Assets.robot);
-
+	Mob bot = new Mob();
+	
 	// robot stuff
 	int robotResources = 0;
 	String amountOfStoneString;
 	float robotTimer = 0;
 	boolean menuOpen = false;
-
+	
 	void gui() {
 		robotTimer += Gdx.graphics.getDeltaTime();
 		if (robotTimer > 60) {
@@ -50,7 +50,7 @@ public class Robot {
 	}
 	
 	void draw(SpriteBatch batch, BitmapFont font){
-		bot.draw(batch, font);
+		bot.draw(batch, font, Assets.mainRobot);
 		if (bot.closeEnough())
 			font.draw(batch, "Press 'L' to open GUI", 50, 100);
 	}
@@ -58,6 +58,12 @@ public class Robot {
 	void update(){
 		bot.movement();
 		bot.boundingArea(0, 0, 1000, 1000);
+		Assets.mainRobot = bot.setSprites(Assets.upRobot_STILL, Assets.upRobot_LEFT,
+				Assets.upRobot_RIGHT, Assets.downRobot_STILL,
+				Assets.downRobot_LEFT, Assets.downRobot_RIGHT,
+				Assets.leftRobot_STILL, Assets.leftRobot_LEFT,
+				Assets.leftRobot_RIGHT, Assets.rightRobot_STILL,
+				Assets.rightRobot_LEFT, Assets.rightRobot_RIGHT);
 		
 	}
 }

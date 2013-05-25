@@ -3,16 +3,23 @@ toolAtlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-w_shortsword_0
+fishingrod
   rotate: false
   xy: 1, 32
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+w_shortsword_0
+  rotate: false
+  xy: 67, 32
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 0
 gear_swords
   rotate: false
-  xy: 67, 33
+  xy: 133, 33
   size: 47, 63
   orig: 47, 63
   offset: 0, 0
@@ -26,7 +33,7 @@ pick
   index: -1
 arm
   rotate: false
-  xy: 116, 86
+  xy: 182, 86
   size: 10, 10
   orig: 10, 10
   offset: 0, 0

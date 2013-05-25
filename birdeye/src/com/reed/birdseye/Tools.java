@@ -35,9 +35,13 @@ public class Tools {
 		batch.draw(Assets.toolsMasterAtlas.findRegion("gear_swords"),
 				(startOfTopBar + (2 * boxWidth)) + toolX,
 				Gdx.graphics.getHeight() - toolY, 50, 50);
+		// draw fishing rod
+		batch.draw(Assets.toolsMasterAtlas.findRegion("fishingrod"),
+				(startOfTopBar + (3 * boxWidth)) + toolX,
+				Gdx.graphics.getHeight() - toolY, 80, 80);
+
 		if ((Player.currentDirection == 2 || Player.currentDirection == 3)
-				&& !(TopMenu.currentTool == 5) && !(TopMenu.currentTool == 4)
-				&& !(TopMenu.currentTool == 3)) {
+				&& !(TopMenu.currentTool == 5) && !(TopMenu.currentTool == 4)) {
 			if (Gdx.input.isKeyPressed(Keys.B)) {
 				isTooling = true;
 				renderer.draw(batch, toolSkel);
@@ -60,6 +64,11 @@ public class Tools {
 		}
 		if (TopMenu.currentTool == 2) {
 			toolSkel.setSkin("hatchet");
+			toolSkel.setSlotsToBindPose();
+			toolSkel.updateWorldTransform();
+		}
+		if (TopMenu.currentTool == 3) {
+			toolSkel.setSkin("fishingRod");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}

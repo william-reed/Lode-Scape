@@ -53,12 +53,6 @@ public class ArrayListsz {
 		}
 	}
 
-	void treeArrayShapes(ShapeRenderer shapeRenderer){
-		for (int i = 0; i < amountOfTrees; i++) {
-			treeArray.get(i).collision(shapeRenderer);
-		}
-	}
-	
 	static Array<House> houseArray = new Array<House>();
 	static int amountOfHouse = 1;
 
@@ -66,11 +60,14 @@ public class ArrayListsz {
 		for (int i = 0; i < amountOfHouse; i++)
 			houseArray.add(new House());
 
-		for (int i = 0; i < amountOfTrees; i++) {
+		houseArray.get(0).x = 800;
+		houseArray.get(0).y = 900;
+		
+		for (int i = 0; i < amountOfHouse; i++) {
 			//ERROR HERE...
-			//houseArray.get(i).draw(batch, font);
-			//houseArray.get(i).closeEnough();
-			//houseArray.get(i).gettingInandOut();
+			houseArray.get(i).draw(batch, font);
+			houseArray.get(i).closeEnough();
+			houseArray.get(i).gettingInandOut();
 		}
 	}
 }

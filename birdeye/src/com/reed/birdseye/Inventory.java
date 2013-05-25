@@ -15,10 +15,11 @@ public class Inventory {
 			Player.move = false;
 			
 			//draw amounts
-			font.draw(batch, Resource.amountOfStoneString, 275, 405);
-			font.draw(batch, Iron.amountOfIronString, 275, 377);
-			font.draw(batch, Copper.amountOfCopperString, 275, 322);
-			font.draw(batch, Tree.amountOfWoodString, 275, 290);
+			//font.draw(batch, Resource.amountOfStoneString, 275, 405);
+			//font.draw(batch, Iron.amountOfIronString, 275, 377);
+			//font.draw(batch, Copper.amountOfCopperString, 275, 322);
+			//font.draw(batch, Tree.amountOfWoodString, 275, 290);
+			font.draw(batch, Fishing.amountOfFishString, 350, 225);
 		}
 	}
 
@@ -28,7 +29,4 @@ public class Inventory {
 			inventoryVisible = false;
 		}
 	}
-	
-	
-
 }
