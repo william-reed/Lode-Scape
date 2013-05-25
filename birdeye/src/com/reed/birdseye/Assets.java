@@ -32,7 +32,7 @@ public class Assets {
 			downPig_RIGHT, leftPig_STILL, leftPig_LEFT, leftPig_RIGHT,
 			rightPig_STILL, rightPig_LEFT, rightPig_RIGHT, mainPig;
 	
-	static TextureRegion shopOwner;
+	static TextureRegion shopOwner, tradePerson;
 
 	// Spine stuffz
 	static TextureAtlas treeAtlas, leavesAtlas, toolsMasterAtlas;
@@ -78,6 +78,7 @@ public class Assets {
 		bacon = new Texture(Gdx.files.internal("Bacon.png"));
 		
 		shopOwner = new TextureRegion(character, 128, 192, 32, 48);
+		tradePerson = new TextureRegion(character, 224, 192, 32, 48);
 		
 		// character animations
 		downChar_STILL = new TextureRegion(character, 32, 0, 32, 48);
