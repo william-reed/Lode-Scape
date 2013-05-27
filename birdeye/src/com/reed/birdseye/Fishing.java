@@ -10,7 +10,7 @@ public class Fishing {
 	// detects if you have the ability to fish
 	boolean fishingPossible() {
 		return Player.x > -250 && Player.x < -200 && Player.y > -1420
-				&& Player.y < -1280 && TopMenu.currentTool == 3;
+				&& Player.y < -1280 && TopMenu.currentTool == 1;
 	}
 
 	String caught = "You have caught a fish!";
@@ -20,8 +20,8 @@ public class Fishing {
 	static String amountOfFishString;
 
 	void fishCaught() {
-		if (fishingPossible() && Gdx.input.isKeyPressed(Keys.B) && timer > 4) {
-			if (r.nextInt(5) == 2) {
+		if (fishingPossible() && Gdx.input.isKeyPressed(Keys.B) && timer > 	1) {
+			if (r.nextInt(4) == 2) {
 				fishCaught = true;
 			}else
 				timer = 0;

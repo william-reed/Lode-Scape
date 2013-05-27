@@ -67,6 +67,7 @@ public class GameScreen implements Screen {
 		swordShop = new SwordShop();
 		fishing = new Fishing();
 		trade = new TradeShop();
+		arrays.treeArrayEstablisher();
 		
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			currentFont = Assets.cgfFont;
@@ -90,12 +91,14 @@ public class GameScreen implements Screen {
 		message.removeOldMessages();
 		swordShop.textSetter();
 		swordShop.update();
+		swordShop.handleInput();
 		collision.doCollision();
 		inv.input();
 		fishing.update();
 		fishing.fishCaught();
 		trade.textSetter();
 		trade.update();
+		trade.handleInput();
 	}
 
 	public static float xRate = 0;
@@ -121,8 +124,11 @@ public class GameScreen implements Screen {
 		batch.draw(Assets.map, -1118, -3860);
 		swordShop.draw(batch);
 		trade.draw(batch);
+		arrays.drawTreeTrunk(batch);
 		
 		player.draw(batch, currentFont);
+		arrays.drawBrush(batch, currentFont);
+		
 		//more static items
 		batch.setProjectionMatrix(camera.projection.cpy().translate(
 				-(Gdx.graphics.getWidth() / 2),
@@ -133,6 +139,8 @@ public class GameScreen implements Screen {
 		points.draw(batch);
 		message.drawText(currentFont, batch);
 		inv.draw(batch, currentFont);
+		swordShop.drawInputText(batch, currentFont);
+		trade.drawInputText(batch, currentFont);
 		
 		batch.end();
 		

@@ -24,21 +24,27 @@ public class Tools {
 
 	void draw(SpriteBatch batch) {
 		// draw sword
-		batch.draw(Assets.toolsMasterAtlas.findRegion("w_shortsword_0"),
-				(startOfTopBar + (0 * boxWidth)) + toolX,
-				Gdx.graphics.getHeight() - toolY, 70, 70);
+		if (Tutorial.step >= 6) {
+			batch.draw(Assets.toolsMasterAtlas.findRegion("w_shortsword_0"),
+					(startOfTopBar + (3 * boxWidth)) + toolX,
+					Gdx.graphics.getHeight() - toolY, 70, 70);
+		}
 		// draw pick axe
 		batch.draw(Assets.toolsMasterAtlas.findRegion("pick"),
-				(startOfTopBar + (1 * boxWidth)) + toolX,
+				(startOfTopBar + (0 * boxWidth)) + toolX,
 				Gdx.graphics.getHeight() - toolY, 50, 50);
-		// draw hatchet
-		batch.draw(Assets.toolsMasterAtlas.findRegion("gear_swords"),
-				(startOfTopBar + (2 * boxWidth)) + toolX,
-				Gdx.graphics.getHeight() - toolY, 50, 50);
-		// draw fishing rod
-		batch.draw(Assets.toolsMasterAtlas.findRegion("fishingrod"),
-				(startOfTopBar + (3 * boxWidth)) + toolX,
-				Gdx.graphics.getHeight() - toolY, 80, 80);
+		if (Tutorial.step >= 5) {
+			// draw hatchet
+			batch.draw(Assets.toolsMasterAtlas.findRegion("gear_swords"),
+					(startOfTopBar + (2 * boxWidth)) + toolX,
+					Gdx.graphics.getHeight() - toolY, 50, 50);
+		}
+		if (Tutorial.step >= 2) {
+			// draw fishing rod
+			batch.draw(Assets.toolsMasterAtlas.findRegion("fishingrod"),
+					(startOfTopBar + (1 * boxWidth)) + toolX,
+					Gdx.graphics.getHeight() - toolY, 80, 80);
+		}
 
 		if ((Player.currentDirection == 2 || Player.currentDirection == 3)
 				&& !(TopMenu.currentTool == 5) && !(TopMenu.currentTool == 4)) {
@@ -53,12 +59,12 @@ public class Tools {
 
 	void changeTool() {
 		if (TopMenu.currentTool == 0) {
-			toolSkel.setSkin("sword");
+			toolSkel.setSkin("pick");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}
 		if (TopMenu.currentTool == 1) {
-			toolSkel.setSkin("pick");
+			toolSkel.setSkin("fishingRod");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}
@@ -68,7 +74,7 @@ public class Tools {
 			toolSkel.updateWorldTransform();
 		}
 		if (TopMenu.currentTool == 3) {
-			toolSkel.setSkin("fishingRod");
+			toolSkel.setSkin("sword");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}
