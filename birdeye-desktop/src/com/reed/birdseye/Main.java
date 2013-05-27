@@ -1,5 +1,7 @@
 package com.reed.birdseye;
 
+import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -13,6 +15,8 @@ public class Main {
 		cfg.foregroundFPS = 60;
 		cfg.backgroundFPS = 60;
 		cfg.resizable = false;
+		cfg.addIcon("icon16x16.png",
+                FileType.Internal);
 		
 		new LwjglApplication(new BirdsEye(), cfg);
 	}
