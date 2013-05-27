@@ -12,7 +12,7 @@ public class Inventory {
 		if (inventoryVisible) {
 			batch.draw(Assets.inventory, 0, 0);
 			//move somewhere else
-			Player.move = false;
+			Player.ableToMove = false;
 			
 			//draw amounts
 			//font.draw(batch, Resource.amountOfStoneString, 275, 405);
@@ -25,7 +25,7 @@ public class Inventory {
 
 	void input() {
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-			Player.move = true;
+			Player.ableToMove = true;
 			inventoryVisible = false;
 		}
 	}

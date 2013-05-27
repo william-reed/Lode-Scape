@@ -29,7 +29,7 @@ public class Resource {
 		if (drawResource) {
 			batch.draw(Assets.material, x, y,
 					width, height);
-			if (closeEnough() && Player.move) {
+			if (closeEnough() && Player.ableToMove) {
 				if (Gdx.app.getType() == ApplicationType.Android) {
 					font.draw(batch, "hold b to mine", Android.size + 10, 50);
 				} else

@@ -26,7 +26,7 @@ public class Copper {
 		if (drawResource) {
 			batch.draw(Assets.copperOre, x, y, width, height);
 
-			if (closeEnough() && Player.move) {
+			if (closeEnough() && Player.ableToMove) {
 				font.draw(batch, "Hold B to Pick up the Copper", 50, 50);
 			}
 		}

@@ -93,6 +93,7 @@ public class SwordShop {
 			//	.println("X: " + Gdx.input.getX() + " Y: " + Gdx.input.getY());
 		if(Tutorial.step == 4 && closeEnough()){
 			timer = 0;
+			TradeShop.cash -= 50;
 			Tutorial.step = 5;
 		}
 		if(Tutorial.step == 6 && closeEnough()){

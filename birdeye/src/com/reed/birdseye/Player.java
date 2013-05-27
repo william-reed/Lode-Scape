@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player {
-	static boolean move = true;
+	static boolean ableToMove = true;
 	static boolean up = false, down = false, left = false, right = false;
 	static int currentDirection = 0; // 0 is down, 1 is up, 2 is left, 3 is
 										// right
@@ -25,7 +25,7 @@ public class Player {
 
 	void input() {
 		// System.out.println("X: " + x + " Y: " + y);
-		if (move) {
+		if (ableToMove) {
 			if (!House.inHouse) {
 
 				if (((Gdx.input.isKeyPressed(Keys.W)) || Android.up)
@@ -75,12 +75,17 @@ public class Player {
 					right = false;
 			}
 		}
+		
+		if(Gdx.input.isButtonPressed(Keys.SHIFT_LEFT)){
+			playerSpeed = 4;
+		}else
+			playerSpeed = 2;
 	}
 
 	void move() {
 		// System.out.println("X: " + x + " Y: " + y);
 
-		if (move) {
+		if (ableToMove) {
 			// handle y movement
 			if (up) {
 				GameScreen.yRate = (playerSpeed);
@@ -110,6 +115,9 @@ public class Player {
 			} else {
 				GameScreen.xRate = 0;
 			}
+		}else{
+			GameScreen.yRate = 0;
+			GameScreen.xRate = 0;
 		}
 	}
 
@@ -181,7 +189,7 @@ public class Player {
 		// font.draw(batch, "Y:  " + Level.levelY, 850, 1000);
 		// if (currentDirection == 3 && Resource.mining)
 		// pickSkel.draw(batch);
-		if (move)
+		if (ableToMove)
 			batch.draw(Assets.mainChar, x, y);
 	}
 

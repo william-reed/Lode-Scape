@@ -29,7 +29,7 @@ public class Iron {
 			batch.draw(Assets.ironOre, x, y,
 					width, height);
 
-			if (closeEnough() && Player.move) {
+			if (closeEnough() && Player.ableToMove) {
 				font.draw(batch, "Hold B to Pick up the Iron", 50, 50);
 			}
 		}

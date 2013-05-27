@@ -52,7 +52,7 @@ public class TradeShop {
 					sender = "Trade Shop: Hello stranger! You look new.";
 					break;
 				case 2:
-					sender = "Trade Shop: If you get some fish with that fishing pole I'll trade with you.";
+					sender = "Trade Shop: If you get 5 fish with that fishing pole I'll trade with you.";
 					break;
 				case 3:
 					sender = "Trade Shop: Do you want to trade your 5 fish for $50?";
@@ -74,6 +74,7 @@ public class TradeShop {
 			Tutorial.step = 3;
 		}
 		if (cash >= 50 && Tutorial.step == 3) {
+			Fishing.amountOfFish -= 5;
 			Tutorial.step = 4;
 		}
 	}
@@ -101,6 +102,7 @@ public class TradeShop {
 						"Trade Shop: Here is your money, thanks for the business!",
 						Messages.sec));
 				timer = 0;
+				cash -= 50;
 				Tutorial.step += 1;
 			}
 		}

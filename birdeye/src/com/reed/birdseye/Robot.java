@@ -26,9 +26,9 @@ public class Robot {
 			menuOpen = true;
 		}
 		if (menuOpen) {
-			Player.move = false;
+			Player.ableToMove = false;
 			if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-				Player.move = true;
+				Player.ableToMove = true;
 				menuOpen = false;
 			}
 			// detect if claim is clicked

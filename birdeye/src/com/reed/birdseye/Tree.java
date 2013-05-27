@@ -32,7 +32,7 @@ public class Tree {
 		renderer.draw(batch, leavesSkel);
 		renderer.draw(batch, treeSkel);
 		// batch.draw(Assets.tree, x, y);
-		if (closeEnough() && Player.move && !treeDone)
+		if (closeEnough() && Player.ableToMove && !treeDone)
 			font.draw(batch, "Press B to Pick up the Tree", 50, 50);
 		treeSkel.updateWorldTransform();
 		leavesSkel.updateWorldTransform();
