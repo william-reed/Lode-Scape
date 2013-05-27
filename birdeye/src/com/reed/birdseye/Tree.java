@@ -36,14 +36,33 @@ public class Tree {
 			font.draw(batch, "Press B to Pick up the Tree", 50, 50);
 		treeSkel.updateWorldTransform();
 		leavesSkel.updateWorldTransform();
+	}
 
+	void drawTrunk(SpriteBatch batch) {
+		batch.draw(Assets.treeAtlas.findRegion("treeBottom"), x - 50, y);
+	}
+
+	void collision() {
+		if (Player.x > x - 45 && Player.x < x - 20 && Player.y < y + 40
+				&& Player.y > y - 20)
+			Player.isAbleToMoveRight = false;
+		if (Player.x > x + 10 && Player.x < x + 30 && Player.y < y + 40
+				&& Player.y > y - 20) {
+			Player.isAbleToMoveLeft = false;
+		}
+		if (Player.x > x - 41 && Player.x < x + 26 && Player.y < y + 40
+				&& Player.y > y + 20) {
+			Player.isAbleToMoveDown = false;
+		}
+		if (Player.x > x - 41 && Player.x < x + 26 && Player.y < y
+				&& Player.y > y - 24) {
+			Player.isAbleToMoveUp = false;
+		}
 	}
 
 	boolean closeEnough() {
-		return (Math.sqrt((x - Level.middleX)
-				* (x - Level.middleX)
-				+ (y - Level.middleY)
-				* (y - Level.middleY)) < distanceFromMaterial);
+		return (Math.sqrt((x - Player.x) * (x - Player.x) + (y - Player.y)
+				* (y - Player.y)) < distanceFromMaterial);
 	}
 
 	float treeFallTime, leavesTime;
@@ -55,14 +74,21 @@ public class Tree {
 		}
 	}
 
+	float chopTimer;
+
 	void collectingTree() {
 		amountOfWoodString = Integer.toString(amountOfWood);// update string
 		if (closeEnough() && !treeFall) {
-			if (Gdx.input.isKeyPressed(Keys.B) &&  TopMenu.currentTool == 2) {
-				Points.xp += 1;
-				amountOfWood += 4;
-				treeFall = true;
-			}
+			if (Gdx.input.isKeyPressed(Keys.B) && TopMenu.currentTool == 2
+					&& Tutorial.step >= 5) {
+				chopTimer += Gdx.graphics.getDeltaTime();
+				if (chopTimer > 2) {
+					Points.xp += 1;
+					amountOfWood += 4;
+					treeFall = true;
+				}
+			}else
+				chopTimer = 0;
 		}
 		if (treeFall && !treeDone) {
 			float delta = Gdx.graphics.getDeltaTime(); // 3;
@@ -71,6 +97,9 @@ public class Tree {
 			if (treeFallTime > .9) {
 				treeDone = true;
 			}
+		}
+		if(Tutorial.step == 5 && amountOfWood >= 8){
+			Tutorial.step = 6;
 		}
 	}
 }

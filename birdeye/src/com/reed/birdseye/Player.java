@@ -1,12 +1,9 @@
 package com.reed.birdseye;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.esotericsoftware.spine.Bone;
-import com.esotericsoftware.spine.Skeleton;
 
 public class Player {
 	static boolean move = true;
@@ -81,7 +78,7 @@ public class Player {
 	}
 
 	void move() {
-		//System.out.println("X: " + x + " Y: " + y);
+		// System.out.println("X: " + x + " Y: " + y);
 
 		if (move) {
 			// handle y movement

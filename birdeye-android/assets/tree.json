@@ -5,17 +5,12 @@
 	{ "name": "bone2", "parent": "bone1", "length": 108.73, "x": 0.14, "y": 3.5, "rotation": 89.09 }
 ],
 "slots": [
-	{ "name": "tree", "bone": "root", "attachment": "tree" },
-	{ "name": "treeBottom", "bone": "root", "attachment": "treeBottom" },
 	{ "name": "bone2", "bone": "bone2", "attachment": "treeTop" }
 ],
 "skins": {
 	"default": {
-		"treeBottom": {
-			"treeBottom": { "x": 3.45, "y": 20.03, "rotation": 0.53, "width": 108, "height": 38 }
-		},
 		"bone2": {
-			"treeTop": { "x": 50, "y": -0.11, "rotation": -89.09, "width": 108, "height": 125 }
+			"treeTop": { "x": 50.11, "y": -0.15, "rotation": -89.09, "width": 108, "height": 125 }
 		}
 	}
 },

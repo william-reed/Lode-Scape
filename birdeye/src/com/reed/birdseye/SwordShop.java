@@ -56,21 +56,24 @@ public class SwordShop {
 					sender = purchase;
 					break;
 				case 2:
-					sender = "Have you obtained any fish yet?";
+					sender = "Sword Shop: Have you obtained any fish yet?";
 					break;
 				case 3:
-					sender = "Have you traded the fish for money yet?";
+					sender = "Sword Shop: Have you traded the fish for money yet?";
 					break;
 				case 4:
-					sender = "You got the money! Oh no... it seems I have ran out of wood."
-							+ "\n"
+					sender = "Sword Shop: You got the money! Oh no... it seems I have ran out of wood."
+							+ "\n" //this doesnt work
 							+ "Take this hatchet and go chop some trees for me!";
 					break;
 				case 5:
-					sender = "Have you gotten that wood yet?";
+					sender = "Sword Shop: Have you gotten that wood yet?";
 					break;
 				case 6:
-					sender = "Thank you for getting that wood! Here is a sword!;";
+					sender = "Sword Shop: Thank you for getting that wood! Here is a sword!";
+					break;
+				case 7:
+					sender = "More of this quest will be added soon! Stay tuned! :D";
 					break;
 				default:
 					sender = "blank message...";
@@ -92,6 +95,10 @@ public class SwordShop {
 			timer = 0;
 			Tutorial.step = 5;
 		}
+		if(Tutorial.step == 6 && closeEnough()){
+			timer = 0;
+			Tutorial.step = 7;
+		}
 	}
 
 	boolean ableToSend() {
@@ -112,8 +119,8 @@ public class SwordShop {
 		if (Tutorial.step == 1 && closeEnough()) {
 			if (Gdx.input.getX() > 785 && Gdx.input.getX() < 836
 					&& Gdx.input.getY() > 470 && Gdx.input.getY() < 515 && Gdx.input.isTouched()) {
-				Messages.messagesArray.add(new Message("Here is a fishing rod. Go catch some fish and trade it for cash to pay me.", Messages.sec));
-				Messages.messagesArray.add(new Message("It looks like you don't have any money...", Messages.sec));
+				Messages.messagesArray.add(new Message("Sword Shop: Here is a fishing rod. Go catch some fish and trade it for cash to pay me.", Messages.sec));
+				Messages.messagesArray.add(new Message("Sword Shop: It looks like you don't have any money...", Messages.sec));
 				Tutorial.step += 1;
 			}
 		}

@@ -86,7 +86,12 @@ public class CollisionDetection {
 		else if (Player.y < 118 && Player.y > -162 && Player.x > 506
 				&& Player.x < 542) {
 			Player.isAbleToMoveLeft = false;
-		} else
+		}// segment 53
+		else if (Player.y < -1058 && Player.y > -1438 && Player.x > 508
+				&& Player.x < 544) {
+			Player.isAbleToMoveLeft = false;
+		}
+		else
 			Player.isAbleToMoveLeft = true;
 
 		if (Player.x > 2830) {
@@ -179,7 +184,12 @@ public class CollisionDetection {
 		else if (Player.y < 118 && Player.y > -162 && Player.x > 496
 				&& Player.x < 532) {
 			Player.isAbleToMoveRight = false;
-		} else
+		}// segment 53
+		else if (Player.y < -1058 && Player.y > -1438 && Player.x > 498
+				&& Player.x < 534) {
+			Player.isAbleToMoveRight = false;
+		}
+		else
 			Player.isAbleToMoveRight = true;
 
 		// bottom wall
@@ -207,7 +217,7 @@ public class CollisionDetection {
 				&& Player.x < 2878) {
 			Player.isAbleToMoveDown = false;
 		}// segment 22
-		else if (Player.y > -1078 && Player.y < -1052 && Player.x > 392
+		else if (Player.y > -1078 && Player.y < -1052 && Player.x > 504
 				&& Player.x < 1740) {
 			Player.isAbleToMoveDown = false;
 		}// segment 24
@@ -216,7 +226,7 @@ public class CollisionDetection {
 			Player.isAbleToMoveDown = false;
 		}// segment 26
 		else if (Player.y > -1428 && Player.y < -1406 && Player.x > -294
-				&& Player.x < -18) {
+				&& Player.x < 544) {
 			Player.isAbleToMoveDown = false;
 		}// segment 28
 		else if (Player.y > -1284 && Player.y < -1268 && Player.x > -294
@@ -302,7 +312,7 @@ public class CollisionDetection {
 				&& Player.x < 2878) {
 			Player.isAbleToMoveUp = false;
 		}// segment 22
-		else if (Player.y > -1088 && Player.y < -1062 && Player.x > 392
+		else if (Player.y > -1088 && Player.y < -1062 && Player.x > 504
 				&& Player.x < 1740) {
 			Player.isAbleToMoveUp = false;
 		}// segment 24
@@ -311,7 +321,7 @@ public class CollisionDetection {
 			Player.isAbleToMoveUp = false;
 		}// segment 26
 		else if (Player.y > -1442 && Player.y < -1416 && Player.x > -294
-				&& Player.x < -18) {
+				&& Player.x < 544) {
 			Player.isAbleToMoveUp = false;
 		}// segment 28
 		else if (Player.y > -1294 && Player.y < -1258 && Player.x > -294

@@ -36,20 +36,29 @@ public class ArrayListsz {
 	static Array<Tree> treeArray = new Array<Tree>();
 	static int amountOfTrees = 2;
 
-	void treeArrayEstablisher(SpriteBatch batch, BitmapFont font) {
+	void treeArrayEstablisher() {
 		for (int i = 0; i < amountOfTrees; i++)
 			treeArray.add(new Tree());
 
-		treeArray.get(0).x = 400;
-		treeArray.get(0).y = 700;
-		treeArray.get(1).x = 300;
-		treeArray.get(1).y = 300;
+		treeArray.get(0).x = 300;
+		treeArray.get(0).y = -1080;
+		treeArray.get(1).x = 200;
+		treeArray.get(1).y = -1300;
+	}
 
+	void drawBrush(SpriteBatch batch, BitmapFont font) {
 		for (int i = 0; i < amountOfTrees; i++) {
 			treeArray.get(i).draw(batch, font);
 			treeArray.get(i).closeEnough();
 			treeArray.get(i).collectingTree();
 			treeArray.get(i).leavesFall();
+			treeArray.get(i).collision();
+		}
+	}
+
+	void drawTreeTrunk(SpriteBatch batch) {
+		for (int i = 0; i < amountOfTrees; i++) {
+			treeArray.get(i).drawTrunk(batch);
 		}
 	}
 
@@ -62,9 +71,9 @@ public class ArrayListsz {
 
 		houseArray.get(0).x = 800;
 		houseArray.get(0).y = 900;
-		
+
 		for (int i = 0; i < amountOfHouse; i++) {
-			//ERROR HERE...
+			// ERROR HERE...
 			houseArray.get(i).draw(batch, font);
 			houseArray.get(i).closeEnough();
 			houseArray.get(i).gettingInandOut();

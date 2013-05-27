@@ -49,16 +49,16 @@ public class TradeShop {
 				// diferent text for tutorial stage
 				switch (Tutorial.step) {
 				case 1:
-					sender = "Hello stranger! You look new.";
+					sender = "Trade Shop: Hello stranger! You look new.";
 					break;
 				case 2:
-					sender = "If you get some fish with that fishing pole I'll trade with you.";
+					sender = "Trade Shop: If you get some fish with that fishing pole I'll trade with you.";
 					break;
 				case 3:
-					sender = "Do you want to trade your 5 fish for $50?";
+					sender = "Trade Shop: Do you want to trade your 5 fish for $50?";
 					break;
 				case 4:
-					sender = "Hello there friend.";
+					sender = "Trade Shop: Hello there friend.";
 				}
 			Messages.messagesArray.add(new Message(sender, Messages.sec));
 		}
@@ -98,7 +98,7 @@ public class TradeShop {
 					&& Gdx.input.getY() > 470 && Gdx.input.getY() < 515
 					&& Gdx.input.isTouched()) {
 				Messages.messagesArray.add(new Message(
-						"Here is your money, thaks for the business!",
+						"Trade Shop: Here is your money, thanks for the business!",
 						Messages.sec));
 				timer = 0;
 				Tutorial.step += 1;

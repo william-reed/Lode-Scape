@@ -13,6 +13,7 @@ public class Tutorial {
 	//5 is having hatchet
 	//6 is having wood
 	//7 is having sword
+	//8 is next...
 	
 	//100 is done with tutorial
 }

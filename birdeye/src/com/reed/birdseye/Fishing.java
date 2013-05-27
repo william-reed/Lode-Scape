@@ -30,6 +30,7 @@ public class Fishing {
 		if (fishCaught) {
 			Messages.messagesArray.add(new Message(caught, Messages.sec));
 			amountOfFish += 1;
+			Points.xp += 1;
 			timer = 0;
 			fishCaught = false;
 		}

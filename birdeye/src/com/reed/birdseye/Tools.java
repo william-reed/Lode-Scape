@@ -24,7 +24,7 @@ public class Tools {
 
 	void draw(SpriteBatch batch) {
 		// draw sword
-		if (Tutorial.step >= 6) {
+		if (Tutorial.step >= 7) {
 			batch.draw(Assets.toolsMasterAtlas.findRegion("w_shortsword_0"),
 					(startOfTopBar + (3 * boxWidth)) + toolX,
 					Gdx.graphics.getHeight() - toolY, 70, 70);
@@ -63,17 +63,17 @@ public class Tools {
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}
-		if (TopMenu.currentTool == 1) {
+		if (TopMenu.currentTool == 1 && Tutorial.step >= 2) {
 			toolSkel.setSkin("fishingRod");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}
-		if (TopMenu.currentTool == 2) {
+		if (TopMenu.currentTool == 2 && Tutorial.step >= 5) {
 			toolSkel.setSkin("hatchet");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
 		}
-		if (TopMenu.currentTool == 3) {
+		if (TopMenu.currentTool == 3 && Tutorial.step >= 7) {
 			toolSkel.setSkin("sword");
 			toolSkel.setSlotsToBindPose();
 			toolSkel.updateWorldTransform();
@@ -96,7 +96,7 @@ public class Tools {
 	float timer;
 
 	void update() {
-		timer += Gdx.graphics.getDeltaTime();
+		timer += Gdx.graphics.getDeltaTime() / 2;
 		toolSkel.setSkin("sword");
 		Assets.toolsMasterAnim.apply(toolSkel, timer, true);
 		toolSkel.updateWorldTransform();

@@ -133,7 +133,7 @@ public class GameScreen implements Screen {
 		batch.setProjectionMatrix(camera.projection.cpy().translate(
 				-(Gdx.graphics.getWidth() / 2),
 				-(Gdx.graphics.getHeight() / 2), 0));
-
+		player.drawTools(batch);
 		topMenu.draw(batch, currentFont);
 		player.drawTools(batch);
 		points.draw(batch);
