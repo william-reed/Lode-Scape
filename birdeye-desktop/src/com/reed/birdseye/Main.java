@@ -17,6 +17,8 @@ public class Main {
 		cfg.resizable = false;
 		cfg.addIcon("icon16x16.png",
                 FileType.Internal);
+		cfg.addIcon("icon32x32.png",
+                FileType.Internal);
 		
 		new LwjglApplication(new BirdsEye(), cfg);
 	}
