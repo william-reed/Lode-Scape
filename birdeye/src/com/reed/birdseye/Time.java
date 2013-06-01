@@ -71,7 +71,6 @@ public class Time {
 		sunset();
 		sunrise();
 		rayHandler.setAmbientLight(getAmbientLight());
-		System.out.println(ambientLight);
 	}
 
 	/** check if time is less then 5 minutes, if so it is day */
@@ -151,6 +150,6 @@ public class Time {
 	private static Array<Vector2> spawnList = new Array<Vector2>();
 	//defines spawn points
 	static void addMobSpawns(){
-		
+		//finish latter
 	}
 }

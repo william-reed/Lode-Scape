@@ -1,12 +1,16 @@
 package com.reed.birdseye;
 
+import java.nio.IntBuffer;
+
+import box2dLight.RayHandler;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -14,10 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-
-import box2dLight.Light;
-import box2dLight.PointLight;
-import box2dLight.RayHandler;
+import com.badlogic.gdx.utils.BufferUtils;
 
 public class GameScreen implements Screen {
 	Game game;
@@ -87,6 +88,14 @@ public class GameScreen implements Screen {
 		rayHandler = new RayHandler(world);
 		
 		Time.createLights(rayHandler);
+		
+		int[] maxTextureSize = new int[1];
+		IntBuffer buf = BufferUtils.newIntBuffer(16);
+		Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf);
+		int result = buf.get();
+		System.out.println(result);
+		int result2 = buf.get();
+		System.out.println(result);
 	}
 
 	int lightX = 400, lightY = 400;
