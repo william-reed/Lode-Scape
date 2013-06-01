@@ -75,10 +75,10 @@ public class Player {
 					right = false;
 			}
 		}
-		
-		if(Gdx.input.isButtonPressed(Keys.SHIFT_LEFT)){
-			playerSpeed = 4;
-		}else
+
+		if (Gdx.input.isButtonPressed(Keys.SHIFT_LEFT)) {
+			playerSpeed = 8;
+		} else
 			playerSpeed = 2;
 	}
 
@@ -115,7 +115,7 @@ public class Player {
 			} else {
 				GameScreen.xRate = 0;
 			}
-		}else{
+		} else {
 			GameScreen.yRate = 0;
 			GameScreen.xRate = 0;
 		}
