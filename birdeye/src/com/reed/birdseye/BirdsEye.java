@@ -7,7 +7,7 @@ import com.badlogic.gdx.Preferences;
 public class BirdsEye extends Game {
 	Preferences prefs;
 	boolean firstRun;
-	float version = 1.01f;
+	float version = 1.02f;
 
 	@Override
 	public void create() {
@@ -17,7 +17,7 @@ public class BirdsEye extends Game {
 		// tests if it has been created before
 		version = prefs.getFloat("version");
 		
-		if (version == 1.01f) {
+		if (version == 1.02f) {
 			GameScreen.camera.position.x = prefs.getFloat("camera x");
 			GameScreen.camera.position.y = prefs.getFloat("camera y");
 			Player.x = prefs.getFloat("player x");
@@ -29,6 +29,9 @@ public class BirdsEye extends Game {
 			TradeShop.cash = prefs.getInteger("cash");
 			Points.hp = prefs.getInteger("hp");
 			Points.xp = prefs.getInteger("xp");
+			Time.colorAlpha = prefs.getFloat("color alpha");
+			Time.setTimeOfDay(prefs.getFloat("time"));
+			Time.setAmbientLight(prefs.getFloat("ambient light"));
 			
 		} else
 			prefs.clear();
@@ -50,9 +53,12 @@ public class BirdsEye extends Game {
 		prefs.putFloat("camera y", GameScreen.camera.position.y);
 		prefs.putFloat("player x", Player.x);
 		prefs.putFloat("player y", Player.y);
+		prefs.putFloat("color alpha", Time.colorAlpha);
+		prefs.putFloat("time", Time.getTimeOfDay());
+		prefs.putFloat("ambient light", Time.getAmbientLight());
 		
 		//set to current version before saving
-		version = 1.01f;
+		version = 1.02f;
 		prefs.putFloat("version", version);
 		prefs.flush();
 		super.dispose();
