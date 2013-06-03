@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
 		rayHandler = new RayHandler(world);
 		
 		Time.createLights(rayHandler);
-		
+		/*
 		int[] maxTextureSize = new int[1];
 		IntBuffer buf = BufferUtils.newIntBuffer(16);
 		Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf);
@@ -96,6 +96,7 @@ public class GameScreen implements Screen {
 		System.out.println(result);
 		int result2 = buf.get();
 		System.out.println(result);
+		*/
 	}
 
 	int lightX = 400, lightY = 400;
@@ -148,7 +149,7 @@ public class GameScreen implements Screen {
 
 		// set camera for drawing moving items.
 		batch.setProjectionMatrix(camera.combined);
-		batch.draw(Assets.map, -1118, -3860);
+		batch.draw(Assets.map, -958, -3316);
 		swordShop.draw(batch);
 		trade.draw(batch);
 		arrays.drawTreeTrunk(batch);

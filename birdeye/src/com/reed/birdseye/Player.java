@@ -76,10 +76,10 @@ public class Player {
 			}
 		}
 
-		if (Gdx.input.isButtonPressed(Keys.SHIFT_LEFT)) {
-			playerSpeed = 8;
-		} else
-			playerSpeed = 2;
+		// if (Gdx.input.isButtonPressed(Keys.SHIFT_LEFT)) {
+		// playerSpeed = 8;
+		// } else
+		// playerSpeed = 2;
 	}
 
 	void move() {

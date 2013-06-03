@@ -42,40 +42,39 @@ public class Assets {
 	static BitmapFont cgfFont;
 
 	public static void load() {
-		map = new Texture(Gdx.files.internal("Map.png"));
-		itemSelector = new Texture(Gdx.files.internal("itemselector.png"));
-		crop = new Texture(Gdx.files.internal("crop.png"));
+		map = new Texture(Gdx.files.internal("data/Map.png"));
+		itemSelector = new Texture(Gdx.files.internal("data/itemselector.png"));
+		crop = new Texture(Gdx.files.internal("data/crop.png"));
 		// floor = new Texture(Gdx.files.internal("floor.png"));
-		lake = new Texture(Gdx.files.internal("lake.png"));
+		lake = new Texture(Gdx.files.internal("data/lake.png"));
 		// buttons = new Texture(Gdx.files.internal("buttons.png"));
-		bucket = new Texture(Gdx.files.internal("bucket.png"));
-		hydration = new Texture(Gdx.files.internal("hydration.png"));
-		corn = new Texture(Gdx.files.internal("corn.png"));
-		character = new Texture(Gdx.files.internal("characters.png"));
-		material = new Texture(Gdx.files.internal("material.png"));
-		house = new Texture(Gdx.files.internal("hosue.png"));
-		houseIn = new Texture(Gdx.files.internal("inhouse.png"));
-		farm = new Texture(Gdx.files.internal("lilfarm2.png"));
-		craftmenu = new Texture(Gdx.files.internal("craftingMenu.png"));
+		bucket = new Texture(Gdx.files.internal("data/bucket.png"));
+		hydration = new Texture(Gdx.files.internal("data/hydration.png"));
+		corn = new Texture(Gdx.files.internal("data/corn.png"));
+		character = new Texture(Gdx.files.internal("data/characters.png"));
+		material = new Texture(Gdx.files.internal("data/material.png"));
+		house = new Texture(Gdx.files.internal("data/hosue.png"));
+		houseIn = new Texture(Gdx.files.internal("data/inhouse.png"));
+		farm = new Texture(Gdx.files.internal("data/lilfarm2.png"));
+		craftmenu = new Texture(Gdx.files.internal("data/craftingMenu.png"));
 		// depreceated due to texture atlas
 		// tree = new Texture(Gdx.files.internal("tree.png"));
-		robot = new Texture(Gdx.files.internal("robot.png"));
-		robotGUI = new Texture(Gdx.files.internal("robotGui.png"));
-		ironOre = new Texture(Gdx.files.internal("ironOre.png"));
-		inventory = new Texture(Gdx.files.internal("inventory.png"));
-		copperOre = new Texture(Gdx.files.internal("copper.png"));
-		grass = new Texture(Gdx.files.internal("grass.png"));
-		dpad = new Texture(Gdx.files.internal("dPad.png"));
-		dpadLEFT = new Texture(Gdx.files.internal("dpad_left.png"));
-		dpadRIGHT = new Texture(Gdx.files.internal("dpad_right.png"));
-		dpadUP = new Texture(Gdx.files.internal("dpad_up.png"));
-		dpadDOWN = new Texture(Gdx.files.internal("dpad_down.png"));
-		buttons = new Texture(Gdx.files.internal("buttonsGray.png"));
-		pointsBar = new Texture(Gdx.files.internal("pointBar.png"));
-		currentItem = new Texture(Gdx.files.internal("currentItem.png"));
-		creeper = new Texture(Gdx.files.internal("creeperSprite.png"));
-		pig = new Texture(Gdx.files.internal("pig.png"));
-		bacon = new Texture(Gdx.files.internal("Bacon.png"));
+		robot = new Texture(Gdx.files.internal("data/robot.png"));
+		robotGUI = new Texture(Gdx.files.internal("data/robotGui.png"));
+		ironOre = new Texture(Gdx.files.internal("data/ironOre.png"));
+		inventory = new Texture(Gdx.files.internal("data/inventory.png"));
+		copperOre = new Texture(Gdx.files.internal("data/copper.png"));
+		grass = new Texture(Gdx.files.internal("data/grass.png"));
+		dpad = new Texture(Gdx.files.internal("data/dPad.png"));
+		dpadLEFT = new Texture(Gdx.files.internal("data/dpad_left.png"));
+		dpadRIGHT = new Texture(Gdx.files.internal("data/dpad_right.png"));
+		dpadUP = new Texture(Gdx.files.internal("data/dpad_up.png"));
+		dpadDOWN = new Texture(Gdx.files.internal("data/dpad_down.png"));
+		buttons = new Texture(Gdx.files.internal("data/buttonsGray.png"));
+		pointsBar = new Texture(Gdx.files.internal("data/pointBar.png"));
+		currentItem = new Texture(Gdx.files.internal("data/currentItem.png"));
+		creeper = new Texture(Gdx.files.internal("data/creeperSprite.png"));
+		pig = new Texture(Gdx.files.internal("data/pig.png"));
 		
 		shopOwner = new TextureRegion(character, 128, 192, 32, 48);
 		tradePerson = new TextureRegion(character, 224, 192, 32, 48);
@@ -139,26 +138,26 @@ public class Assets {
 		mainRobot = downRobot_STILL;
 		mainChar = downChar_STILL;
 
-		treeAtlas = new TextureAtlas(Gdx.files.internal("tree.atlas"));
+		treeAtlas = new TextureAtlas(Gdx.files.internal("data/tree.atlas"));
 		SkeletonJson treeJson = new SkeletonJson(treeAtlas);
 		treeSkeletonData = treeJson.readSkeletonData(Gdx.files
-				.internal("tree.json"));
+				.internal("data/tree.json"));
 		treeAnim = treeSkeletonData.findAnimation("tree fall");
 
-		leavesAtlas = new TextureAtlas(Gdx.files.internal("leaves.atlas"));
+		leavesAtlas = new TextureAtlas(Gdx.files.internal("data/leaves.atlas"));
 		SkeletonJson leavesJson = new SkeletonJson(leavesAtlas);
 		leaveSkeletonData = leavesJson.readSkeletonData(Gdx.files
-				.internal("leavesSkel.json"));
+				.internal("data/leavesSkel.json"));
 		leaveAnim = leaveSkeletonData.findAnimation("animation");
 
 		toolsMasterAtlas = new TextureAtlas(
-				Gdx.files.internal("toolAtlas.atlas"));
+				Gdx.files.internal("data/toolAtlas.atlas"));
 		SkeletonJson toolsMasterJson = new SkeletonJson(toolsMasterAtlas);
 		toolsMasterData = toolsMasterJson.readSkeletonData(Gdx.files
-				.internal("toolsMaster.json"));
+				.internal("data/toolsMaster.json"));
 		toolsMasterAnim = toolsMasterData.findAnimation("animation");
 
-		cgfFont = new BitmapFont(Gdx.files.internal("cgf.fnt"),
-				Gdx.files.internal("cgf_0.png"), false);
+		cgfFont = new BitmapFont(Gdx.files.internal("data/cgf.fnt"),
+				Gdx.files.internal("data/cgf_0.png"), false);
 	}
 }
