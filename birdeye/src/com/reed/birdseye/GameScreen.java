@@ -1,7 +1,5 @@
 package com.reed.birdseye;
 
-import java.nio.IntBuffer;
-
 import box2dLight.RayHandler;
 
 import com.badlogic.gdx.Application.ApplicationType;
@@ -10,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -18,11 +15,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.BufferUtils;
 
 public class GameScreen implements Screen {
 	Game game;
-	OrthographicCamera camera;
+	//static for getting position
+	static OrthographicCamera camera;
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 	BitmapFont currentFont;
@@ -51,7 +48,7 @@ public class GameScreen implements Screen {
 		this.game = game;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		
+
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, w, h);
 		camera.update();
@@ -86,24 +83,22 @@ public class GameScreen implements Screen {
 		world = new World(new Vector2(0, 0), true);
 
 		rayHandler = new RayHandler(world);
-		
+
 		Time.createLights(rayHandler);
 		/*
-		int[] maxTextureSize = new int[1];
-		IntBuffer buf = BufferUtils.newIntBuffer(16);
-		Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf);
-		int result = buf.get();
-		System.out.println(result);
-		int result2 = buf.get();
-		System.out.println(result);
-		*/
+		 * int[] maxTextureSize = new int[1]; IntBuffer buf =
+		 * BufferUtils.newIntBuffer(16);
+		 * Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf); int result =
+		 * buf.get(); System.out.println(result); int result2 = buf.get();
+		 * System.out.println(result);
+		 */
 	}
 
 	int lightX = 400, lightY = 400;
 	FPSLogger fps;
 
 	public void update(float deltaTime) {
-		//can be changed anytime in time class
+		// can be changed anytime in time class
 		player.setSprites();
 		player.move();
 		player.input();
@@ -123,7 +118,7 @@ public class GameScreen implements Screen {
 		trade.textSetter();
 		trade.update();
 		trade.handleInput();
-		//fps.log();
+		// fps.log();
 		Time.update(rayHandler);
 	}
 

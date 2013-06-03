@@ -7,7 +7,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = "Lode Scape - 1.0 Beta";
+		cfg.title = "Lode Scape - 1.01 Beta";
 		cfg.useGL20 = true;
 		cfg.width = 960;
 		cfg.height = 540;

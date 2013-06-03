@@ -18,7 +18,7 @@ public class Time {
 	static float colorAlpha = 0f;
 	// set to .9 for proper light
 	final static Color lightColor = new Color(255, 237, 138, colorAlpha);
-	private static float timeOfDay = 305;
+	private static float timeOfDay = 0;
 	// set to .2 for proper darkness
 	private static float ambientLight = 1f;
 
