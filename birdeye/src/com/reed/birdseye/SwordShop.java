@@ -19,10 +19,10 @@ public class SwordShop {
 				* (y - Player.y)) < DISTANCE_FROM_SHOP);
 	}
 
-	String hello = "Sword Shop: Hello there!";
-	String purchase = "Sword Shop: Would you like to buy a sword?";
-	String derp = "Sword Shop: What a nice game this is.";
-	String myJob = "Sword Shop: I love my job.";
+	String hello = "[Sword Shop] Hello there!";
+	String purchase = "[Sword Shop] Would you like to buy a sword?";
+	String derp = "[Sword Shop] What a nice game this is.";
+	String myJob = "[Sword Shop] I love my job.";
 
 	Random r = new Random();
 
@@ -56,21 +56,20 @@ public class SwordShop {
 					sender = purchase;
 					break;
 				case 2:
-					sender = "Sword Shop: Have you obtained any fish yet?";
+					sender = "[Sword Shop] Have you obtained any fish yet?";
 					break;
 				case 3:
-					sender = "Sword Shop: Have you traded the fish for money yet?";
+					sender = "[Sword Shop] Have you traded the fish for money yet?";
 					break;
 				case 4:
-					sender = "Sword Shop: You got the money! Oh no... it seems I have ran out of wood."
-							+ "\n" //this doesnt work
-							+ "Take this hatchet and go chop some trees for me!";
+					sender = "[Sword Shop] You got the money! Oh no... it seems I have ran out of wood.";
+					Messages.messagesArray.add(new Message("[Sword Shop] Take this hatchet and go chop some trees for me!", Messages.sec));
 					break;
 				case 5:
-					sender = "Sword Shop: Have you gotten that wood yet?";
+					sender = "[Sword Shop] Have you gotten that wood yet?";
 					break;
 				case 6:
-					sender = "Sword Shop: Thank you for getting that wood! Here is a sword!";
+					sender = "[Sword Shop] Thank you for getting that wood! Here is a sword!";
 					break;
 				case 7:
 					sender = "More of this quest will be added soon! Stay tuned! :D";
@@ -120,8 +119,8 @@ public class SwordShop {
 		if (Tutorial.step == 1 && closeEnough()) {
 			if (Gdx.input.getX() > 785 && Gdx.input.getX() < 836
 					&& Gdx.input.getY() > 470 && Gdx.input.getY() < 515 && Gdx.input.isTouched()) {
-				Messages.messagesArray.add(new Message("Sword Shop: Here is a fishing rod. Go catch some fish and trade it for cash to pay me.", Messages.sec));
-				Messages.messagesArray.add(new Message("Sword Shop: It looks like you don't have any money...", Messages.sec));
+				Messages.messagesArray.add(new Message("[Sword Shop] Here is a fishing rod. Go catch some fish and trade it for cash to pay me.", Messages.sec));
+				Messages.messagesArray.add(new Message("[Sword Shop] It looks like you don't have any money...", Messages.sec));
 				Tutorial.step += 1;
 			}
 		}

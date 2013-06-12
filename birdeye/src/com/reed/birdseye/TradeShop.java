@@ -20,9 +20,9 @@ public class TradeShop {
 				* (y - Player.y)) < DISTANCE_FROM_SHOP);
 	}
 
-	String hello = "Trade Shop: Hello there stranger!";
-	String purchase = "Trade Shop: Anything you want to trade with me?";
-	String derp = "Trade Shop: What a nice game this is.";
+	String hello = "[Trade Shop]: Hello there stranger!";
+	String purchase = "[Trade Shop]: Anything you want to trade with me?";
+	String derp = "[Trade Shop]: What a nice game this is.";
 
 	Random r = new Random();
 
@@ -49,16 +49,16 @@ public class TradeShop {
 				// diferent text for tutorial stage
 				switch (Tutorial.step) {
 				case 1:
-					sender = "Trade Shop: Hello stranger! You look new.";
+					sender = "[Trade Shop] Hello stranger! You look new.";
 					break;
 				case 2:
-					sender = "Trade Shop: If you get 5 fish with that fishing pole I'll trade with you.";
+					sender = "[Trade Shop] If you get 5 fish with that fishing pole I'll trade with you.";
 					break;
 				case 3:
-					sender = "Trade Shop: Do you want to trade your 5 fish for $50?";
+					sender = "[Trade Shop] Do you want to trade your 5 fish for $50?";
 					break;
 				case 4:
-					sender = "Trade Shop: Hello there friend.";
+					sender = "[Trade Shop] Hello there friend.";
 				}
 			Messages.messagesArray.add(new Message(sender, Messages.sec));
 		}
@@ -99,7 +99,7 @@ public class TradeShop {
 					&& Gdx.input.getY() > 470 && Gdx.input.getY() < 515
 					&& Gdx.input.isTouched()) {
 				Messages.messagesArray.add(new Message(
-						"Trade Shop: Here is your money, thanks for the business!",
+						"[Trade Shop] Here is your money, thanks for the business!",
 						Messages.sec));
 				timer = 0;
 				cash -= 50;

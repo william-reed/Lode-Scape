@@ -32,7 +32,6 @@ public class BirdsEye extends Game {
 			Time.colorAlpha = prefs.getFloat("color alpha");
 			Time.setTimeOfDay(prefs.getFloat("time"));
 			Time.setAmbientLight(prefs.getFloat("ambient light"));
-			
 		} else
 			prefs.clear();
 	}
@@ -61,7 +60,9 @@ public class BirdsEye extends Game {
 		version = 1.02f;
 		prefs.putFloat("version", version);
 		prefs.flush();
+		
 		super.dispose();
+		Gdx.app.exit();
 	}
 
 	public void resize(int width, int height) {

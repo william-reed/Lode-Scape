@@ -10,6 +10,7 @@ public class Messages {
 	public static Array<Message> messagesArray = new Array<Message>();
 
 	void drawText(BitmapFont font, SpriteBatch batch) {
+		//batch.draw(Assets.chatBox, 0, 0);
 		for (int i = 0; i < messagesArray.size; i++) {
 			font.draw(batch, messagesArray.get(i).message, 20, i * 30 + 30);
 		}
