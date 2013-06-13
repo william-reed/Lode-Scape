@@ -6,7 +6,7 @@ import com.badlogic.gdx.Preferences;
 
 public class BirdsEye extends Game {
 	Preferences prefs;
-	String currentVersion = "1.1.0";
+	String currentVersion = "1.1.1.0";
 	String version;
 
 	@Override
@@ -14,7 +14,6 @@ public class BirdsEye extends Game {
 		prefs = Gdx.app.getPreferences("preferences.lodescape");
 		Assets.load();
 		setScreen(new GameScreen(this));
-		// tests if it has been created before
 		version = prefs.getString("version");
 		
 		if (version.equals(currentVersion)) {

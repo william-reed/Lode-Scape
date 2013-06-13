@@ -37,12 +37,12 @@ public class Time {
 		pointLights.add(newLight(rayHandler, 2062, 3636));
 		pointLights.add(newLight(rayHandler, 2480, 3636));
 		pointLights.add(newLight(rayHandler, 2896, 3636));
-		pointLights.add(newLight(rayHandler, 2896, 3402));//
-		pointLights.add(newLight(rayHandler, 3056, 3402));//
-		pointLights.add(newLight(rayHandler, 2896, 2836));//
-		pointLights.add(newLight(rayHandler, 2896, 2448));//
-		pointLights.add(newLight(rayHandler, 3056, 2448));//
-		pointLights.add(newLight(rayHandler, 2668, 2116));//
+		pointLights.add(newLight(rayHandler, 2896, 3402));
+		pointLights.add(newLight(rayHandler, 3056, 3402));
+		pointLights.add(newLight(rayHandler, 2896, 2836));
+		pointLights.add(newLight(rayHandler, 2896, 2448));
+		pointLights.add(newLight(rayHandler, 3056, 2448));
+		pointLights.add(newLight(rayHandler, 2668, 2116));
 		pointLights.add(newLight(rayHandler, 2808, 2116));
 		pointLights.add(newLight(rayHandler, 2073, 2468));
 		pointLights.add(newLight(rayHandler, 2213, 2468));
@@ -71,6 +71,14 @@ public class Time {
 		sunset();
 		sunrise();
 		rayHandler.setAmbientLight(getAmbientLight());
+		
+		//necessary to do to load lights from a save
+		if (isNight() || isDay()) {
+			lightColor.set(255, 237, 138, colorAlpha);
+			for (int i = 0; i < pointLights.size; i++) {
+				pointLights.get(i).setColor(lightColor);
+			}
+		}
 	}
 
 	/** check if time is less then 5 minutes, if so it is day */
@@ -145,11 +153,12 @@ public class Time {
 	public static void setAmbientLight(float ambientLight) {
 		Time.ambientLight = ambientLight;
 	}
-	
-	//array list of spawn points
+
+	// array list of spawn points
 	private static Array<Vector2> spawnList = new Array<Vector2>();
-	//defines spawn points
-	static void addMobSpawns(){
-		//finish latter
+
+	// defines spawn points
+	static void addMobSpawns() {
+		// finish latter
 	}
 }

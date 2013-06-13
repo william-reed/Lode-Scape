@@ -92,13 +92,13 @@ public class GameScreen implements Screen {
 		world = new World(new Vector2(0, 0), true);
 
 		rayHandler = new RayHandler(world);
-		rayHandler.setCombinedMatrix(mapCamera.combined);
 		Time.createLights(rayHandler);
 		/*
-		 * int[] maxTextureSize = new int[1]; IntBuffer buf =
-		 * BufferUtils.newIntBuffer(16);
-		 * Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf); int result =
-		 * buf.get(); System.out.println(result); int result2 = buf.get();
+		 * int[] maxTextureSize = new int[1]; IntBuffer 
+		 * buf = BufferUtils.newIntBuffer(16);
+		 * Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf); 
+		 * int result = buf.get(); System.out.println(result); 
+		 * int result2 = buf.get();
 		 * System.out.println(result);
 		 */
 	}
@@ -140,9 +140,6 @@ public class GameScreen implements Screen {
 	public void draw(float deltaTime) {
 		Gdx.gl.glClearColor(255f, 255f, 255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		
-		
 		
 		batch.begin();
 		// sets camera for drawing static items
@@ -160,15 +157,21 @@ public class GameScreen implements Screen {
 		batch.begin();
 			// set camera for drawing moving items.
 			batch.setProjectionMatrix(mapCamera.combined);
-			swordShop.draw(batch);//
-			trade.draw(batch);//
-			arrays.drawTreeTrunk(batch);//
+			swordShop.draw(batch);
+			trade.draw(batch);
+			arrays.drawTreeTrunk(batch);
 
-			player.draw(batch, currentFont);//
-			arrays.drawBrush(batch, currentFont);//
-
+			player.draw(batch, currentFont);
+			//set static for tool drawing (so it is affected by lights)
+			batch.setProjectionMatrix(camera.combined);
+			player.drawCurrent(batch);
+			// set camera for drawing moving items.
+			batch.setProjectionMatrix(mapCamera.combined);
+			arrays.drawBrush(batch, currentFont);
+			
 		batch.end();
-			rayHandler.updateAndRender();//
+			rayHandler.setCombinedMatrix(mapCamera.combined);
+			rayHandler.updateAndRender();
 		batch.begin();
 
 			// more static items (HUD stuff)
@@ -183,7 +186,7 @@ public class GameScreen implements Screen {
 			trade.drawInputText(batch, currentFont);
 
 		batch.end();
-
+		shapeRenderer.setProjectionMatrix(camera.combined);
 		points.drawBars(shapeRenderer);
 		
 
@@ -196,7 +199,7 @@ public class GameScreen implements Screen {
 		handleInput();
 	}
 	
-	//handle input for zooming in and out of game
+	/** Handle input for zooming in and out */
 	private void handleInput() {
 		if (Gdx.input.isKeyPressed(Input.Keys.O)) {
 			camera.zoom += 0.02;
@@ -205,6 +208,10 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
 			camera.zoom -= 0.02;
 			mapCamera.zoom -= 0.02;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.U)) {
+			camera.zoom = 1;
+			mapCamera.zoom = 1;
 		}
 	}
 

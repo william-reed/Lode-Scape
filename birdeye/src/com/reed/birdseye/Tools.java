@@ -45,7 +45,9 @@ public class Tools {
 					(startOfTopBar + (1 * boxWidth)) + toolX,
 					Gdx.graphics.getHeight() - toolY, 80, 80);
 		}
+	}
 
+	void drawCurrentTool(SpriteBatch batch) {
 		if ((Player.currentDirection == 2 || Player.currentDirection == 3)
 				&& !(TopMenu.currentTool == 5) && !(TopMenu.currentTool == 4)) {
 			if (Gdx.input.isKeyPressed(Keys.B)) {

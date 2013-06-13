@@ -368,6 +368,11 @@ public class CollisionDetection {
 		else if (Player.y > 3148 && Player.y < 3188 && Player.x > 1458
 				&& Player.x < 1528) {
 			Player.isAbleToMoveUp = false;
+		}
+		// segment 53
+		else if (Player.y > 2230 && Player.y < 2240 && Player.x > 1354
+					&& Player.x < 1386) {
+				Player.isAbleToMoveUp = false;
 		} else
 			Player.isAbleToMoveUp = true;
 	}

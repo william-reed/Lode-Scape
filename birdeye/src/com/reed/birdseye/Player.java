@@ -22,7 +22,7 @@ public class Player {
 	void input() {
 		// x = 1422;
 		// y = 3562;
-		//System.out.println("X: " + x + " Y: " + y);
+		// System.out.println("X: " + x + " Y: " + y);
 		if (ableToMove) {
 			if (!House.inHouse) {
 
@@ -196,5 +196,9 @@ public class Player {
 		tools.update();
 		tools.changeTool();
 		tools.direction();
+	}
+	
+	void drawCurrent(SpriteBatch batch){
+		tools.drawCurrentTool(batch);
 	}
 }
