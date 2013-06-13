@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TradeShop {
-	int x = 880, y = -410;
+	int x = 1838, y = 2906;
 	final int DISTANCE_FROM_SHOP = 100;
 	public static int cash = 0;
 

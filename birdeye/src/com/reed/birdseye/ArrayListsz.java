@@ -40,10 +40,10 @@ public class ArrayListsz {
 		for (int i = 0; i < amountOfTrees; i++)
 			treeArray.add(new Tree());
 
-		treeArray.get(0).x = 300;
-		treeArray.get(0).y = -1080;
-		treeArray.get(1).x = 200;
-		treeArray.get(1).y = -1300;
+		treeArray.get(0).x = 1258;
+		treeArray.get(0).y = 2236;
+		treeArray.get(1).x = 1158;
+		treeArray.get(1).y = 2016;
 	}
 
 	void drawBrush(SpriteBatch batch, BitmapFont font) {

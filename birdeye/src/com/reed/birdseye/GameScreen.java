@@ -13,13 +13,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class GameScreen implements Screen {
 	Game game;
-	//static for getting position
+	// static for getting position
 	static OrthographicCamera camera;
+	OrthographicCamera mapCamera;
+	OrthogonalTiledMapRenderer mapRenderer;
+
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 	BitmapFont currentFont;
@@ -48,12 +52,17 @@ public class GameScreen implements Screen {
 		this.game = game;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, w, h);
-		camera.update();
-
+		
 		batch = new SpriteBatch();
+		camera = new OrthographicCamera(w, h);
+		mapCamera = new OrthographicCamera(w, h);
+		camera.update();
+		mapCamera.update();
+		mapRenderer = new OrthogonalTiledMapRenderer(Assets.mainTiledMap, batch);
+		//translate HUD camera to make bottom left cordinate 0,0
+		camera.translate(w / 2, h / 2);
+		//translate camera to spawn point
+		mapCamera.translate(1422 + 16 , 3562 + 24);
 
 		shapeRenderer = new ShapeRenderer();
 		level = new Level();
@@ -83,7 +92,7 @@ public class GameScreen implements Screen {
 		world = new World(new Vector2(0, 0), true);
 
 		rayHandler = new RayHandler(world);
-
+		rayHandler.setCombinedMatrix(mapCamera.combined);
 		Time.createLights(rayHandler);
 		/*
 		 * int[] maxTextureSize = new int[1]; IntBuffer buf =
@@ -111,7 +120,7 @@ public class GameScreen implements Screen {
 		swordShop.textSetter();
 		swordShop.update();
 		swordShop.handleInput();
-		collision.doCollision();
+		//collision.doCollision();
 		inv.input();
 		fishing.update();
 		fishing.fishCaught();
@@ -120,6 +129,9 @@ public class GameScreen implements Screen {
 		trade.handleInput();
 		// fps.log();
 		Time.update(rayHandler);
+		
+		//camera stuff
+		camera.update();
 	}
 
 	public static float xRate = 0;
@@ -129,50 +141,51 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(255f, 255f, 255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		lightX = 402;
-		lightY = 406;
-		camera.translate(xRate, yRate);
-		camera.update();
-
+		
+		
+		
 		batch.begin();
 		// sets camera for drawing static items
-		batch.setProjectionMatrix(camera.projection.cpy().translate(
-				-(Gdx.graphics.getWidth() / 2),
-				-(Gdx.graphics.getHeight() / 2), 0));
+			batch.setProjectionMatrix(camera.combined);
 
-		level.draw(batch);
+			level.draw(batch);
+		
+		batch.end();
+		batch.setProjectionMatrix(mapCamera.combined);
+		mapCamera.translate(xRate, yRate);
+		mapCamera.update();
+		mapRenderer.setView(mapCamera);
+		mapRenderer.render();
+		
+		batch.begin();
+			// set camera for drawing moving items.
+			batch.setProjectionMatrix(mapCamera.combined);
+			swordShop.draw(batch);//
+			trade.draw(batch);//
+			arrays.drawTreeTrunk(batch);//
 
-		// set camera for drawing moving items.
-		batch.setProjectionMatrix(camera.combined);
-		batch.draw(Assets.map, -958, -3316);
-		swordShop.draw(batch);
-		trade.draw(batch);
-		arrays.drawTreeTrunk(batch);
-
-		player.draw(batch, currentFont);
-		arrays.drawBrush(batch, currentFont);
+			player.draw(batch, currentFont);//
+			arrays.drawBrush(batch, currentFont);//
 
 		batch.end();
-		rayHandler.setCombinedMatrix(camera.combined);
-		rayHandler.updateAndRender();
+			rayHandler.updateAndRender();
 		batch.begin();
 
-		// more static items
-		batch.setProjectionMatrix(camera.projection.cpy().translate(
-				-(Gdx.graphics.getWidth() / 2),
-				-(Gdx.graphics.getHeight() / 2), 0));
-		player.drawTools(batch);
-		topMenu.draw(batch, currentFont);
-		player.drawTools(batch);
-		points.draw(batch);
-		message.drawText(currentFont, batch);
-		inv.draw(batch, currentFont);
-		swordShop.drawInputText(batch, currentFont);
-		trade.drawInputText(batch, currentFont);
+			// more static items (HUD stuff)
+			batch.setProjectionMatrix(camera.combined);
+			player.drawTools(batch);
+			topMenu.draw(batch, currentFont);
+			player.drawTools(batch);
+			points.draw(batch);
+			message.drawText(currentFont, batch);
+			inv.draw(batch, currentFont);
+			swordShop.drawInputText(batch, currentFont);
+			trade.drawInputText(batch, currentFont);
 
 		batch.end();
 
 		points.drawBars(shapeRenderer);
+		
 
 	}
 
@@ -182,13 +195,16 @@ public class GameScreen implements Screen {
 		draw(delta);
 		handleInput();
 	}
-
+	
+	//handle input for zooming in and out of game
 	private void handleInput() {
 		if (Gdx.input.isKeyPressed(Input.Keys.O)) {
 			camera.zoom += 0.02;
+			mapCamera.zoom += 0.02;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
 			camera.zoom -= 0.02;
+			mapCamera.zoom -= 0.02;
 		}
 	}
 

@@ -14,17 +14,15 @@ public class Player {
 			isAbleToMoveDown = true, isAbleToMoveUp = true;
 
 	int playerSpeed = 2;
-	static float x = Level.middleX;
-	static float y = Level.middleY;
+	static float x = 1422;
+	static float y = 3562;
 	static final int playerWidth = 32;
 	static final int playerHeight = 48;
 
-	// pick stuff
-	// Skeleton pickSkel = new Skeleton(Assets.pickRightSkeletonData);
-	// Bone root = pickSkel.getRootBone();
-
 	void input() {
-		// System.out.println("X: " + x + " Y: " + y);
+		// x = 1422;
+		// y = 3562;
+		//System.out.println("X: " + x + " Y: " + y);
 		if (ableToMove) {
 			if (!House.inHouse) {
 

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SwordShop {
-	int x = 1515, y = -924;
+	int x = 2473, y = 2392;
 	final int DISTANCE_FROM_SHOP = 100;
 
 	void draw(SpriteBatch batch) {

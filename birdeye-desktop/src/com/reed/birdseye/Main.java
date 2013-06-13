@@ -14,11 +14,9 @@ public class Main {
 		cfg.foregroundFPS = 60;
 		cfg.backgroundFPS = 60;
 		cfg.resizable = false;
-		cfg.addIcon("data/icon16x16.png",
-                FileType.Internal);
-		cfg.addIcon("data/icon32x32.png",
-                FileType.Internal);
-		
+		cfg.addIcon("data/icon16x16.png", FileType.Internal);
+		cfg.addIcon("data/icon32x32.png", FileType.Internal);
+
 		new LwjglApplication(new BirdsEye(), cfg);
 	}
 }

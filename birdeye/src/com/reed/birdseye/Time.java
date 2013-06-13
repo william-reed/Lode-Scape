@@ -18,7 +18,7 @@ public class Time {
 	static float colorAlpha = 0f;
 	// set to .9 for proper light
 	final static Color lightColor = new Color(255, 237, 138, colorAlpha);
-	private static float timeOfDay = 0;
+	private static float timeOfDay = 300;
 	// set to .2 for proper darkness
 	private static float ambientLight = 1f;
 
@@ -26,30 +26,30 @@ public class Time {
 
 	/** Sets up new lights */
 	public static void createLights(RayHandler rayHandler) {
-		pointLights.add(newLight(rayHandler, 402, 406));
-		pointLights.add(newLight(rayHandler, 563, 406));
-		pointLights.add(newLight(rayHandler, 402, 200));
-		pointLights.add(newLight(rayHandler, 402, -362));
-		pointLights.add(newLight(rayHandler, 560, -362));
-		pointLights.add(newLight(rayHandler, 402, -738));
-		pointLights.add(newLight(rayHandler, 240, 318));
-		pointLights.add(newLight(rayHandler, 738, 320));
-		pointLights.add(newLight(rayHandler, 1104, 320));
-		pointLights.add(newLight(rayHandler, 1522, 320));
-		pointLights.add(newLight(rayHandler, 1938, 320));
-		pointLights.add(newLight(rayHandler, 1938, 86));
-		pointLights.add(newLight(rayHandler, 2098, 86));
-		pointLights.add(newLight(rayHandler, 1938, -480));
-		pointLights.add(newLight(rayHandler, 1938, -868));
-		pointLights.add(newLight(rayHandler, 2098, -868));
-		pointLights.add(newLight(rayHandler, 1710, -1200));
-		pointLights.add(newLight(rayHandler, 1850, -1200));
-		pointLights.add(newLight(rayHandler, 1115, -848));
-		pointLights.add(newLight(rayHandler, 1255, -848));
-		pointLights.add(newLight(rayHandler, 1236, -374));
-		pointLights.add(newLight(rayHandler, 560, -862));
-		pointLights.add(newLight(rayHandler, -224, -836));
-		pointLights.add(newLight(rayHandler, -145, -1190));
+		pointLights.add(newLight(rayHandler, 1360, 3722));
+		pointLights.add(newLight(rayHandler, 1521, 3722));
+		pointLights.add(newLight(rayHandler, 1360, 3516));
+		pointLights.add(newLight(rayHandler, 1360, 2954));
+		pointLights.add(newLight(rayHandler, 1518, 2954));
+		pointLights.add(newLight(rayHandler, 1360, 2578));
+		pointLights.add(newLight(rayHandler, 1198, 3634));
+		pointLights.add(newLight(rayHandler, 1696, 3636));
+		pointLights.add(newLight(rayHandler, 2062, 3636));
+		pointLights.add(newLight(rayHandler, 2480, 3636));
+		pointLights.add(newLight(rayHandler, 2896, 3636));
+		pointLights.add(newLight(rayHandler, 2896, 3402));//
+		pointLights.add(newLight(rayHandler, 3056, 3402));//
+		pointLights.add(newLight(rayHandler, 2896, 2836));//
+		pointLights.add(newLight(rayHandler, 2896, 2448));//
+		pointLights.add(newLight(rayHandler, 3056, 2448));//
+		pointLights.add(newLight(rayHandler, 2668, 2116));//
+		pointLights.add(newLight(rayHandler, 2808, 2116));
+		pointLights.add(newLight(rayHandler, 2073, 2468));
+		pointLights.add(newLight(rayHandler, 2213, 2468));
+		pointLights.add(newLight(rayHandler, 2194, 2942));
+		pointLights.add(newLight(rayHandler, 1518, 2454));
+		pointLights.add(newLight(rayHandler, 734, 2480));
+		pointLights.add(newLight(rayHandler, 813, 2126));
 	}
 
 	/** Returns current time */
