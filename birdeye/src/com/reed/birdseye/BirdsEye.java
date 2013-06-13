@@ -6,8 +6,8 @@ import com.badlogic.gdx.Preferences;
 
 public class BirdsEye extends Game {
 	Preferences prefs;
-	boolean firstRun;
-	float version = 1.02f;
+	String currentVersion = "1.1.0";
+	String version;
 
 	@Override
 	public void create() {
@@ -15,9 +15,9 @@ public class BirdsEye extends Game {
 		Assets.load();
 		setScreen(new GameScreen(this));
 		// tests if it has been created before
-		version = prefs.getFloat("version");
+		version = prefs.getString("version");
 		
-		if (version == 1.02f) {
+		if (version.equals(currentVersion)) {
 			GameScreen.mapCamera.position.x = prefs.getFloat("camera x");
 			GameScreen.mapCamera.position.y = prefs.getFloat("camera y");
 			Player.x = prefs.getFloat("player x");
@@ -57,8 +57,7 @@ public class BirdsEye extends Game {
 		prefs.putFloat("ambient light", Time.getAmbientLight());
 		
 		//set to current version before saving
-		version = 1.02f;
-		prefs.putFloat("version", version);
+		prefs.putString("version", currentVersion);
 		prefs.flush();
 		
 		super.dispose();

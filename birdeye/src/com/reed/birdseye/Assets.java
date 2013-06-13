@@ -13,11 +13,11 @@ import com.esotericsoftware.spine.SkeletonJson;
 
 public class Assets {
 
-	static Texture itemSelector, buttons, character, material, floor,
-			tree, hydration, bucket, corn, lake, farm, house, houseIn,
-			craftmenu, crop, creeper, robot, robotGUI, ironOre, inventory,
-			copperOre, grass, dpad, dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN,
-			pointsBar, currentItem, pig, bacon, map, wolf, chatBox, inHouse;
+	static Texture itemSelector, buttons, character, material, tree, hydration,
+			bucket, corn, farm, houseIn, craftmenu, crop, creeper,
+			robot, robotGUI, ironOre, inventory, copperOre, grass, dpad,
+			dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN, pointsBar, currentItem, pig,
+			bacon, wolf, chatBox, inHouse;
 
 	static TextureRegion upChar_STILL, upChar_LEFT, upChar_RIGHT,
 			downChar_STILL, downChar_LEFT, downChar_RIGHT, leftChar_STILL,
@@ -32,11 +32,12 @@ public class Assets {
 			rightRobot_LEFT, rightRobot_RIGHT, mainRobot, upPig_STILL,
 			upPig_LEFT, upPig_RIGHT, downPig_STILL, downPig_LEFT,
 			downPig_RIGHT, leftPig_STILL, leftPig_LEFT, leftPig_RIGHT,
-			rightPig_STILL, rightPig_LEFT, rightPig_RIGHT, mainPig, upWolf_STILL,
-			upWolf_LEFT, upWolf_RIGHT, downWolf_STILL, downWolf_LEFT,
-			downWolf_RIGHT, leftWolf_STILL, leftWolf_LEFT, leftWolf_RIGHT,
-			rightWolf_STILL, rightWolf_LEFT, rightWolf_RIGHT, mainWolf;
-	
+			rightPig_STILL, rightPig_LEFT, rightPig_RIGHT, mainPig,
+			upWolf_STILL, upWolf_LEFT, upWolf_RIGHT, downWolf_STILL,
+			downWolf_LEFT, downWolf_RIGHT, leftWolf_STILL, leftWolf_LEFT,
+			leftWolf_RIGHT, rightWolf_STILL, rightWolf_LEFT, rightWolf_RIGHT,
+			mainWolf;
+
 	static TextureRegion shopOwner, tradePerson;
 
 	// Spine stuffz
@@ -47,20 +48,16 @@ public class Assets {
 	static BitmapFont cgfFont;
 
 	static TiledMap mainTiledMap;
-	
+
 	public static void load() {
-		map = new Texture(Gdx.files.internal("data/Map.png"));
 		itemSelector = new Texture(Gdx.files.internal("data/itemselector.png"));
 		crop = new Texture(Gdx.files.internal("data/crop.png"));
-		// floor = new Texture(Gdx.files.internal("floor.png"));
-		lake = new Texture(Gdx.files.internal("data/lake.png"));
 		// buttons = new Texture(Gdx.files.internal("buttons.png"));
 		bucket = new Texture(Gdx.files.internal("data/bucket.png"));
 		hydration = new Texture(Gdx.files.internal("data/hydration.png"));
 		corn = new Texture(Gdx.files.internal("data/corn.png"));
 		character = new Texture(Gdx.files.internal("data/characters.png"));
 		material = new Texture(Gdx.files.internal("data/material.png"));
-		house = new Texture(Gdx.files.internal("data/hosue.png"));
 		houseIn = new Texture(Gdx.files.internal("data/inhouse.png"));
 		farm = new Texture(Gdx.files.internal("data/lilfarm2.png"));
 		craftmenu = new Texture(Gdx.files.internal("data/craftingMenu.png"));
@@ -85,11 +82,10 @@ public class Assets {
 		wolf = new Texture(Gdx.files.internal("data/wolf.png"));
 		inHouse = new Texture(Gdx.files.internal("data/inhouse.png"));
 		chatBox = new Texture(Gdx.files.internal("data/chat.png"));
-		
-		
+
 		shopOwner = new TextureRegion(character, 128, 192, 32, 48);
 		tradePerson = new TextureRegion(character, 224, 192, 32, 48);
-		
+
 		// character animations
 		downChar_STILL = new TextureRegion(character, 32, 0, 32, 48);
 		downChar_LEFT = new TextureRegion(character, 0, 0, 32, 48);
@@ -155,8 +151,8 @@ public class Assets {
 		upWolf_STILL = new TextureRegion(wolf, 48, 144, 48, 48);
 		upWolf_LEFT = new TextureRegion(wolf, 0, 144, 48, 48);
 		upWolf_RIGHT = new TextureRegion(wolf, 96, 144, 48, 48);
-		
-		//set to defaults - no nulls (yarg)
+
+		// set to defaults - no nulls (yarg)
 		mainCreeper = downCreeper_STILL;
 		mainPig = downPig_STILL;
 		mainRobot = downRobot_STILL;
@@ -183,8 +179,8 @@ public class Assets {
 
 		cgfFont = new BitmapFont(Gdx.files.internal("data/cgf.fnt"),
 				Gdx.files.internal("data/cgf_0.png"), false);
-		
-		//maps
+
+		// maps
 		mainTiledMap = new TmxMapLoader().load("data/maps/Map.tmx");
 	}
 }
