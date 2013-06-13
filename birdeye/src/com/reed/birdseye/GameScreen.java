@@ -19,9 +19,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class GameScreen implements Screen {
 	Game game;
-	// static for getting position
-	static OrthographicCamera camera;
-	OrthographicCamera mapCamera;
+	OrthographicCamera camera;
+	// static for getting and setting position during save / load
+	static OrthographicCamera mapCamera;
 	OrthogonalTiledMapRenderer mapRenderer;
 
 	SpriteBatch batch;
@@ -61,7 +61,7 @@ public class GameScreen implements Screen {
 		mapRenderer = new OrthogonalTiledMapRenderer(Assets.mainTiledMap, batch);
 		//translate HUD camera to make bottom left cordinate 0,0
 		camera.translate(w / 2, h / 2);
-		//translate camera to spawn point
+		//translate camera to spawn point 
 		mapCamera.translate(1422 + 16 , 3562 + 24);
 
 		shapeRenderer = new ShapeRenderer();
@@ -120,7 +120,7 @@ public class GameScreen implements Screen {
 		swordShop.textSetter();
 		swordShop.update();
 		swordShop.handleInput();
-		//collision.doCollision();
+		collision.doCollision();
 		inv.input();
 		fishing.update();
 		fishing.fishCaught();
@@ -168,7 +168,7 @@ public class GameScreen implements Screen {
 			arrays.drawBrush(batch, currentFont);//
 
 		batch.end();
-			rayHandler.updateAndRender();
+			rayHandler.updateAndRender();//
 		batch.begin();
 
 			// more static items (HUD stuff)

@@ -9,8 +9,8 @@ public class Fishing {
 
 	// detects if you have the ability to fish
 	boolean fishingPossible() {
-		return Player.x > -250 && Player.x < -200 && Player.y > -1420
-				&& Player.y < -1280 && TopMenu.currentTool == 1;
+		return Player.x > 700 && Player.x < 758 && Player.y > 1896
+				&& Player.y < 2036 && TopMenu.currentTool == 1;
 	}
 
 	String caught = "You have caught a fish!";

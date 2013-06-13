@@ -18,8 +18,8 @@ public class BirdsEye extends Game {
 		version = prefs.getFloat("version");
 		
 		if (version == 1.02f) {
-			GameScreen.camera.position.x = prefs.getFloat("camera x");
-			GameScreen.camera.position.y = prefs.getFloat("camera y");
+			GameScreen.mapCamera.position.x = prefs.getFloat("camera x");
+			GameScreen.mapCamera.position.y = prefs.getFloat("camera y");
 			Player.x = prefs.getFloat("player x");
 			Player.y = prefs.getFloat("player y");
 			Tutorial.step = prefs.getInteger("Tutorial Level");
@@ -48,8 +48,8 @@ public class BirdsEye extends Game {
 		prefs.putInteger("Cash", TradeShop.cash);
 		prefs.putInteger("hp", Points.hp);
 		prefs.putInteger("xp", Points.xp);
-		prefs.putFloat("camera x", GameScreen.camera.position.x);
-		prefs.putFloat("camera y", GameScreen.camera.position.y);
+		prefs.putFloat("camera x", GameScreen.mapCamera.position.x);
+		prefs.putFloat("camera y", GameScreen.mapCamera.position.y);
 		prefs.putFloat("player x", Player.x);
 		prefs.putFloat("player y", Player.y);
 		prefs.putFloat("color alpha", Time.colorAlpha);
