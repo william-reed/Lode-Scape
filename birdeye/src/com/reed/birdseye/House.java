@@ -17,18 +17,29 @@ public class House {
 				GameScreen.mapCamera.position.x = Gdx.graphics.getWidth() / 2;
 				GameScreen.mapCamera.position.y = 300;
 				// draw player in correct spot
-				// get rid of grass
-				// set to house collision (set up different types of collision <makes sense in the long run it seems....<)
-				//finally set to false
+				Player.x = Gdx.graphics.getWidth() / 2;
+				Player.y = 400;// adjust a little
+				// get rid of grass (set to what)
+				CollisionDetection.setCollisionType(1);
+				// get rid of darkness. (how to set back to normal levels when
+				// you exit *looks around franticly*
+				// finally set to false
 				justEntered = false;
-				
+
 			}
-			// check for collision
+			// check for collision (will be done in gamescreen class thanks to a
+			// 		switch statment)
+			// check for bed (prob add its own method) must be close enough (add
+			// 		close enough method)
+			// stove / oven method stuff
+			// allow for exit of house ability set justExited to true
 		} else {
 			if (justExited) {
 				GameScreen.mapRenderer.setMap(Assets.mainTiledMap);
 				// redraw grass
 				// do normal collision
+				CollisionDetection.setCollisionType(0);
+				justExited = false;
 			}
 		}
 	}
