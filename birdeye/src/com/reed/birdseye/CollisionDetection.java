@@ -2,7 +2,37 @@ package com.reed.birdseye;
 
 public class CollisionDetection {
 
+	/**
+	 * Defines current type of collision 0 by default means map collision 1 is
+	 * river house collision @
+	 */
+	private int collisionType = 0;
+
+	// current maps collision
 	void doCollision() {
+		switch (collisionType) {
+		case 0: {
+			mapCollision();
+			break;
+		}
+		case 1:{
+			riverHouseCollision();
+			break;
+		}
+		}
+	}
+
+	/** Gets current value of collision type*/
+	public int getCollisionType() {
+		return collisionType;
+	}
+	/** Sets current value of collision type*/
+	public void setCollisionType(int collisionType) {
+		this.collisionType = collisionType;
+	}
+
+	// all collision for main map stuff
+	void mapCollision() {
 		// left wall
 		if (Player.x < 110) {
 			Player.isAbleToMoveLeft = false;
@@ -90,8 +120,7 @@ public class CollisionDetection {
 		else if (Player.y < 2258 && Player.y > 1878 && Player.x > 1466
 				&& Player.x < 1502) {
 			Player.isAbleToMoveLeft = false;
-		}
-		else
+		} else
 			Player.isAbleToMoveLeft = true;
 
 		if (Player.x > 3788) {
@@ -188,8 +217,7 @@ public class CollisionDetection {
 		else if (Player.y < 2258 && Player.y > 1878 && Player.x > 1456
 				&& Player.x < 1492) {
 			Player.isAbleToMoveRight = false;
-		}
-		else
+		} else
 			Player.isAbleToMoveRight = true;
 
 		// bottom wall
@@ -371,9 +399,14 @@ public class CollisionDetection {
 		}
 		// segment 53
 		else if (Player.y > 2230 && Player.y < 2240 && Player.x > 1354
-					&& Player.x < 1386) {
-				Player.isAbleToMoveUp = false;
+				&& Player.x < 1386) {
+			Player.isAbleToMoveUp = false;
 		} else
 			Player.isAbleToMoveUp = true;
+	}
+	
+	//collision detection for in the river house
+	void riverHouseCollision(){
+		//shit load of integers go here :D
 	}
 }
