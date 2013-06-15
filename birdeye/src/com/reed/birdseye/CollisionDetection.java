@@ -11,29 +11,31 @@ public class CollisionDetection {
 			mapCollision();
 			break;
 		}
-		case 1:{
+		case 1: {
 			riverHouseCollision();
 			break;
 		}
 		}
 	}
 
-	/** Gets current value of collision type*/
+	/** Gets current value of collision type */
 	public static int getCollisionType() {
 		return collisionType;
 	}
-	/** Sets current value of collision type <br>
-	 *  @param
-	 *  <b>0</b> is default map <br>
-	 *  <b>1</b> is house by river <br>
+
+	/**
+	 * Sets current value of collision type
+	 * 
+	 * @param <b>0</b> is default map <br>
+	 *        <b>1</b> is house by river <br>
 	 */
-	
+
 	public static void setCollisionType(int collisionType) {
 		CollisionDetection.collisionType = collisionType;
 	}
 
 	// all collision for main map stuff
-	void mapCollision() {
+	private void mapCollision() {
 		// left wall
 		if (Player.x < 110) {
 			Player.isAbleToMoveLeft = false;
@@ -402,12 +404,107 @@ public class CollisionDetection {
 		else if (Player.y > 2230 && Player.y < 2240 && Player.x > 1354
 				&& Player.x < 1386) {
 			Player.isAbleToMoveUp = false;
-		} else
+		} 
+		else
 			Player.isAbleToMoveUp = true;
 	}
-	
-	//collision detection for in the river house
-	void riverHouseCollision(){
-		//shit load of integers go here :D
+
+	// collision detection for in the river house
+	private void riverHouseCollision() {
+		
+		/** Up stuff */
+		// segment 1
+		if (Player.y > 435) {
+			Player.isAbleToMoveUp = false;
+		} // segment 2
+		else if (Player.y > 410 && Player.x < 336 && Player.x > 172) {
+			Player.isAbleToMoveUp = false;
+		}// segment 4
+		else if (Player.y > 420 && Player.x < 400) {
+			Player.isAbleToMoveUp = false;
+		}// segment 7
+		else if (Player.y > 414 && Player.x < 540 && Player.x > 482) {
+			Player.isAbleToMoveUp = false;
+		} // segment 11
+		else if (Player.y > 330 && Player.x > 708) {
+			Player.isAbleToMoveUp = false;
+		} // segment 13
+		else if (Player.y > 242 && Player.x > 722) {
+			Player.isAbleToMoveUp = false;
+		}// segment 20
+		else if (Player.y > 308 && Player.y < 364 && Player.x < 234) {
+			Player.isAbleToMoveUp = false;
+		}// segment 26
+		else if (Player.y > 260 && Player.y < 300 && Player.x > 390 && Player.x < 574) {
+			Player.isAbleToMoveUp = false;
+		}
+		else
+			Player.isAbleToMoveUp = true;
+		
+		/** Down Stuff */
+		//segment 14
+		if(Player.y  < 160 && Player.x > 730){
+			Player.isAbleToMoveDown = false;
+		} //segment 16 && 17 && 18
+		else if (Player.y < 102){
+			Player.isAbleToMoveDown = false;
+			if(Player.x > 460 && Player.x < 484){
+				System.out.println("EXIT");
+			}
+		} // segment 22
+		else if (Player.y > 318 && Player. y < 374 && Player.x < 234) {
+			Player.isAbleToMoveDown = false;
+		}// segment 23
+		else if (Player.y > 270 && Player.y < 322 && Player.x > 386 && Player.x < 574) {
+			Player.isAbleToMoveDown = false;
+		}
+		else
+			Player.isAbleToMoveDown = true;
+		
+		/** Left Stuff */
+		// segment 3
+		if (Player.y > 414 && Player.x < 336 && Player.x > 330) {
+			Player.isAbleToMoveLeft = false;
+		} // segment 5
+		else if (Player.y > 424 && Player.x < 400) {
+			Player.isAbleToMoveLeft = false;
+		}  // segment 8
+		else if (Player.y > 418 && Player.x < 540 && Player.x > 520) {
+			Player.isAbleToMoveLeft = false;
+		}// segment 19
+		else if (Player.x < 206) {
+			Player.isAbleToMoveLeft = false;
+		}// segment 21
+		else if (Player.y > 314 && Player.y < 370 && Player.x< 238) {
+			Player.isAbleToMoveLeft = false;
+		}// segment 25
+		else if (Player.y > 264 && Player.y < 318 && Player.x > 500 && Player.x < 578) {
+			Player.isAbleToMoveLeft = false;
+		}
+		else
+			Player.isAbleToMoveLeft = true;
+		
+		/** Right Stuff */
+		// segment 6
+		if (Player.y > 418 && Player.x > 482 && Player.x < 540) {
+			Player.isAbleToMoveRight = false;
+		} //segment 9
+		else if (Player.x > 750){
+			Player.isAbleToMoveRight = false;
+		}//segment 10 
+		else if (Player.y  > 334 && Player.x > 704){
+			Player.isAbleToMoveRight = false;
+		}//segment 12
+		else if (Player.y  > 246 && Player.x > 718){
+			Player.isAbleToMoveRight = false;
+		} //segment 15
+		else if (Player.y  < 156 && Player.x > 726){
+			Player.isAbleToMoveRight = false;
+		}//segment 24
+		else if (Player.y  < 318 && Player.y > 264 && Player.x > 382 && Player. x < 400){
+			Player.isAbleToMoveRight = false;
+		}
+		else
+			Player.isAbleToMoveRight = true;
 	}
 }
