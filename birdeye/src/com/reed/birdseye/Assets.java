@@ -47,7 +47,7 @@ public class Assets {
 
 	static BitmapFont cgfFont;
 
-	static TiledMap mainTiledMap;
+	static TiledMap mainTiledMap, riverHouse;
 
 	public static void load() {
 		itemSelector = new Texture(Gdx.files.internal("data/itemselector.png"));
@@ -182,5 +182,6 @@ public class Assets {
 
 		// maps
 		mainTiledMap = new TmxMapLoader().load("data/maps/Map.tmx");
+		riverHouse = new TmxMapLoader().load("data/maps/House.tmx");
 	}
 }

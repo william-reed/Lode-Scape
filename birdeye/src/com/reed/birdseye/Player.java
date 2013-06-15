@@ -24,54 +24,30 @@ public class Player {
 		// y = 3562;
 		// System.out.println("X: " + x + " Y: " + y);
 		if (ableToMove) {
-			if (!House.inHouse) {
-
-				if (((Gdx.input.isKeyPressed(Keys.W)) || Android.up)
-						&& isAbleToMoveUp) {
-					up = true;
-					currentDirection = 1;
-				} else
-					up = false;
-				if (((Gdx.input.isKeyPressed(Keys.A)) || Android.left)
-						&& isAbleToMoveLeft) {
-					left = true;
-					currentDirection = 2;
-				} else
-					left = false;
-				if (((Gdx.input.isKeyPressed(Keys.S)) || Android.down)
-						&& isAbleToMoveDown) {
-					currentDirection = 0;
-					down = true;
-				} else
-					down = false;
-				if (((Gdx.input.isKeyPressed(Keys.D)) || Android.right)
-						&& isAbleToMoveRight) {
-					right = true;
-					currentDirection = 3;
-				} else
-					right = false;
-			} else {
-				if ((Gdx.input.isKeyPressed(Keys.W))) {
-					y += playerSpeed;
-					up = true;
-				} else
-					up = false;
-				if ((Gdx.input.isKeyPressed(Keys.A))) {
-					x -= playerSpeed;
-					left = true;
-				} else
-					left = false;
-				if ((Gdx.input.isKeyPressed(Keys.S))) {
-					y -= playerSpeed;
-					down = true;
-				} else
-					down = false;
-				if ((Gdx.input.isKeyPressed(Keys.D))) {
-					x += playerSpeed;
-					right = true;
-				} else
-					right = false;
-			}
+			if (((Gdx.input.isKeyPressed(Keys.W)) || Android.up)
+					&& isAbleToMoveUp) {
+				up = true;
+				currentDirection = 1;
+			} else
+				up = false;
+			if (((Gdx.input.isKeyPressed(Keys.A)) || Android.left)
+					&& isAbleToMoveLeft) {
+				left = true;
+				currentDirection = 2;
+			} else
+				left = false;
+			if (((Gdx.input.isKeyPressed(Keys.S)) || Android.down)
+					&& isAbleToMoveDown) {
+				currentDirection = 0;
+				down = true;
+			} else
+				down = false;
+			if (((Gdx.input.isKeyPressed(Keys.D)) || Android.right)
+					&& isAbleToMoveRight) {
+				right = true;
+				currentDirection = 3;
+			} else
+				right = false;
 		}
 
 		// if (Gdx.input.isButtonPressed(Keys.SHIFT_LEFT)) {
@@ -197,8 +173,8 @@ public class Player {
 		tools.changeTool();
 		tools.direction();
 	}
-	
-	void drawCurrent(SpriteBatch batch){
+
+	void drawCurrent(SpriteBatch batch) {
 		tools.drawCurrentTool(batch);
 	}
 }

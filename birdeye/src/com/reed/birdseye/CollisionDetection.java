@@ -335,7 +335,7 @@ public class CollisionDetection {
 		else if (Player.y > 2500 && Player.y < 2516 && Player.x > 758
 				&& Player.x < 832) {
 			Player.isAbleToMoveUp = false;
-			//House.isInRiverHouse = true;
+			House.isInRiverHouse = true;
 		}// segment 34
 		else if (Player.y > 2460 && Player.y < 2486 && Player.x > 806
 				&& Player.x < 1386) {

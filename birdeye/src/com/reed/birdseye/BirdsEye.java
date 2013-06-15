@@ -11,11 +11,12 @@ public class BirdsEye extends Game {
 
 	@Override
 	public void create() {
+		
 		prefs = Gdx.app.getPreferences("preferences.lodescape");
 		Assets.load();
 		setScreen(new GameScreen(this));
 		version = prefs.getString("version");
-		
+		/*
 		if (version.equals(currentVersion)) {
 			GameScreen.mapCamera.position.x = prefs.getFloat("camera x");
 			GameScreen.mapCamera.position.y = prefs.getFloat("camera y");
@@ -32,14 +33,14 @@ public class BirdsEye extends Game {
 			Time.setTimeOfDay(prefs.getFloat("time"));
 			Time.setAmbientLight(prefs.getFloat("ambient light"));
 		} else
-			prefs.clear();
+			prefs.clear();*/
 	}
 
 	public void render() {
 		super.render();
 	}
 
-	public void dispose() {
+	public void dispose() {/*
 		prefs.putInteger("Tutorial Level", Tutorial.step);
 		prefs.putInteger("Fish", Fishing.amountOfFish);
 		prefs.putInteger("Stone", Resource.amountOfStone);
@@ -57,7 +58,7 @@ public class BirdsEye extends Game {
 		
 		//set to current version before saving
 		prefs.putString("version", currentVersion);
-		prefs.flush();
+		prefs.flush();*/
 		
 		super.dispose();
 		Gdx.app.exit();

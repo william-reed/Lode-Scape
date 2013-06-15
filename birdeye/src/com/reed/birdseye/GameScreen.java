@@ -22,7 +22,8 @@ public class GameScreen implements Screen {
 	OrthographicCamera camera;
 	// static for getting and setting position during save / load
 	static OrthographicCamera mapCamera;
-	OrthogonalTiledMapRenderer mapRenderer;
+	//static to modify when entering different map areas.
+	static OrthogonalTiledMapRenderer mapRenderer;
 
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
@@ -47,6 +48,7 @@ public class GameScreen implements Screen {
 	TradeShop trade;
 	World world;
 	RayHandler rayHandler;
+	House house;
 
 	public GameScreen(Game game) {
 		this.game = game;
@@ -83,7 +85,8 @@ public class GameScreen implements Screen {
 		fishing = new Fishing();
 		trade = new TradeShop();
 		arrays.treeArrayEstablisher();
-
+		house = new House();
+		
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			currentFont = Assets.cgfFont;
 		} else
@@ -127,6 +130,7 @@ public class GameScreen implements Screen {
 		trade.textSetter();
 		trade.update();
 		trade.handleInput();
+		house.update();
 		// fps.log();
 		Time.update(rayHandler);
 		
