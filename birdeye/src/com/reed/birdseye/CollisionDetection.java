@@ -2,11 +2,7 @@ package com.reed.birdseye;
 
 public class CollisionDetection {
 
-	/**
-	 * Defines current type of collision 0 by default means map collision 1 is
-	 * river house collision @
-	 */
-	private int collisionType = 0;
+	private static int collisionType = 0;
 
 	// current maps collision
 	void doCollision() {
@@ -23,12 +19,17 @@ public class CollisionDetection {
 	}
 
 	/** Gets current value of collision type*/
-	public int getCollisionType() {
+	public static int getCollisionType() {
 		return collisionType;
 	}
-	/** Sets current value of collision type*/
-	public void setCollisionType(int collisionType) {
-		this.collisionType = collisionType;
+	/** Sets current value of collision type <br>
+	 *  @param
+	 *  <b>0</b> is default map <br>
+	 *  <b>1</b> is house by river <br>
+	 */
+	
+	public static void setCollisionType(int collisionType) {
+		CollisionDetection.collisionType = collisionType;
 	}
 
 	// all collision for main map stuff
