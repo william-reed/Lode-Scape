@@ -5,7 +5,7 @@ import com.badlogic.gdx.Preferences;
 
 public class SaveAndLoad {
 	static Preferences prefs;
-	static String currentVersion = "1.1.1.0";
+	static String currentVersion = "1.1.2.0";
 	static String version;
 
 	public static void load() {
@@ -27,10 +27,24 @@ public class SaveAndLoad {
 			Time.colorAlpha = prefs.getFloat("color alpha");
 			Time.setTimeOfDay(prefs.getFloat("time"));
 			Time.setAmbientLight(prefs.getFloat("ambient light"));
-		} else
+			House.preCameraPos.x = prefs.getFloat("pre camera x");
+			House.preCameraPos.y = prefs.getFloat("pre camera y");
+			House.prePlayerPos.x = prefs.getFloat("pre player x");
+			House.prePlayerPos.y = prefs.getFloat("pre player y");
+			CollisionDetection.setCollisionType(prefs
+					.getInteger("collision type"));
+			Level.setCurrentMap(prefs.getInteger("current map"));
+			Time.setOutdoors(prefs.getBoolean("is outside"));
+			House.preAmbientLight = prefs.getFloat("pre ambient light");
+
+			Time.createLights(GameScreen.rayHandler);
+		} else {
+			Time.createLights(GameScreen.rayHandler);
 			prefs.clear();
+		}
+
 	}
-	
+
 	public static void save() {
 		prefs.putInteger("Tutorial Level", Tutorial.step);
 		prefs.putInteger("Fish", Fishing.amountOfFish);
@@ -46,8 +60,17 @@ public class SaveAndLoad {
 		prefs.putFloat("color alpha", Time.colorAlpha);
 		prefs.putFloat("time", Time.getTimeOfDay());
 		prefs.putFloat("ambient light", Time.getAmbientLight());
-		
-		//set to current version before saving
+		prefs.putFloat("pre camera x", House.preCameraPos.x);
+		prefs.putFloat("pre camera y", House.preCameraPos.y);
+		prefs.putFloat("pre player x", House.prePlayerPos.x);
+		prefs.putFloat("pre player y", House.prePlayerPos.y);
+		prefs.putInteger("collision type",
+				CollisionDetection.getCollisionType());
+		prefs.putInteger("current map", Level.getCurrentMap());
+		prefs.putBoolean("is outside", Time.isOutdoors());
+		prefs.putFloat("pre ambient light", House.preAmbientLight);
+
+		// set to current version before saving
 		prefs.putString("version", currentVersion);
 		prefs.flush();
 	}

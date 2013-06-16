@@ -22,7 +22,7 @@ public class GameScreen implements Screen {
 	OrthographicCamera camera;
 	// static for getting and setting position during save / load
 	static OrthographicCamera mapCamera;
-	//static to modify when entering different map areas.
+	// static to modify when entering different map areas.
 	static OrthogonalTiledMapRenderer mapRenderer;
 
 	SpriteBatch batch;
@@ -47,24 +47,24 @@ public class GameScreen implements Screen {
 	Fishing fishing;
 	TradeShop trade;
 	World world;
-	RayHandler rayHandler;
+	static RayHandler rayHandler;
 	House house;
 
 	public GameScreen(Game game) {
 		this.game = game;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		
+
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(w, h);
 		mapCamera = new OrthographicCamera(w, h);
 		camera.update();
 		mapCamera.update();
 		mapRenderer = new OrthogonalTiledMapRenderer(Assets.mainTiledMap, batch);
-		//translate HUD camera to make bottom left cordinate 0,0
+		// translate HUD camera to make bottom left cordinate 0,0
 		camera.translate(w / 2, h / 2);
-		//translate camera to spawn point 
-		mapCamera.translate(1422 + 16 , 3562 + 24);
+		// translate camera to spawn point
+		mapCamera.translate(1422 + 16, 3562 + 24);
 
 		shapeRenderer = new ShapeRenderer();
 		level = new Level();
@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
 		trade = new TradeShop();
 		arrays.treeArrayEstablisher();
 		house = new House();
-		
+
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			currentFont = Assets.cgfFont;
 		} else
@@ -95,13 +95,12 @@ public class GameScreen implements Screen {
 		world = new World(new Vector2(0, 0), true);
 
 		rayHandler = new RayHandler(world);
-		Time.createLights(rayHandler);
+		
 		/*
-		 * int[] maxTextureSize = new int[1]; IntBuffer 
-		 * buf = BufferUtils.newIntBuffer(16);
-		 * Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf); 
-		 * int result = buf.get(); System.out.println(result); 
-		 * int result2 = buf.get();
+		 * int[] maxTextureSize = new int[1]; IntBuffer buf =
+		 * BufferUtils.newIntBuffer(16);
+		 * Gdx.gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, buf); int result =
+		 * buf.get(); System.out.println(result); int result2 = buf.get();
 		 * System.out.println(result);
 		 */
 	}
@@ -133,8 +132,8 @@ public class GameScreen implements Screen {
 		house.update();
 		// fps.log();
 		Time.update(rayHandler);
-		
-		//camera stuff
+
+		// camera stuff
 		camera.update();
 	}
 
@@ -144,55 +143,56 @@ public class GameScreen implements Screen {
 	public void draw(float deltaTime) {
 		Gdx.gl.glClearColor(255f, 255f, 255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		batch.begin();
 		// sets camera for drawing static items
-			batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(camera.combined);
 
+		if (Time.isOutdoors()) {
 			level.draw(batch);
-		
+		}
+
 		batch.end();
 		batch.setProjectionMatrix(mapCamera.combined);
 		mapCamera.translate(xRate, yRate);
 		mapCamera.update();
 		mapRenderer.setView(mapCamera);
 		mapRenderer.render();
-		
-		batch.begin();
-			// set camera for drawing moving items.
-			batch.setProjectionMatrix(mapCamera.combined);
-			swordShop.draw(batch);
-			trade.draw(batch);
-			arrays.drawTreeTrunk(batch);
 
-			player.draw(batch, currentFont);
-			//set static for tool drawing (so it is affected by lights)
-			batch.setProjectionMatrix(camera.combined);
-			player.drawCurrent(batch);
-			// set camera for drawing moving items.
-			batch.setProjectionMatrix(mapCamera.combined);
-			arrays.drawBrush(batch, currentFont);
-			
+		batch.begin();
+		// set camera for drawing moving items.
+		batch.setProjectionMatrix(mapCamera.combined);
+		swordShop.draw(batch);
+		trade.draw(batch);
+		arrays.drawTreeTrunk(batch);
+
+		player.draw(batch, currentFont);
+		// set static for tool drawing (so it is affected by lights)
+		batch.setProjectionMatrix(camera.combined);
+		player.drawCurrent(batch);
+		// set camera for drawing moving items.
+		batch.setProjectionMatrix(mapCamera.combined);
+		arrays.drawBrush(batch, currentFont);
+
 		batch.end();
-			rayHandler.setCombinedMatrix(mapCamera.combined);
-			rayHandler.updateAndRender();
+		rayHandler.setCombinedMatrix(mapCamera.combined);
+		rayHandler.updateAndRender();
 		batch.begin();
 
-			// more static items (HUD stuff)
-			batch.setProjectionMatrix(camera.combined);
-			player.drawTools(batch);
-			topMenu.draw(batch, currentFont);
-			player.drawTools(batch);
-			points.draw(batch);
-			message.drawText(currentFont, batch);
-			inv.draw(batch, currentFont);
-			swordShop.drawInputText(batch, currentFont);
-			trade.drawInputText(batch, currentFont);
+		// more static items (HUD stuff)
+		batch.setProjectionMatrix(camera.combined);
+		player.drawTools(batch);
+		topMenu.draw(batch, currentFont);
+		player.drawTools(batch);
+		points.draw(batch);
+		message.drawText(currentFont, batch);
+		inv.draw(batch, currentFont);
+		swordShop.drawInputText(batch, currentFont);
+		trade.drawInputText(batch, currentFont);
 
 		batch.end();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		points.drawBars(shapeRenderer);
-		
 
 	}
 
@@ -202,7 +202,7 @@ public class GameScreen implements Screen {
 		draw(delta);
 		handleInput();
 	}
-	
+
 	/** Handle input for zooming in and out */
 	private void handleInput() {
 		if (Gdx.input.isKeyPressed(Input.Keys.O)) {

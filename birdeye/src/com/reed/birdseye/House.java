@@ -1,30 +1,63 @@
 package com.reed.birdseye;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g3d.lights.Lights;
+import com.badlogic.gdx.math.Vector2;
 
 public class House {
 
-	static boolean isInRiverHouse = false;
+	private static boolean isInRiverHouse = false;
 	// booleans for a run once code strip
-	boolean justEntered = true, justExited = false;
+	private static boolean justEntered = false, justExited = false;
 
+	public static boolean isJustEntered() {
+		return justEntered;
+	}
+
+	public static void setJustEntered(boolean justEntered) {
+		House.justEntered = justEntered;
+	}
+
+	public static boolean isJustExited() {
+		return justExited;
+	}
+
+	public static void setJustExited(boolean justExited) {
+		House.justExited = justExited;
+	}
+	
+	public static boolean isInRiverHouse() {
+		return isInRiverHouse;
+	}
+
+	public static void setInRiverHouse(boolean isInRiverHouse) {
+		House.isInRiverHouse = isInRiverHouse;
+	}
+	
+	static Vector2 preCameraPos = new Vector2();
+	static Vector2 prePlayerPos = new Vector2();
+	static float preAmbientLight;
+	/** SEPPERATE INTO INDIVIDUAL METHODS*/
 	void update() {
 		// variable becomes true through the collision class
 		if (isInRiverHouse) {
 			if (justEntered) {
+				prePlayerPos.x = Player.x;
+				prePlayerPos.y = Player.y;
+				preCameraPos.x = GameScreen.mapCamera.position.x;
+				preCameraPos.y = GameScreen.mapCamera.position.y;
+				preAmbientLight = Time.getAmbientLight();
+				Time.setOutdoors(false);
+				Time.setAmbientLight(1f);
+				
 				CollisionDetection.setCollisionType(1);
-				// temporary delete after proper collision is set up
-				Player.isAbleToMoveUp = true;
-				Player.isAbleToMoveRight = true;
-				Player.isAbleToMoveDown = true;
-				Player.isAbleToMoveLeft = true;
-				GameScreen.mapRenderer.setMap(Assets.riverHouse);
+				Level.setCurrentMap(1);
 				// set cordinates
 				GameScreen.mapCamera.position.x = Gdx.graphics.getWidth() / 2;
 				GameScreen.mapCamera.position.y = 300;
 				// draw player in correct spot
 				Player.x = Gdx.graphics.getWidth() / 2;
-				Player.y = 400;// adjust a little
+				Player.y = Gdx.graphics.getHeight() / 2 - 50;
 				// get rid of grass (set to what? blackness)
 
 				// get rid of darkness. (how to set back to normal levels when
@@ -42,19 +75,16 @@ public class House {
 			// allow for exit of house ability set justExited to true
 		} else {
 			if (justExited) {
-				GameScreen.mapRenderer.setMap(Assets.mainTiledMap);
-				// redraw grass
-				// do normal collision
+				Level.setCurrentMap(0);
+				Player.x = prePlayerPos.x;
+				Player.y = prePlayerPos.y;
+				GameScreen.mapCamera.position.x = preCameraPos.x;
+				GameScreen.mapCamera.position.y = preCameraPos.y;
 				CollisionDetection.setCollisionType(0);
+				Time.setAmbientLight(preAmbientLight);
+				Time.setOutdoors(true);
 				justExited = false;
 			}
-		}
-	}
-
-	void gettingOut() {
-		//set cordinates for exit door
-		if(){
-			
 		}
 	}
 }

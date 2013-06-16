@@ -29,7 +29,36 @@ public class Level {
 		if (grassX <= -128 || grassX >= 0) {
 			grassX = -64;
 		}
+		setMap();
 
+	}
+
+	private static int currentMap = 0;
+
+	public static int getCurrentMap() {
+		return currentMap;
+	}
+
+	/**Sets current map (uses integers for saving)
+	 * @param <b>0</b> is Main map <br>
+	 * <b>1</b> is river house
+	 */
+	public static void setCurrentMap(int currentMap) {
+		Level.currentMap = currentMap;
+	}
+	
+	
+	void setMap() {
+		switch (currentMap) {
+		case 0: {
+			GameScreen.mapRenderer.setMap(Assets.mainTiledMap);
+			break;
+		}
+		case 1: {
+			GameScreen.mapRenderer.setMap(Assets.riverHouse);
+			break;
+		}
+		}
 	}
 
 }

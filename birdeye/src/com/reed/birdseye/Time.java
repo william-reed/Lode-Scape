@@ -62,23 +62,33 @@ public class Time {
 		Time.timeOfDay = timeOfDay;
 	}
 
+	private static boolean isOutdoors = true;
+
+	public static boolean isOutdoors() {
+		return isOutdoors;
+	}
+
+	public static void setOutdoors(boolean isOutdoors) {
+		Time.isOutdoors = isOutdoors;
+	}
+
 	public static void update(RayHandler rayHandler) {
-		// Constantly update time
-		timeOfDay += Gdx.graphics.getDeltaTime();
-		// set time back to 0 if reaches 10 minutes
-		if (timeOfDay > 840)
-			timeOfDay = 0;
-		sunset();
-		sunrise();
-		rayHandler.setAmbientLight(getAmbientLight());
-		
-		//necessary to do to load lights from a save
-		if (isNight() || isDay()) {
-			lightColor.set(255, 237, 138, colorAlpha);
-			for (int i = 0; i < pointLights.size; i++) {
-				pointLights.get(i).setColor(lightColor);
+		if (Time.isOutdoors()) {
+			// Constantly update time
+			timeOfDay += Gdx.graphics.getDeltaTime();
+			// set time back to 0 if reaches 10 minutes
+			if (timeOfDay > 840)
+				timeOfDay = 0;
+			sunset();
+			sunrise();
+
+			// necessary to do to load lights from a save
+				lightColor.set(255, 237, 138, colorAlpha);
+				for (int i = 0; i < pointLights.size; i++) {
+					pointLights.get(i).setColor(lightColor);
 			}
 		}
+		rayHandler.setAmbientLight(getAmbientLight());
 	}
 
 	/** check if time is less then 5 minutes, if so it is day */
