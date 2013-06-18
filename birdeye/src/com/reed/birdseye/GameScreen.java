@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -49,7 +50,8 @@ public class GameScreen implements Screen {
 	World world;
 	static RayHandler rayHandler;
 	House house;
-
+	Particles smoke;
+	
 	public GameScreen(Game game) {
 		this.game = game;
 		float w = Gdx.graphics.getWidth();
@@ -103,6 +105,8 @@ public class GameScreen implements Screen {
 		 * buf.get(); System.out.println(result); int result2 = buf.get();
 		 * System.out.println(result);
 		 */
+		
+		smoke = new Particles();
 	}
 
 	int lightX = 400, lightY = 400;
@@ -160,35 +164,36 @@ public class GameScreen implements Screen {
 		mapRenderer.render();
 
 		batch.begin();
-		// set camera for drawing moving items.
-		batch.setProjectionMatrix(mapCamera.combined);
-		swordShop.draw(batch);
-		trade.draw(batch);
-		arrays.drawTreeTrunk(batch);
+			// set camera for drawing moving items.
+			batch.setProjectionMatrix(mapCamera.combined);
+			swordShop.draw(batch);
+			trade.draw(batch);
+			arrays.drawTreeTrunk(batch);
 
-		player.draw(batch, currentFont);
-		// set static for tool drawing (so it is affected by lights)
-		batch.setProjectionMatrix(camera.combined);
-		player.drawCurrent(batch);
-		// set camera for drawing moving items.
-		batch.setProjectionMatrix(mapCamera.combined);
-		arrays.drawBrush(batch, currentFont);
-
+			player.draw(batch, currentFont);
+			// set static for tool drawing (so it is affected by lights)
+			batch.setProjectionMatrix(camera.combined);
+			player.drawCurrent(batch);
+			// set camera for drawing moving items.
+			batch.setProjectionMatrix(mapCamera.combined);
+			arrays.drawBrush(batch, currentFont);
+			smoke.smokeUpdateAndDraw(batch, deltaTime);
+			
 		batch.end();
-		rayHandler.setCombinedMatrix(mapCamera.combined);
-		rayHandler.updateAndRender();
+			rayHandler.setCombinedMatrix(mapCamera.combined);
+			rayHandler.updateAndRender();
 		batch.begin();
 
-		// more static items (HUD stuff)
-		batch.setProjectionMatrix(camera.combined);
-		player.drawTools(batch);
-		topMenu.draw(batch, currentFont);
-		player.drawTools(batch);
-		points.draw(batch);
-		message.drawText(currentFont, batch);
-		inv.draw(batch, currentFont);
-		swordShop.drawInputText(batch, currentFont);
-		trade.drawInputText(batch, currentFont);
+			// more static items (HUD stuff)
+			batch.setProjectionMatrix(camera.combined);
+			player.drawTools(batch);
+			topMenu.draw(batch, currentFont);
+			player.drawTools(batch);
+			points.draw(batch);
+			message.drawText(currentFont, batch);
+			inv.draw(batch, currentFont);
+			swordShop.drawInputText(batch, currentFont);
+			trade.drawInputText(batch, currentFont);
 
 		batch.end();
 		shapeRenderer.setProjectionMatrix(camera.combined);

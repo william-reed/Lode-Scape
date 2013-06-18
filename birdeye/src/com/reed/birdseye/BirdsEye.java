@@ -9,7 +9,7 @@ public class BirdsEye extends Game {
 		
 		Assets.load();
 		setScreen(new GameScreen(this));
-		SaveAndLoad.load();
+		//SaveAndLoad.load();
 	}
 
 	public void render() {
@@ -17,7 +17,7 @@ public class BirdsEye extends Game {
 	}
 
 	public void dispose() {
-		SaveAndLoad.save();
+		//SaveAndLoad.save();
 		super.dispose();
 		Gdx.app.exit();
 	}

@@ -60,7 +60,7 @@ public class TradeShop {
 				case 4:
 					sender = "[Trade Shop] Hello there friend.";
 				}
-			Messages.messagesArray.add(new Message(sender, Messages.sec));
+			Messages.messagesArray.add(new Message(sender, Messages.getSec()));
 		}
 
 	}
@@ -100,7 +100,7 @@ public class TradeShop {
 					&& Gdx.input.isTouched()) {
 				Messages.messagesArray.add(new Message(
 						"[Trade Shop] Here is your money, thanks for the business!",
-						Messages.sec));
+						Messages.getSec()));
 				timer = 0;
 				cash -= 50;
 				Tutorial.step += 1;

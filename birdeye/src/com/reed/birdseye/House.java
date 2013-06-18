@@ -1,6 +1,7 @@
 package com.reed.birdseye;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g3d.lights.Lights;
 import com.badlogic.gdx.math.Vector2;
 
@@ -25,7 +26,7 @@ public class House {
 	public static void setJustExited(boolean justExited) {
 		House.justExited = justExited;
 	}
-	
+
 	public static boolean isInRiverHouse() {
 		return isInRiverHouse;
 	}
@@ -33,11 +34,13 @@ public class House {
 	public static void setInRiverHouse(boolean isInRiverHouse) {
 		House.isInRiverHouse = isInRiverHouse;
 	}
-	
+
 	static Vector2 preCameraPos = new Vector2();
 	static Vector2 prePlayerPos = new Vector2();
 	static float preAmbientLight;
-	/** SEPPERATE INTO INDIVIDUAL METHODS*/
+	float ambientLight = 1;
+
+	/** SEPPERATE INTO INDIVIDUAL METHODS */
 	void update() {
 		// variable becomes true through the collision class
 		if (isInRiverHouse) {
@@ -48,8 +51,8 @@ public class House {
 				preCameraPos.y = GameScreen.mapCamera.position.y;
 				preAmbientLight = Time.getAmbientLight();
 				Time.setOutdoors(false);
-				Time.setAmbientLight(1f);
-				
+				Time.setAmbientLight(ambientLight);
+
 				CollisionDetection.setCollisionType(1);
 				Level.setCurrentMap(1);
 				// set cordinates
@@ -61,8 +64,8 @@ public class House {
 				// get rid of grass (set to what? blackness)
 
 				// get rid of darkness. (how to set back to normal levels when
-				//  you exit *looks around franticly* -- set up currentAmbient
-				//  light and outdoor ambient light variables.
+				// you exit *looks around franticly* -- set up currentAmbient
+				// light and outdoor ambient light variables.
 				// finally set to false
 				justEntered = false;
 
@@ -85,6 +88,83 @@ public class House {
 				Time.setOutdoors(true);
 				justExited = false;
 			}
+		}
+		nearBed();
+		sleep();
+		exitBed();
+
+	}
+
+	// bed cordinates
+	int x = 730, y = 386;
+	final int distanceFromBed = 50;
+
+	/**
+	 * Returns boolean if you are close enough from the designated variable
+	 * 
+	 * @variable distanceFromBed
+	 */
+	boolean closeEnough() {
+		return (Math.sqrt((x - Player.x) * (x - Player.x) + (y - Player.y)
+				* (y - Player.y)) < distanceFromBed);
+	}
+
+	boolean justGotNearBed = false;
+	boolean justGotInBed = false;
+	boolean inBed = false;
+
+	void nearBed() {
+		if (closeEnough() && !inBed) {
+			// justGotNearBed = true;
+			if (justGotNearBed) {
+				Messages.messagesArray.add(new Message(
+						"Press 'B' to go to sleep", Messages.getSec()));
+				justGotNearBed = false;
+			}
+			if (Gdx.input.isKeyPressed(Keys.B)) {
+				inBed = true;
+				justGotInBed = true;
+			}
+		} else
+			justGotNearBed = false;
+	}
+
+	final float fadingRate = .05f;// adjust to fine tune changing rate
+	boolean justExitedBed = false;
+
+	void sleep() {
+		if (inBed) {
+			if (justGotInBed) {
+				Player.ableToMove = false;
+				// set player to bed position facing down
+				Player.x = 730;
+				Player.y = 386;
+				System.out.println("in bed should be no movement");
+				justGotInBed = false;
+			}
+			System.out.println("darkness levels should change");
+			Time.setAmbientLight(ambientLight);
+			if (ambientLight >= 0) {
+				ambientLight -= fadingRate;
+			}
+			if (ambientLight <= 0) {
+				Time.setTimeOfDay(0f);
+			}
+			if (ambientLight <= 1) {
+				ambientLight += fadingRate;
+			}
+			if (ambientLight >= 1) {
+				justExitedBed = true;
+				// inBed = false;
+			}
+		}
+	}
+
+	void exitBed() {
+		if (justExitedBed) {
+			Player.ableToMove = true;
+			// set player position
+			// set move booleans back to true;
 		}
 	}
 }

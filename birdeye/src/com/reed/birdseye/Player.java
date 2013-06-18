@@ -22,7 +22,7 @@ public class Player {
 	void input() {
 		// x = 1422;
 		// y = 3562;
-		// System.out.println("X: " + x + " Y: " + y);
+		 System.out.println("X: " + x + " Y: " + y);
 		if (ableToMove) {
 			if (((Gdx.input.isKeyPressed(Keys.W)) || Android.up)
 					&& isAbleToMoveUp) {

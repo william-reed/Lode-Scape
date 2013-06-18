@@ -3,6 +3,7 @@ package com.reed.birdseye;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -48,6 +49,8 @@ public class Assets {
 	static BitmapFont cgfFont;
 
 	static TiledMap mainTiledMap, riverHouse;
+	
+	static ParticleEffect chimneySmoke;
 
 	public static void load() {
 		itemSelector = new Texture(Gdx.files.internal("data/itemselector.png"));
@@ -183,5 +186,9 @@ public class Assets {
 		// maps
 		mainTiledMap = new TmxMapLoader().load("data/maps/Map.tmx");
 		riverHouse = new TmxMapLoader().load("data/maps/House.tmx");
+		
+		//particle effects
+		chimneySmoke = new ParticleEffect();
+		chimneySmoke.load(Gdx.files.internal("data/effects/smoke.p"), Gdx.files.internal("data/effects"));
 	}
 }
