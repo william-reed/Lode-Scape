@@ -15,11 +15,13 @@ public class Crafting {
 	void menuInput() {
 		if (Gdx.input.isKeyPressed(Keys.Z)) {
 			craftMenuVisible = true;
-			Player.move = false;
+			Player.ableToMove = false;
+			Player.drawCharacter = false;
 		}
 		if (craftMenuVisible) {
 			if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-				Player.move = true;
+				Player.ableToMove = true;
+				Player.drawCharacter = true;
 				craftMenuVisible = false;
 			}
 		}

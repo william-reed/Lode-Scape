@@ -162,6 +162,7 @@ public class Time {
 	/** Sets ambient light value */
 	public static void setAmbientLight(float ambientLight) {
 		Time.ambientLight = ambientLight;
+		
 	}
 
 	// array list of spawn points

@@ -22,7 +22,7 @@ public class Player {
 	void input() {
 		// x = 1422;
 		// y = 3562;
-		 System.out.println("X: " + x + " Y: " + y);
+		// System.out.println("X: " + x + " Y: " + y);
 		if (ableToMove) {
 			if (((Gdx.input.isKeyPressed(Keys.W)) || Android.up)
 					&& isAbleToMoveUp) {
@@ -157,13 +157,13 @@ public class Player {
 	}
 
 	Tools tools = new Tools();
-
+	static boolean drawCharacter = true;
 	void draw(SpriteBatch batch, BitmapFont font) {
 		// font.draw(batch, "X:  " + Level.levelX, 850, 1030);
 		// font.draw(batch, "Y:  " + Level.levelY, 850, 1000);
 		// if (currentDirection == 3 && Resource.mining)
 		// pickSkel.draw(batch);
-		if (ableToMove)
+		if (drawCharacter)
 			batch.draw(Assets.mainChar, x, y);
 	}
 

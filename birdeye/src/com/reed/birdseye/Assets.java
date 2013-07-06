@@ -16,9 +16,9 @@ public class Assets {
 
 	static Texture itemSelector, buttons, character, material, tree, hydration,
 			bucket, corn, farm, houseIn, craftmenu, crop, creeper,
-			robot, robotGUI, ironOre, inventory, copperOre, grass, dpad,
+			robot, robotGUI, coalOre, inventory, copperOre, grass, dpad,
 			dpadLEFT, dpadRIGHT, dpadUP, dpadDOWN, pointsBar, currentItem, pig,
-			bacon, wolf, chatBox, inHouse;
+			bacon, wolf, chatBox, inHouse, furnaceGUI;
 
 	static TextureRegion upChar_STILL, upChar_LEFT, upChar_RIGHT,
 			downChar_STILL, downChar_LEFT, downChar_RIGHT, leftChar_STILL,
@@ -50,9 +50,10 @@ public class Assets {
 
 	static TiledMap mainTiledMap, riverHouse;
 	
-	static ParticleEffect chimneySmoke;
+	static ParticleEffect chimneySmoke, fire;
 
 	public static void load() {
+		bacon = new Texture(Gdx.files.internal("data/Bacon.png"));
 		itemSelector = new Texture(Gdx.files.internal("data/itemselector.png"));
 		crop = new Texture(Gdx.files.internal("data/crop.png"));
 		// buttons = new Texture(Gdx.files.internal("buttons.png"));
@@ -68,7 +69,7 @@ public class Assets {
 		// tree = new Texture(Gdx.files.internal("tree.png"));
 		robot = new Texture(Gdx.files.internal("data/robot.png"));
 		robotGUI = new Texture(Gdx.files.internal("data/robotGui.png"));
-		ironOre = new Texture(Gdx.files.internal("data/ironOre.png"));
+		coalOre = new Texture(Gdx.files.internal("data/coalOre.png"));
 		inventory = new Texture(Gdx.files.internal("data/inventory.png"));
 		copperOre = new Texture(Gdx.files.internal("data/copper.png"));
 		grass = new Texture(Gdx.files.internal("data/grass.png"));
@@ -85,6 +86,7 @@ public class Assets {
 		wolf = new Texture(Gdx.files.internal("data/wolf.png"));
 		inHouse = new Texture(Gdx.files.internal("data/inhouse.png"));
 		chatBox = new Texture(Gdx.files.internal("data/chat.png"));
+		furnaceGUI = new Texture(Gdx.files.internal("data/furnace.png"));
 
 		shopOwner = new TextureRegion(character, 128, 192, 32, 48);
 		tradePerson = new TextureRegion(character, 224, 192, 32, 48);
@@ -190,5 +192,8 @@ public class Assets {
 		//particle effects
 		chimneySmoke = new ParticleEffect();
 		chimneySmoke.load(Gdx.files.internal("data/effects/smoke.p"), Gdx.files.internal("data/effects"));
+		
+		fire = new ParticleEffect();
+		fire.load(Gdx.files.internal("data/effects/fire.p"), Gdx.files.internal("data/effects"));
 	}
 }

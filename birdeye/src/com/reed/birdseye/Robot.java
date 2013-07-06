@@ -27,8 +27,10 @@ public class Robot {
 		}
 		if (menuOpen) {
 			Player.ableToMove = false;
+			Player.drawCharacter = false;
 			if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
 				Player.ableToMove = true;
+				Player.drawCharacter = true;
 				menuOpen = false;
 			}
 			// detect if claim is clicked

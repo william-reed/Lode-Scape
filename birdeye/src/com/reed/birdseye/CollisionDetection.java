@@ -119,11 +119,16 @@ public class CollisionDetection {
 		else if (Player.y < 3434 && Player.y > 3154 && Player.x > 1464
 				&& Player.x < 1500) {
 			Player.isAbleToMoveLeft = false;
-		}// segment 53
-		else if (Player.y < 2258 && Player.y > 1878 && Player.x > 1466
+		}// segment 54
+		else if (Player.y < 2258 && Player.y > 1192 && Player.x > 1466
 				&& Player.x < 1502) {
 			Player.isAbleToMoveLeft = false;
-		} else
+		}// segment 56
+		else if (Player.y < 1952 && Player.y > 1186 && Player.x > 2748
+				&& Player.x < 2780) {
+			Player.isAbleToMoveLeft = false;
+		}
+		else
 			Player.isAbleToMoveLeft = true;
 
 		if (Player.x > 3788) {
@@ -165,7 +170,7 @@ public class CollisionDetection {
 				&& Player.x < 3708) {
 			Player.isAbleToMoveRight = false;
 		}// segment 21
-		else if (Player.y < 2260 && Player.y > 1930 && Player.x > 2658
+		else if (Player.y < 2260 && Player.y > 1930 && Player.x > 2628
 				&& Player.x < 2696) {
 			Player.isAbleToMoveRight = false;
 		}// segment 23
@@ -216,11 +221,16 @@ public class CollisionDetection {
 		else if (Player.y < 3434 && Player.y > 3154 && Player.x > 1454
 				&& Player.x < 1490) {
 			Player.isAbleToMoveRight = false;
-		}// segment 53
-		else if (Player.y < 2258 && Player.y > 1878 && Player.x > 1456
+		}// segment 54
+		else if (Player.y < 2258 && Player.y > 1192 && Player.x > 1456
 				&& Player.x < 1492) {
 			Player.isAbleToMoveRight = false;
-		} else
+		}// segment 56
+		else if (Player.y < 1952 && Player.y > 1186 && Player.x > 2738
+				&& Player.x < 2770) {
+			Player.isAbleToMoveRight = false;
+		}
+		else
 			Player.isAbleToMoveRight = true;
 
 		// bottom wall
@@ -244,7 +254,7 @@ public class CollisionDetection {
 				&& Player.x < 2836) {
 			Player.isAbleToMoveDown = false;
 		}// segment 20
-		else if (Player.y > 1932 && Player.y < 1960 && Player.x > 2662
+		else if (Player.y > 1932 && Player.y < 1960 && Player.x > 2738
 				&& Player.x < 3836) {
 			Player.isAbleToMoveDown = false;
 		}// segment 22
@@ -299,7 +309,12 @@ public class CollisionDetection {
 		else if (Player.y > 3090 && Player.y < 3112 && Player.x > 1458
 				&& Player.x < 1528) {
 			Player.isAbleToMoveDown = false;
-		} else
+		} // segment 55
+		else if (Player.y > 1198 && Player.y < 1222 && Player.x > 1460
+				&& Player.x < 2776) {
+			Player.isAbleToMoveDown = false;
+		} 
+		else
 			Player.isAbleToMoveDown = true;
 
 		// top wall
@@ -339,7 +354,7 @@ public class CollisionDetection {
 				&& Player.x < 3836) {
 			Player.isAbleToMoveUp = false;
 		}// segment 20
-		else if (Player.y > 1922 && Player.y < 1950 && Player.x > 2662
+		else if (Player.y > 1922 && Player.y < 1950 && Player.x > 2738
 				&& Player.x < 3836) {
 			Player.isAbleToMoveUp = false;
 		}// segment 22
@@ -404,6 +419,15 @@ public class CollisionDetection {
 		// segment 53
 		else if (Player.y > 2230 && Player.y < 2240 && Player.x > 1354
 				&& Player.x < 1386) {
+			Player.isAbleToMoveUp = false;
+		} 
+		// segment 55
+		else if (Player.y > 1188 && Player.y < 1208 && Player.x > 1460
+				&& Player.x < 2776) {
+			Player.isAbleToMoveUp = false;
+		} // segment 55
+		else if (Player.y > 1924 && Player.y < 1938 && Player.x > 2632
+				&& Player.x < 2698) {
 			Player.isAbleToMoveUp = false;
 		} 
 		else
@@ -477,7 +501,7 @@ public class CollisionDetection {
 		else if (Player.x < 206) {
 			Player.isAbleToMoveLeft = false;
 		}// segment 21
-		else if (Player.y > 314 && Player.y < 370 && Player.x< 238) {
+		else if (Player.y > 314 && Player.y < 370 && Player.x < 238) {
 			Player.isAbleToMoveLeft = false;
 		}// segment 25
 		else if (Player.y > 264 && Player.y < 318 && Player.x > 500 && Player.x < 578) {

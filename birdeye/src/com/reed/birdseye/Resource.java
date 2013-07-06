@@ -17,7 +17,12 @@ public class Resource {
 	static String amountOfStoneString;
 	boolean drawResource = true;
 	float miningRate = 1f;
-
+	
+	public Resource(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
 	boolean closeEnough() {
 		return (Math.sqrt((x - Level.middleX)
 				* (x - Level.middleX)

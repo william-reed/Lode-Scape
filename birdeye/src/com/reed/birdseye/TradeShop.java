@@ -9,7 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class TradeShop {
 	int x = 1838, y = 2906;
 	final int DISTANCE_FROM_SHOP = 100;
-	public static int cash = 0;
+	static int cash = 0;
+	static String cashString;
 
 	void draw(SpriteBatch batch) {
 		batch.draw(Assets.tradePerson, x, y);
@@ -68,6 +69,7 @@ public class TradeShop {
 	float timer = 5;
 
 	void update() {
+		cashString = String.valueOf(cash);
 		timer += Gdx.graphics.getDeltaTime();
 
 		if (Fishing.amountOfFish >= 5 && Tutorial.step == 2) {

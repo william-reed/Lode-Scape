@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -29,17 +28,11 @@ public class GameScreen implements Screen {
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 	BitmapFont currentFont;
-	Farm farm;
 	Level level;
 	Player player;
-	// TEMP use arrayList for random or static assigned rocks
-	Resource resource;
 	ArrayListsz arrays;
-	// Crafting craft = new Crafting();
 	TopMenu topMenu;
-	Iron iron;
 	Inventory inv;
-	Copper copper;
 	CollisionDetection collision;
 	Android android;
 	Points points;
@@ -51,7 +44,8 @@ public class GameScreen implements Screen {
 	static RayHandler rayHandler;
 	House house;
 	Particles smoke;
-	
+	Food food;
+
 	public GameScreen(Game game) {
 		this.game = game;
 		float w = Gdx.graphics.getWidth();
@@ -71,10 +65,8 @@ public class GameScreen implements Screen {
 		shapeRenderer = new ShapeRenderer();
 		level = new Level();
 		player = new Player();
-		resource = new Resource();
 		arrays = new ArrayListsz();
 		topMenu = new TopMenu();
-		iron = new Iron();
 		inv = new Inventory();
 		// collision detection problem?
 		fps = new FPSLogger();
@@ -97,7 +89,7 @@ public class GameScreen implements Screen {
 		world = new World(new Vector2(0, 0), true);
 
 		rayHandler = new RayHandler(world);
-		
+
 		/*
 		 * int[] maxTextureSize = new int[1]; IntBuffer buf =
 		 * BufferUtils.newIntBuffer(16);
@@ -105,8 +97,9 @@ public class GameScreen implements Screen {
 		 * buf.get(); System.out.println(result); int result2 = buf.get();
 		 * System.out.println(result);
 		 */
-		
+
 		smoke = new Particles();
+		food = new Food();
 	}
 
 	int lightX = 400, lightY = 400;
@@ -134,34 +127,38 @@ public class GameScreen implements Screen {
 		trade.update();
 		trade.handleInput();
 		house.update();
-		// fps.log();
 		Time.update(rayHandler);
-
-		// camera stuff
 		camera.update();
+		arrays.mobUpdate();
+		food.affectHealth();
+		food.looseHunger();
+		house.furnace();
+		arrays.updateCoal();
+		house.addCoalandFood();
 	}
+	
 
 	public static float xRate = 0;
 	public static float yRate = 0;
 
 	public void draw(float deltaTime) {
-		Gdx.gl.glClearColor(255f, 255f, 255f, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
 		// sets camera for drawing static items
-		batch.setProjectionMatrix(camera.combined);
+			batch.setProjectionMatrix(camera.combined);
 
-		if (Time.isOutdoors()) {
-			level.draw(batch);
-		}
+			if (Time.isOutdoors()) {
+				level.draw(batch);
+			}
 
 		batch.end();
-		batch.setProjectionMatrix(mapCamera.combined);
-		mapCamera.translate(xRate, yRate);
-		mapCamera.update();
-		mapRenderer.setView(mapCamera);
-		mapRenderer.render();
+			batch.setProjectionMatrix(mapCamera.combined);
+			mapCamera.translate(xRate, yRate);
+			mapCamera.update();
+			mapRenderer.setView(mapCamera);
+			mapRenderer.render();
 
 		batch.begin();
 			// set camera for drawing moving items.
@@ -169,7 +166,14 @@ public class GameScreen implements Screen {
 			swordShop.draw(batch);
 			trade.draw(batch);
 			arrays.drawTreeTrunk(batch);
-
+			arrays.drawCoal(batch);
+			arrays.mobDraw(batch);
+			arrays.pigUpdateAndDraw(batch);
+		batch.end();
+			shapeRenderer.setProjectionMatrix(mapCamera.combined);
+			arrays.mobHealthBars(shapeRenderer);
+			arrays.pigHealthBars(shapeRenderer);
+		batch.begin();
 			player.draw(batch, currentFont);
 			// set static for tool drawing (so it is affected by lights)
 			batch.setProjectionMatrix(camera.combined);
@@ -178,12 +182,10 @@ public class GameScreen implements Screen {
 			batch.setProjectionMatrix(mapCamera.combined);
 			arrays.drawBrush(batch, currentFont);
 			smoke.smokeUpdateAndDraw(batch, deltaTime);
-			
 		batch.end();
 			rayHandler.setCombinedMatrix(mapCamera.combined);
 			rayHandler.updateAndRender();
 		batch.begin();
-
 			// more static items (HUD stuff)
 			batch.setProjectionMatrix(camera.combined);
 			player.drawTools(batch);
@@ -194,10 +196,11 @@ public class GameScreen implements Screen {
 			inv.draw(batch, currentFont);
 			swordShop.drawInputText(batch, currentFont);
 			trade.drawInputText(batch, currentFont);
-
+			house.furnaceGUIdraw(batch, deltaTime, currentFont, shapeRenderer);
 		batch.end();
-		shapeRenderer.setProjectionMatrix(camera.combined);
-		points.drawBars(shapeRenderer);
+			shapeRenderer.setProjectionMatrix(camera.combined);
+			points.drawBars(shapeRenderer);
+			
 
 	}
 

@@ -4,27 +4,42 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Intersector;
 
 public class Mob {
 	// randomly moving "mob" (animal, monster, etc)
 	final int distanceFromMob = 100;
 	Random r = new Random();
-	int x = 500;
-	int y = 500; // set to random *in bounding area*
-	int direction = r.nextInt(5) + 1; // 0 = up, 1 = down, 2 = left, 3 = right,
-										// 4 = no movement
-	float mobTime = r.nextInt(3) + 1;
-	// defines time left for movement - set to random int below 3
-	final int speed = 1;
-	static int food = 0;
+	int x, y;
+	/**
+	 * 0 = up <br>
+	 * 1 = down <br>
+	 * 2 = Left <br>
+	 * 3 = right <br>
+	 * 4 = no movement
+	 */
+	int direction = r.nextInt(5) + 1;
 
-	void draw(SpriteBatch batch, BitmapFont font, TextureRegion mainMob) {
+	float mobTime = r.nextInt(3) + 1;
+	float speed = 1;
+	static int food = 0;
+	TextureRegion realMob = Assets.mainCreeper;
+	boolean isAbleToMoveUp = true, isAbleToMoveDown = true,
+			isAbleToMoveRight = true, isAbleToMoveLeft = true;
+
+	public Mob(int boundX, int boundY, int boundWidth, int boundHeight) {
+		this.boundX = boundX;
+		this.boundY = boundY;
+		this.boundWidth = boundWidth;
+		this.boundHeight = boundHeight;
+		x = r.nextInt(boundWidth) + boundX;
+		y = r.nextInt(boundHeight) + boundY;
+	}
+
+	void draw(SpriteBatch batch, TextureRegion mainMob) {
 		if (isAlive()) {
 			batch.draw(mainMob, x, y);
 		}
@@ -32,7 +47,7 @@ public class Mob {
 
 	void movement() {
 		// constantly decrease the mobTime
-		if (!attackedMovement && isAlive()) {
+		if (!underAttack && isAlive()) {
 			mobTime -= Gdx.graphics.getDeltaTime();
 			if (direction == 0 && mobTime > 0) {
 				y += speed;
@@ -51,20 +66,24 @@ public class Mob {
 		}
 	}
 
-	void boundingArea(int xCord, int yCord, int width, int height) {
-		if (x > xCord + width)
-			direction = 2;
-		if (x < xCord)
-			direction = 3;
-		if (y > yCord + height)
-			direction = 1;
-		if (y < yCord)
-			direction = 0;
+	int boundX, boundY, boundWidth, boundHeight;
+
+	void boundingArea() {
+		if (!underAttack) {
+			if (x > boundX + boundWidth)
+				direction = 2;
+			if (x < boundX)
+				direction = 3;
+			if (y > boundY + boundHeight)
+				direction = 1;
+			if (y < boundY)
+				direction = 0;
+		}
 	}
 
 	boolean closeEnough() {
-		return (Math.sqrt((x - Level.middleX) * (x - Level.middleX)
-				+ (y - Level.middleY) * (y - Level.middleY)) < distanceFromMob);
+		return (Math.sqrt((x - Player.x) * (x - Player.x) + (y - Player.y)
+				* (y - Player.y)) < distanceFromMob);
 	}
 
 	// health etc
@@ -100,7 +119,7 @@ public class Mob {
 
 	// takes away health from mob
 	void looseHealth() {
-		if (closeEnough() && TopMenu.currentTool == 0 && Tools.isTooling
+		if (closeEnough() && TopMenu.currentTool == 3 && Tools.isTooling
 				&& dyingTimer > 1) {
 			health -= r.nextInt(20) + 10;
 			dyingTimer = 0;
@@ -117,19 +136,6 @@ public class Mob {
 		} else
 			return true;
 	}
-
-	boolean attackedMovement;
-
-	/*
-	 * //how am i going to do this??? void movementWhenAttacked(){
-	 * if(!closeEnough() && attackedMovement){ if (target is to the left of me):
-	 * move(left); else move(right);
-	 * 
-	 * if (target is above me): move(up); else move(down); } //if further than
-	 * 100 pixels away move back to bounding area.
-	 * 
-	 * }
-	 */
 
 	float timer = 0;
 
@@ -212,6 +218,79 @@ public class Mob {
 		if (!isAlive() && closeEnough() && onGround) {
 			food += 1;
 			onGround = false;
+		}
+	}
+
+	/** Returns if mob is below player */
+	boolean isBelow() {
+		return Player.y > y;
+	}
+
+	/** Returns if mob is above player */
+	boolean isAbove() {
+		return Player.y < y;
+	}
+
+	/** Returns if mob is to the left of player */
+	boolean isToTheLeft() {
+		return Player.x > x;
+	}
+
+	/** Returns if mob is to the right of player */
+	boolean isToTheRight() {
+		return Player.x < x;
+	}
+
+	boolean underAttack;
+	float attackedHealth = health;
+
+	void detectIfUnderAttack() {
+		// detect if under attack
+		if (attackedHealth > health) {
+			underAttack = true;
+			attackedHealth = health;
+		}
+		// set to false if player no longer threat to mob
+		if (distanceBetweenMobAndPlayer() > 500)
+			underAttack = false;
+	}
+
+	void follow() {
+
+		// change position if under attack
+		if (underAttack && distanceBetweenMobAndPlayer() > 75) {
+			if (isBelow() && !(y > boundY + boundHeight && isAbleToMoveUp)) {
+				y += speed;
+				direction = 0;
+			}
+			if (isAbove() && !(y < boundY) && isAbleToMoveDown) {
+				y -= speed;
+				direction = 1;
+			}
+			if (isToTheLeft() && !(x > boundX + boundWidth) && isAbleToMoveRight) {
+				x += speed;
+				direction = 3;
+			}
+			if (isToTheRight() && !(x < boundX) && isAbleToMoveLeft) {
+				x -= speed;
+				direction = 2;
+			}
+		}
+	}
+
+	/** Distance between mob and player */
+	float distanceBetweenMobAndPlayer() {
+		return (float) Math.sqrt((x - Player.x) * (x - Player.x)
+				+ (y - Player.y) * (y - Player.y));
+	}
+
+	// respawn mobs during day
+	void regeneration() {
+		if (health <= 0 && Time.isNight()
+				&& distanceBetweenMobAndPlayer() > 544) {
+			underAttack = false;
+			health = 100;
+			attackedHealth = 100;
 		}
 	}
 }
